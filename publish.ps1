@@ -55,14 +55,13 @@ if ($Target.Equals("Debug")) {
 }
 
 if($Target.Equals("Release")) {
-    Write-Host "Packaging for ThunderStore..."
-    $Package="Package"
-    $PackagePath="$ProjectPath\$Package"
-
-    Write-Host "$PackagePath\$TargetAssembly"
-    Copy-Item -Path "$TargetPath\$TargetAssembly" -Destination "$PackagePath\plugins\$TargetAssembly" -Force
-    Copy-Item -Path "$PackagePath\README.md" -Destination "$ProjectPath\README.md" -Force
-    Compress-Archive -Path "$PackagePath\*" -DestinationPath "$TargetPath\$TargetAssembly.zip" -Force
+    if ($DeployPath.Equals("")){
+      $DeployPath = "$ValheimPath\BepInEx\plugins"
+    }
+    
+    $plug = New-Item -Type Directory -Path "$DeployPath\$name" -Force
+    Write-Host "Copy $TargetAssembly to $plug"
+    Copy-Item -Path "$TargetPath\$name.dll" -Destination "$plug" -Force
 }
 
 # Pop Location
