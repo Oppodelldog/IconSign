@@ -46,15 +46,15 @@ namespace IconSign
                 text: GetText(),
                 parent: canvas.transform,
                 anchorMin: new Vector2(0.5f, 0.5f),
-                anchorMax: new Vector2(0.5f,0.5f),
+                anchorMax: new Vector2(0.5f, 0.5f),
                 position: new Vector2(0, 0),
-                size: new Vector2(0.35f,0.35f)).GetComponent<RectTransform>().position += new Vector3(0.01f, 0, 0);
+                size: new Vector2(0.35f, 0.35f)).GetComponent<RectTransform>().position += new Vector3(0.01f, 0, 0);
 
             _mNview = GetComponent<ZNetView>();
             if (_mNview.GetZDO() == null)
                 return;
             UpdateText();
-            InvokeRepeating("UpdateText", 2f, 2f);
+            InvokeRepeating(nameof(UpdateText), 2f, 2f);
         }
 
         public string GetHoverText()
@@ -108,7 +108,7 @@ namespace IconSign
                         _mCurrentText = "";
                         UpdateSprite();
                         _mIsViewable = false;
-                        ZLog.LogError((object)"Failed to check UGC privilege");
+                        ZLog.LogError("Failed to check UGC privilege");
                         break;
                 }
             });
