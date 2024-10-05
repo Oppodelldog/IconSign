@@ -19,14 +19,10 @@ namespace IconSign
         public const string PluginName = "IconSign";
         public const string PluginVersion = "0.1.0";
 
-        private CustomLocalization _localization;
-        
         private void Awake()
         {
             Jotunn.Logger.LogInfo("awake");
 
-            _localization = LocalizationManager.Instance.GetLocalization();
-            LocalizationManager.Instance.AddLocalization(_localization);
 
             PrefabManager.OnVanillaPrefabsAvailable += CreateIconSign;
         }
