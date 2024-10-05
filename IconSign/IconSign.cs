@@ -79,6 +79,7 @@ namespace IconSign
 
         private void OnIconSelected(string icon)
         {
+            IconSelectionPanel.Instance.OnIconSelected -= OnIconSelected;
             SetText(icon);
         }
 
