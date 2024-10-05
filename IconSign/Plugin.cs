@@ -49,7 +49,7 @@ namespace IconSign
                 { IconSign.TranslationKeyUse, "Paint" },
             });
 
-            var customPiece = new CustomPiece("iconsign_name", "sign", iconSignPiece);
+            var customPiece = new CustomPiece("iconsign", "sign", iconSignPiece);
             PieceManager.Instance.AddPiece(customPiece);
             customPiece.PiecePrefab.gameObject.AddComponent<IconSign>();
 
