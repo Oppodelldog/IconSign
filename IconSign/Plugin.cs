@@ -36,20 +36,21 @@ namespace IconSign
             Jotunn.Logger.LogInfo("creating icon sign");
             var iconSignPiece = new PieceConfig
             {
-                Name = "$iconsign_name",
+                Name = IconSign.TranslationKeyName,
                 PieceTable = "Hammer",
                 Category = "Misc"
             };
-            
+
             iconSignPiece.AddRequirement(new RequirementConfig("Wood", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Coal", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Raspberry", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Blueberries", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Guck", 1));
 
-            _localization.AddTranslation("English", new Dictionary<string, string>
+            LocalizationManager.Instance.GetLocalization().AddTranslation("English", new Dictionary<string, string>
             {
-                { "iconsign_name", "Icon Sign" }
+                { IconSign.TranslationKeyName, "Icon Sign" },
+                { IconSign.TranslationKeyUse, "Paint" },
             });
 
             var customPiece = new CustomPiece("iconsign_name", "sign", iconSignPiece);

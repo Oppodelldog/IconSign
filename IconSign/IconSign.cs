@@ -8,7 +8,10 @@ namespace IconSign
 {
     internal class IconSign : MonoBehaviour, Hoverable, Interactable, TextReceiver
     {
-        [FormerlySerializedAs("m_name")] public string mName = nameof(IconSign);
+        internal const string TranslationKeyName = "$iconsign_name";
+        internal const string TranslationKeyUse = "$iconsign_use";
+
+        [FormerlySerializedAs("m_name")] public string mName;
 
         [FormerlySerializedAs("m_defaultText")]
         public string mDefaultText = "T_emote_thumbsup";
@@ -16,10 +19,10 @@ namespace IconSign
         private ZNetView _mNview;
         private bool _mIsViewable = true;
         private string _mCurrentText = "T_emote_thumbsup";
-        
+
         private void Awake()
         {
-            
+            mName = Localization.instance.Localize(TranslationKeyName);
             var canvas = gameObject.GetComponentInChildren<Canvas>();
             var woodPole = gameObject.FindDeepChild("wood_pole (1)");
             var sign = gameObject.GetComponent<Sign>();
@@ -59,7 +62,7 @@ namespace IconSign
             var str = _mIsViewable ? "\"" + GetText().RemoveRichTextTags() + "\"" : "[TEXT HIDDEN DUE TO UGC SETTINGS]";
             return !PrivateArea.CheckAccess(transform.position, flash: false)
                 ? str
-                : str + "\n" + Localization.instance.Localize(mName + "\n[<color=yellow><b>$KEY_Use</b></color>] $piece_use");
+                : str + "\n" + Localization.instance.Localize(mName + "\n[<color=yellow><b>$KEY_Use</b></color>] " + TranslationKeyUse);
         }
 
         public string GetHoverName() => mName;
