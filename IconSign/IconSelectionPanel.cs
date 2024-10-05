@@ -28,17 +28,6 @@ namespace IconSign
             GUIManager.BlockInput(false);
         }
 
-        internal void ToggleIconSelectionPanel()
-        {
-            EnsurePanel();
-
-            var state = !_iconSelectionPanel.activeSelf;
-
-            _iconSelectionPanel.SetActive(state);
-
-            GUIManager.BlockInput(state);
-        }
-
         private void EnsurePanel()
         {
             if (_iconSelectionPanel) return;
@@ -66,7 +55,7 @@ namespace IconSign
             _iconSelectionPanel.SetActive(false);
 
             GUIManager.Instance.CreateText(
-                text: Localization.instance.Localize("iconsign_name"),
+                text: LocalizationManager.Instance.TryTranslate("iconsign_name"),
                 parent: _iconSelectionPanel.transform,
                 anchorMin: new Vector2(0.5f, 1f),
                 anchorMax: new Vector2(0.5f, 1f),
