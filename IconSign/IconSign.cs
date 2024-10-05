@@ -23,9 +23,11 @@ namespace IconSign
             var canvas = gameObject.GetComponentInChildren<Canvas>();
             var woodPole = gameObject.FindDeepChild("wood_pole (1)");
             var sign = gameObject.GetComponent<Sign>();
+            var collider = gameObject.GetComponentInChildren<Collider>();
             LOGIfNull(canvas, "Canvas");
             LOGIfNull(woodPole, "WoodPole");
             LOGIfNull(sign, "Sign");
+            LOGIfNull(collider, "Collider");
 
             var text = canvas.transform.GetChild(0);
             LOGIfNull(text, "Text");
@@ -35,6 +37,7 @@ namespace IconSign
 
             canvas.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0.5f, 0.5f);
             woodPole.transform.localScale = new Vector3(0.5f, 0.5f, 0.1f);
+            collider.transform.localScale = new Vector3(0.5f, 1f, 1f);
 
             GUIManager.Instance.CreateImage(
                 text: GetText(),
@@ -74,7 +77,6 @@ namespace IconSign
         private void OnIconSelected(string icon)
         {
             SetText(icon);
-            IconSelectionPanel.Instance.OnIconSelected -= OnIconSelected;
         }
 
         private void UpdateText()
