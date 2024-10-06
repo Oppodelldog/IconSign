@@ -13,9 +13,7 @@ param(
     [System.String]$ValheimPath,
 
     [Parameter(Mandatory)]
-    [System.String]$ProjectPath,
-    
-    [System.String]$DeployPath
+    [System.String]$ProjectPath
 )
 
 # Make sure Get-Location is the script path
@@ -40,14 +38,18 @@ if (Test-Path -Path "$pdb") {
 }
 
 # Main Script
-Write-Host "Publishing for $Target from $TargetPath"
+$DeployPathDebug = "$ValheimPath\BepInEx\plugins"
+$DeployPathRelease = "$ValheimPath\BepInEx\plugins"
+
+Remove-Item -Path "$DeployPathDebug\$name.dll" -Recurse -Force
+Remove-Item -Path "$DeployPathDebug\$name.pdb" -Recurse -Force
+Remove-Item -Path "$DeployPathDebug\$name.dll.mdb" -Recurse -Force
+Remove-Item -Path "$DeployPathRelease\$name" -Recurse -Force
 
 if ($Target.Equals("Debug")) {
-    if ($DeployPath.Equals("")){
-      $DeployPath = "$ValheimPath\BepInEx\plugins"
-    }
+    Write-Host "Publishing for $Target from $TargetPath to $DeployPathDebug"
     
-    $plug = New-Item -Type Directory -Path "$DeployPath\$name" -Force
+    $plug = New-Item -Type Directory -Path "$DeployPathDebug\$name" -Force
     Write-Host "Copy $TargetAssembly to $plug"
     Copy-Item -Path "$TargetPath\$name.dll" -Destination "$plug" -Force
     Copy-Item -Path "$TargetPath\$name.pdb" -Destination "$plug" -Force
@@ -55,11 +57,9 @@ if ($Target.Equals("Debug")) {
 }
 
 if($Target.Equals("Release")) {
-    if ($DeployPath.Equals("")){
-      $DeployPath = "$ValheimPath\BepInEx\plugins"
-    }
+    Write-Host "Publishing for $Target from $TargetPath to $DeployPathRelease"
     
-    $plug = New-Item -Type Directory -Path "$DeployPath\$name" -Force
+    $plug = New-Item -Type Directory -Path "$DeployPathRelease\$name" -Force
     Write-Host "Copy $TargetAssembly to $plug"
     Copy-Item -Path "$TargetPath\$name.dll" -Destination "$plug" -Force
 }
