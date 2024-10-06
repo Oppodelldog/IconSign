@@ -3,6 +3,7 @@ using Jotunn.Managers;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+using Logger = Jotunn.Logger;
 
 namespace IconSign
 {
@@ -22,7 +23,7 @@ namespace IconSign
             GUIManager.BlockInput(true);
         }
 
-        private void ClosePanel()
+        internal void ClosePanel()
         {
             _iconSelectionPanel.SetActive(false);
             GUIManager.BlockInput(false);
@@ -34,13 +35,13 @@ namespace IconSign
 
             if (GUIManager.Instance == null)
             {
-                Jotunn.Logger.LogError("GUIManager instance is null");
+                Logger.LogError("GUIManager instance is null");
                 return;
             }
 
             if (!GUIManager.CustomGUIFront)
             {
-                Jotunn.Logger.LogError("GUIManager CustomGUI is null");
+                Logger.LogError("GUIManager CustomGUI is null");
                 return;
             }
 
@@ -53,6 +54,7 @@ namespace IconSign
                 height: 600,
                 draggable: false);
             _iconSelectionPanel.SetActive(false);
+            _iconSelectionPanel.AddComponent<EscClosePanelListener>();
 
             GUIManager.Instance.CreateText(
                 text: LocalizationManager.Instance.TryTranslate("iconsign_name"),
@@ -112,6 +114,17 @@ namespace IconSign
             }
 
             return spriteName;
+        }
+    }
+
+    internal class EscClosePanelListener : MonoBehaviour
+    {
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                IconSelectionPanel.Instance.ClosePanel();
+            }
         }
     }
 }

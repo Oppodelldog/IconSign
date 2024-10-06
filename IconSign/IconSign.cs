@@ -80,6 +80,8 @@ namespace IconSign
         private void OnIconSelected(string icon)
         {
             IconSelectionPanel.Instance.OnIconSelected -= OnIconSelected;
+            if (icon == "") return;
+
             SetText(icon);
         }
 
