@@ -43,11 +43,7 @@ namespace IconSign
             iconSignPiece.AddRequirement(new RequirementConfig("Blueberries", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Guck", 1));
 
-            LocalizationManager.Instance.GetLocalization().AddTranslation("English", new Dictionary<string, string>
-            {
-                { IconSign.TranslationKeyName, "Icon Sign" },
-                { IconSign.TranslationKeyUse, "Paint" },
-            });
+            Translations.Add();
 
             var customPiece = new CustomPiece("iconsign", "sign", iconSignPiece);
             PieceManager.Instance.AddPiece(customPiece);
