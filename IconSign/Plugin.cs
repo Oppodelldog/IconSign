@@ -17,7 +17,7 @@ namespace IconSign
     {
         public const string PluginGuid = "oppodelldog.mod";
         public const string PluginName = "IconSign";
-        public const string PluginVersion = "0.1.0";
+        public const string PluginVersion = "0.2.0";
 
         private void Awake()
         {
