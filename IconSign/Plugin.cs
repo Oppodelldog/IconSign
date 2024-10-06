@@ -37,7 +37,7 @@ namespace IconSign
                 Category = "Misc"
             };
 
-            iconSignPiece.AddRequirement(new RequirementConfig("Wood", 1));
+            iconSignPiece.AddRequirement(new RequirementConfig("Wood", 1, 0, true));
             iconSignPiece.AddRequirement(new RequirementConfig("Coal", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Raspberry", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Blueberries", 1));
