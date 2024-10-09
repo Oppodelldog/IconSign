@@ -1,8 +1,10 @@
-﻿using Jotunn;
+﻿using System;
+using Jotunn;
 using Jotunn.Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Logger = Jotunn.Logger;
 
 namespace IconSign
 {
@@ -10,6 +12,7 @@ namespace IconSign
     {
         internal const string TranslationKeyName = "$iconsign_name";
         internal const string TranslationKeyUse = "$iconsign_use";
+        internal const string TranslationKeyPaintItem = "$iconsign_paint_item";
 
         [FormerlySerializedAs("m_name")] public string mName;
 
@@ -60,9 +63,13 @@ namespace IconSign
         public string GetHoverText()
         {
             var str = _mIsViewable ? "\"" + GetText().RemoveRichTextTags() + "\"" : "[TEXT HIDDEN DUE TO UGC SETTINGS]";
-            return !PrivateArea.CheckAccess(transform.position, flash: false)
-                ? str
-                : str + "\n" + Localization.instance.Localize(mName + "\n[<color=yellow><b>$KEY_Use</b></color>] " + TranslationKeyUse);
+            if (!PrivateArea.CheckAccess(transform.position, flash: false)) return str;
+            str += "\n" + Localization.instance.Localize(mName + "\n[<color=yellow><b>$KEY_Use</b></color>] " + TranslationKeyUse);
+
+            if (Conf.HotbarPaintEnabled())
+                str += "\n" + Localization.instance.Localize("\n[<color=yellow><b>1-8</b></color>] " + TranslationKeyPaintItem);
+
+            return str;
         }
 
         public string GetHoverName() => mName;
@@ -124,7 +131,15 @@ namespace IconSign
 
         public string GetText() => _mCurrentText;
 
-        public bool UseItem(Humanoid user, ItemDrop.ItemData item) => false;
+        public bool UseItem(Humanoid user, ItemDrop.ItemData item)
+        {
+            if (!Conf.HotbarPaintEnabled()) return false;
+
+            Logger.LogInfo("UseItem: " + item.m_shared.m_name);
+            SetText(item.GetIcon().name);
+
+            return false;
+        }
 
         public void SetText(string text)
         {

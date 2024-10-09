@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conf.cs" />
     <Compile Include="IconSelectionPanel.cs" />
     <Compile Include="IconSign.cs" />
     <Compile Include="Properties\IgnoreAccessModifiers.cs" />

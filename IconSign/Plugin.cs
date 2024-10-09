@@ -1,5 +1,6 @@
 ﻿using System;
 using BepInEx;
+using BepInEx.Configuration;
 using Jotunn;
 using Jotunn.Configs;
 using Jotunn.Entities;
@@ -22,6 +23,7 @@ namespace IconSign
         {
             Jotunn.Logger.LogInfo("awake");
 
+            Conf.xHotbarPaint = Config.Bind("Experiments", "hotbar-paint", true, new ConfigDescription("paint icon signs using the hotbar"));
 
             PrefabManager.OnVanillaPrefabsAvailable += CreateIconSign;
         }
