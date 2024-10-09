@@ -38,18 +38,18 @@ if (Test-Path -Path "$pdb") {
 }
 
 # Main Script
-$DeployPathDebug = "$ValheimPath\BepInEx\plugins"
-$DeployPathRelease = "$ValheimPath\BepInEx\plugins"
+$DeployPathDebug = "$ValheimPath\BepInEx\scripts\$name"
+$DeployPathRelease = "$ValheimPath\BepInEx\plugins\$name"
 
 Remove-Item -Path "$DeployPathDebug\$name.dll" -Recurse -Force
 Remove-Item -Path "$DeployPathDebug\$name.pdb" -Recurse -Force
 Remove-Item -Path "$DeployPathDebug\$name.dll.mdb" -Recurse -Force
-Remove-Item -Path "$DeployPathRelease\$name" -Recurse -Force
+Remove-Item -Path "$DeployPathRelease" -Recurse -Force
 
 if ($Target.Equals("Debug")) {
     Write-Host "Publishing for $Target from $TargetPath to $DeployPathDebug"
     
-    $plug = New-Item -Type Directory -Path "$DeployPathDebug\$name" -Force
+    $plug = New-Item -Type Directory -Path "$DeployPathDebug" -Force
     Write-Host "Copy $TargetAssembly to $plug"
     Copy-Item -Path "$TargetPath\$name.dll" -Destination "$plug" -Force
     Copy-Item -Path "$TargetPath\$name.pdb" -Destination "$plug" -Force
@@ -59,7 +59,7 @@ if ($Target.Equals("Debug")) {
 if($Target.Equals("Release")) {
     Write-Host "Publishing for $Target from $TargetPath to $DeployPathRelease"
     
-    $plug = New-Item -Type Directory -Path "$DeployPathRelease\$name" -Force
+    $plug = New-Item -Type Directory -Path "$DeployPathRelease" -Force
     Write-Host "Copy $TargetAssembly to $plug"
     Copy-Item -Path "$TargetPath\$name.dll" -Destination "$plug" -Force
 }
