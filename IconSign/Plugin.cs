@@ -23,7 +23,7 @@ namespace IconSign
         {
             Jotunn.Logger.LogInfo("awake");
 
-            Conf.xHotbarPaint = Config.Bind("Experiments", "hotbar-paint", true, new ConfigDescription("paint icon signs using the hotbar"));
+            Conf.xHotbarPaint = Config.Bind("Experiments", "hotbar-paint", false, new ConfigDescription("paint icon signs using the hotbar"));
 
             PrefabManager.OnVanillaPrefabsAvailable += CreateIconSign;
         }
