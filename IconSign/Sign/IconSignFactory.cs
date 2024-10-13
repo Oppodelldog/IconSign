@@ -22,6 +22,7 @@ namespace IconSign.Sign
             PrefabManager.OnVanillaPrefabsAvailable -= CreateIconSign;
 
             Logger.LogInfo("creating icon sign");
+            
             var iconSignPiece = new PieceConfig
             {
                 Name = Constants.TranslationKeyName,
@@ -40,6 +41,8 @@ namespace IconSign.Sign
             var customPiece = new CustomPiece(BuildPieceName, "sign", iconSignPiece);
             PieceManager.Instance.AddPiece(customPiece);
             customPiece.PiecePrefab.gameObject.AddComponent<IconSign>();
+            
+            Logger.LogInfo("icon sign created");
         }
     }
 }
