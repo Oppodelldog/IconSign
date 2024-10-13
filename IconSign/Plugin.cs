@@ -20,7 +20,7 @@ namespace IconSign
         {
             RecentIcons.ConfigEntry = Config.Bind("config", "recent_icons", "", "your recently used icons");
 
-            PrefabManager.OnVanillaPrefabsAvailable += IconSignFactory.CreateIconSign;
+            IconSignFactory.Register();
         }
     }
 }

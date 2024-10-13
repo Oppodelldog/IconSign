@@ -9,7 +9,13 @@ namespace IconSign.Sign
     {
         private const string BuildPieceName = "iconsign";
 
-        internal static void CreateIconSign()
+
+        internal static void Register()
+        {
+            PrefabManager.OnVanillaPrefabsAvailable += CreateIconSign;
+        }
+
+        private static void CreateIconSign()
         {
             PrefabManager.OnVanillaPrefabsAvailable -= CreateIconSign;
 
