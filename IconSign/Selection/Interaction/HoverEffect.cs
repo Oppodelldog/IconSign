@@ -33,6 +33,7 @@ namespace IconSign.Selection.Interaction
         public void OnPointerClick(PointerEventData eventData)
         {
             OnClicked?.Invoke();
+            _image.color = normalColor;
         }
     }
 }
