@@ -200,6 +200,7 @@ namespace IconSign.Data
                     "shield_silver04",
                     "shield_silver05",
                     "shield_silver06",
+                    "StaffShield",
 
                     "shield_blackmetal00",
                     "shield_blackmetal01",
@@ -810,7 +811,8 @@ namespace IconSign.Data
                     "karve",
                     "longship",
                     "longship_ashlands",
-                    "branch"
+                    "branch",
+                    "Staff_Shield"
                 }
             },
             {
