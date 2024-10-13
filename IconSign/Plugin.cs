@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using IconSign.Config;
 using IconSign.Data;
 using IconSign.Sign;
 using Jotunn;

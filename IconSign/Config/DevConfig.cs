@@ -1,6 +1,6 @@
 ﻿using BepInEx.Configuration;
 
-namespace IconSign.Data
+namespace IconSign.Config
 {
     internal static class DevConfig
     {

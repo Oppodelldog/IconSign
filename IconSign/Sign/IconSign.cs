@@ -1,4 +1,5 @@
-﻿using IconSign.Data;
+﻿using IconSign.Config;
+using IconSign.Data;
 using IconSign.Extensions;
 using IconSign.Selection;
 using Jotunn;
@@ -12,24 +13,6 @@ namespace IconSign.Sign
 {
     internal class IconSign : MonoBehaviour, Hoverable, Interactable, TextReceiver
     {
-        internal const string TranslationKeyName = "name";
-        internal const string TranslationKeyUse = "use";
-        internal const string TranslationKeyPaintItem = "paint_item";
-
-        internal const string TabNameCategories = "tab_categories";
-        internal const string TabNameRecent = "tab_recent";
-        internal const string TabNameInventory = "tab_inventory";
-
-        internal const string CategoryAbstract = "abstract";
-        internal const string CategoryArmor = "armor";
-        internal const string CategoryBuilding = "building";
-        internal const string CategoryConsumables = "consumables";
-        internal const string CategoryFarming = "farming";
-        internal const string CategoryFurniture = "furniture";
-        internal const string CategoryMiscellaneous = "misc";
-        internal const string CategoryPlunder = "plunder";
-        internal const string CategoryWeapons = "weapons";
-
         [FormerlySerializedAs("m_name")] public string mName;
 
         [FormerlySerializedAs("m_defaultText")]
@@ -38,11 +21,9 @@ namespace IconSign.Sign
         private ZNetView _mNview;
         private string _mCurrentText = "T_emote_thumbsup";
 
-        private const float BlitPreventionOffset = -0.007f;
-
         private void Awake()
         {
-            mName = LocalizationManager.Instance.TryTranslate(TranslationKeyName);
+            mName = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName);
             var canvas = gameObject.GetComponentInChildren<Canvas>();
             var woodPole = gameObject.FindDeepChild("wood_pole (1)");
             var sign = gameObject.GetComponent<global::Sign>();
@@ -71,7 +52,7 @@ namespace IconSign.Sign
                 position: new Vector2(0, 0),
                 size: new Vector2(0.35f, 0.35f));
 
-            imgObj.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 0, BlitPreventionOffset);
+            imgObj.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 0, Constants.BlitPreventionOffset);
             _mNview = GetComponent<ZNetView>();
             if (_mNview.GetZDO() == null)
                 return;
@@ -85,9 +66,9 @@ namespace IconSign.Sign
             if (!PrivateArea.CheckAccess(transform.position, flash: false)) return str;
             str += "\n" + mName
                         + Localization.instance.Localize("\n[<color=yellow><b>$KEY_Use</b></color>] ")
-                        + LocalizationManager.Instance.TryTranslate(TranslationKeyUse);
+                        + LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyUse);
 
-            str += "\n[<color=yellow><b>1-8</b></color>] " + LocalizationManager.Instance.TryTranslate(TranslationKeyPaintItem);
+            str += "\n[<color=yellow><b>1-8</b></color>] " + LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyPaintItem);
 
             return str;
         }

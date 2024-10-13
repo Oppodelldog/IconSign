@@ -1,4 +1,4 @@
-﻿using IconSign.Data;
+﻿using IconSign.Config;
 using UnityEngine;
 using UnityEngine.UI;
 

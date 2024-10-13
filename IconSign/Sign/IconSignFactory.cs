@@ -1,4 +1,5 @@
-﻿using IconSign.Data;
+﻿using IconSign.Config;
+using IconSign.Data;
 using Jotunn;
 using Jotunn.Configs;
 using Jotunn.Entities;
@@ -23,7 +24,7 @@ namespace IconSign.Sign
             Logger.LogInfo("creating icon sign");
             var iconSignPiece = new PieceConfig
             {
-                Name = IconSign.TranslationKeyName,
+                Name = Constants.TranslationKeyName,
                 PieceTable = "Hammer",
                 Category = "Misc"
             };

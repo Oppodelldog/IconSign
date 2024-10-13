@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IconSign.Config;
 
 namespace IconSign.Data
 {
@@ -7,7 +8,7 @@ namespace IconSign.Data
         internal static readonly Dictionary<string, string[]> Data = new Dictionary<string, string[]>
         {
             {
-                Sign.IconSign.CategoryAbstract, new[]
+                Constants.CategoryAbstract, new[]
                 {
                     "plank",
                     "Slimed",
@@ -80,7 +81,7 @@ namespace IconSign.Data
                 }
             },
             {
-                Sign.IconSign.CategoryArmor, new[]
+                Constants.CategoryArmor, new[]
                 {
                     "HelmetAshlandsMage",
                     "HelmetAshlandsMedium",
@@ -250,7 +251,7 @@ namespace IconSign.Data
                 }
             },
             {
-                Sign.IconSign.CategoryBuilding, new[]
+                Constants.CategoryBuilding, new[]
                 {
                     "blackmarble_1x1",
                     "blackmarble_2x1x1",
@@ -434,7 +435,7 @@ namespace IconSign.Data
                 }
             },
             {
-                Sign.IconSign.CategoryConsumables, new[]
+                Constants.CategoryConsumables, new[]
                 {
                     "softtissue_cooked",
                     "bloodbag", "dandelion", "dragonegg", "faderdrop", "giantbloodsack",
@@ -507,7 +508,7 @@ namespace IconSign.Data
                 }
             },
             {
-                Sign.IconSign.CategoryFarming, new[]
+                Constants.CategoryFarming, new[]
                 {
                     "stone",
                     "turnip",
@@ -586,7 +587,7 @@ namespace IconSign.Data
                 }
             },
             {
-                Sign.IconSign.CategoryFurniture, new[]
+                Constants.CategoryFurniture, new[]
                 {
                     "yulecrown", "yulegarland",
                     "portal",
@@ -734,7 +735,7 @@ namespace IconSign.Data
                 }
             },
             {
-                Sign.IconSign.CategoryMiscellaneous, new[]
+                Constants.CategoryMiscellaneous, new[]
                 {
                     "SadleAsksvin", "SadleLox",
                     "Trap", "Trap_Unstablemine", "Sparkler", "SlowFall",
@@ -816,7 +817,7 @@ namespace IconSign.Data
                 }
             },
             {
-                Sign.IconSign.CategoryPlunder, new[]
+                Constants.CategoryPlunder, new[]
                 {
                     "amber",
                     "GemstoneBlue",
@@ -890,7 +891,7 @@ namespace IconSign.Data
                 }
             },
             {
-                Sign.IconSign.CategoryWeapons, new[]
+                Constants.CategoryWeapons, new[]
                 {
                     "FistFenringClaw",
                     "AtgeirBlackmetal",

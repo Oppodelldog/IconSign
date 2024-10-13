@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IconSign.Config;
 using IconSign.Extensions;
 using Jotunn.Managers;
 using UnityEngine;
@@ -77,9 +78,9 @@ namespace IconSign.Selection.TabBar
         {
             var tabs = new[]
             {
-                Sign.IconSign.TabNameCategories,
-                Sign.IconSign.TabNameRecent,
-                Sign.IconSign.TabNameInventory
+                Constants.TabNameCategories,
+                Constants.TabNameRecent,
+                Constants.TabNameInventory
             };
 
             const int buttonWidth = 140;
@@ -100,7 +101,7 @@ namespace IconSign.Selection.TabBar
                 x += buttonWidth;
             }
 
-            TabButtons[Sign.IconSign.TabNameCategories].GetComponent<TabButton>().IsSelected = true;
+            TabButtons[Constants.TabNameCategories].GetComponent<TabButton>().IsSelected = true;
 
             GUIManager.Instance.CreateImage(
                 "panel_separator",
