@@ -88,11 +88,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IconSelectionPanel.cs" />
-    <Compile Include="IconSign.cs" />
+    <Compile Include="Data\CategorizedIcons.cs" />
+    <Compile Include="Data\DevConfig.cs" />
+    <Compile Include="Data\IconCategories.cs" />
+    <Compile Include="Data\RecentIcons.cs" />
+    <Compile Include="Data\Translations.cs" />
+    <Compile Include="Extensions\ImageCreationExtensions.cs" />
+    <Compile Include="Extensions\RectTransformExtension.cs" />
     <Compile Include="Properties\IgnoreAccessModifiers.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selection\Helper\IconName.cs" />
+    <Compile Include="Selection\IconScrollContent\CreateCategorizedIcons.cs" />
+    <Compile Include="Selection\IconScrollContent\CreateInventoryIcons.cs" />
+    <Compile Include="Selection\IconScrollContent\CreateRecentIcons.cs" />
+    <Compile Include="Selection\IconSelectionPanel.cs" />
+    <Compile Include="Selection\Interaction\EscClosePanelListener.cs" />
+    <Compile Include="Selection\Interaction\HoverEffect.cs" />
+    <Compile Include="Selection\Scrollpane\CreateCategoriesScrollPane.cs" />
+    <Compile Include="Selection\Scrollpane\CreateInventoryScrollPane.cs" />
+    <Compile Include="Selection\Scrollpane\CreateRecentScrollPane.cs" />
+    <Compile Include="Selection\Scrollpane\ScrollableContainer.cs" />
+    <Compile Include="Selection\TabBar\CreateTabButtons.cs" />
+    <Compile Include="Selection\TabBar\TabButton.cs" />
+    <Compile Include="Sign\IconSign.cs" />
+    <Compile Include="Sign\IconSignFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Package\README.md" />
@@ -104,6 +124,8 @@
     <None Include="Package\manifest.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Docs\IconSign-used-to-visually-improve-storage.jpg" />
+    <Content Include="Docs\IconSign-categories-for-browsing.jpg" />
     <Content Include="Package\icon.png" />
   </ItemGroup>
   <PropertyGroup>
@@ -112,7 +134,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="JotunnPostBuildTaskWin" Condition="'$(OS)' == 'Windows_NT'">
     <MakeDir Directories="$(MOD_DEPLOYPATH)\IconSign" />
-    <Exec Command="powershell.exe -ExecutionPolicy RemoteSigned -File &quot;$(SolutionDir)publish.ps1&quot; -Target &quot;$(ConfigurationName)&quot; -TargetPath &quot;$(TargetDir.TrimEnd('\'))&quot; -TargetAssembly &quot;$(TargetFileName)&quot; -ValheimPath &quot;$(VALHEIM_INSTALL.TrimEnd('\'))&quot; -DeployPath &quot;$(MOD_DEPLOYPATH.TrimEnd('\'))&quot; -ProjectPath &quot;$(ProjectDir.TrimEnd('\'))&quot; " />
+    <Exec Command="powershell.exe -ExecutionPolicy RemoteSigned -File &quot;$(SolutionDir)publish.ps1&quot; -Target &quot;$(ConfigurationName)&quot; -TargetPath &quot;$(TargetDir.TrimEnd('\'))&quot; -TargetAssembly &quot;$(TargetFileName)&quot; -ValheimPath &quot;$(VALHEIM_INSTALL.TrimEnd('\'))&quot; -ProjectPath &quot;$(ProjectDir.TrimEnd('\'))&quot; " />
   </Target>
   <PropertyGroup>
     <BuildDependsOn>
