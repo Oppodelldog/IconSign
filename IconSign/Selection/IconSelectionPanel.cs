@@ -31,11 +31,12 @@ namespace IconSign.Selection
 
         internal void ClosePanel()
         {
-            foreach(var tabButton in _tabButtons)
+            foreach (var tabButton in _tabButtons)
             {
+                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
                 tabButton.Value.GetComponent<TabButton>().UpdateTextColor();
             }
-            
+
             _iconSelectionPanel.SetActive(false);
             GUIManager.BlockInput(false);
         }
@@ -68,7 +69,7 @@ namespace IconSign.Selection
 
             TabContainers.Add(Sign.IconSign.TabNameInventory, CreateInventoryScrollPane.Create(_iconSelectionPanel.transform));
             CreateInventoryScrollPane.OnIconClicked += TriggerSelectionEvent;
-            
+
             TabContainers.Add(Sign.IconSign.TabNameRecent, CreateRecentScrollPane.Create(_iconSelectionPanel.transform));
             CreateRecentScrollPane.OnIconClicked += TriggerSelectionEvent;
 

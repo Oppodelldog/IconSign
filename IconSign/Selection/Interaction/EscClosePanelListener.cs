@@ -8,6 +8,7 @@ namespace IconSign.Selection.Interaction
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
                 IconSelectionPanel.Instance.ClosePanel();
             }
         }
