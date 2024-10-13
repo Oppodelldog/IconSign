@@ -10,7 +10,7 @@ New sign that shows icons instead of text.
 - Inventory tag for quick access to inventory icons
 - Hotbar assignment
 
-## Refrence
+## Reference
 
 Find the mod at [IconSign at Valheim Nexus - Mods and community](https://www.nexusmods.com/valheim/mods/2891)
 
