@@ -43,29 +43,29 @@ namespace IconSign.Data
             LocalizationManager.Instance.GetLocalization().AddTranslation(de,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Piktrogramm Schild" },
-                    { Sign.IconSign.TranslationKeyUse, "Bemalen" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Objekt Malen" },
+                    { Sign.IconSign.TranslationKeyName, "Icon Schild" },
+                    { Sign.IconSign.TranslationKeyUse, "bemalen" },
+                    { Sign.IconSign.TranslationKeyPaintItem, "Objekt anmalen" },
 
                     { Sign.IconSign.TabNameInventory, "Inventar" },
-                    { Sign.IconSign.TabNameRecent, "Neueste" },
+                    { Sign.IconSign.TabNameRecent, "Kürzliche" },
                     { Sign.IconSign.TabNameCategories, "Kategorien" },
 
-                    { Sign.IconSign.CategoryArmor, "Rüstung" },
-                    { Sign.IconSign.CategoryBuilding, "Gebäude" },
-                    { Sign.IconSign.CategoryConsumables, "Verbrauchsmaterial" },
-                    { Sign.IconSign.CategoryFarming, "Landwirtschaft" },
-                    { Sign.IconSign.CategoryFurniture, "Möbel" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Diesdas" },
-                    { Sign.IconSign.CategoryWeapons, "Waffen" },
-                    { Sign.IconSign.CategoryPlunder, "Plündergut" },
+                    { Sign.IconSign.CategoryArmor, "Rüstung & Kleidung" },
+                    { Sign.IconSign.CategoryBuilding, "Baustruktur" },
+                    { Sign.IconSign.CategoryConsumables, "Verbrauchsgüter" },
+                    { Sign.IconSign.CategoryFarming, "Anbau & Herstellung" },
+                    { Sign.IconSign.CategoryFurniture, "Einrichtung" },
+                    { Sign.IconSign.CategoryMiscellaneous, "Sonstiges" },
+                    { Sign.IconSign.CategoryWeapons, "Waffen & Werkzeuge" },
+                    { Sign.IconSign.CategoryPlunder, "Trophäen" },
                     { Sign.IconSign.CategoryAbstract, "Abstrakt" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(fr,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Panneau d'icônes" },
+                    { Sign.IconSign.TranslationKeyName, "Icône de panneau" },
                     { Sign.IconSign.TranslationKeyUse, "Peindre" },
                     { Sign.IconSign.TranslationKeyPaintItem, "Peindre l'objet" },
 
@@ -80,15 +80,15 @@ namespace IconSign.Data
                     { Sign.IconSign.CategoryFurniture, "Meubles" },
                     { Sign.IconSign.CategoryMiscellaneous, "Divers" },
                     { Sign.IconSign.CategoryWeapons, "Armes" },
-                    { Sign.IconSign.CategoryPlunder, "Pillage" },
+                    { Sign.IconSign.CategoryPlunder, "Butin" },
                     { Sign.IconSign.CategoryAbstract, "Abstrait" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(es,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Señal de icono" },
-                    { Sign.IconSign.TranslationKeyUse, "Pintura" },
+                    { Sign.IconSign.TranslationKeyName, "Icono de señal" },
+                    { Sign.IconSign.TranslationKeyUse, "Pintar" },
                     { Sign.IconSign.TranslationKeyPaintItem, "Pintar objeto" },
 
                     { Sign.IconSign.TabNameInventory, "Inventario" },
@@ -100,7 +100,7 @@ namespace IconSign.Data
                     { Sign.IconSign.CategoryConsumables, "Consumibles" },
                     { Sign.IconSign.CategoryFarming, "Agricultura" },
                     { Sign.IconSign.CategoryFurniture, "Muebles" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Misceláneo" },
+                    { Sign.IconSign.CategoryMiscellaneous, "Diverso" },
                     { Sign.IconSign.CategoryWeapons, "Armas" },
                     { Sign.IconSign.CategoryPlunder, "Botín" },
                     { Sign.IconSign.CategoryAbstract, "Abstracto" }
