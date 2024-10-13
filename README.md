@@ -18,8 +18,8 @@ built with [Jötunn](https://github.com/Valheim-Modding/Jotunn).
 
 ## Screenshots
 
-![improved storage with icon signs](./Docs/IconSign-used-to-visually-improve-storage.jpg)
-![categories for browsing](./Docs/IconSign-categories-for-browsing.jpg)
+![improved storage with icon signs](./IconSign/Docs/IconSign-used-to-visually-improve-storage.jpg)
+![categories for browsing](./IconSign/Docs/IconSign-categories-for-browsing.jpg)
 
 
 
