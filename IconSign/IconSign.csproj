@@ -110,6 +110,7 @@
     <Compile Include="Selection\TabBar\CreateTabButtons.cs" />
     <Compile Include="Selection\TabBar\TabButton.cs" />
     <Compile Include="Sign\IconSign.cs" />
+    <Compile Include="Sign\IconSignFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Package\README.md" />
