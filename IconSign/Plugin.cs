@@ -1,13 +1,9 @@
-﻿using System;
-using BepInEx;
-using BepInEx.Configuration;
+﻿using BepInEx;
+using IconSign.Data;
 using Jotunn;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace IconSign
 {
@@ -15,25 +11,28 @@ namespace IconSign
     [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
     internal class Plugin : BaseUnityPlugin
     {
-        public const string PluginGuid = "oppodelldog.mod";
+        // ReSharper disable block MemberCanBePrivate.Global
+        public const string PluginGuid = "oppodelldog.mod.iconsign";
         public const string PluginName = "IconSign";
         public const string PluginVersion = "0.2.0";
 
+        private const string BuildPieceName = "iconsign";
+
         private void Awake()
         {
-            Jotunn.Logger.LogInfo("awake");
-
-            Conf.xHotbarPaint = Config.Bind("Experiments", "hotbar-paint", false, new ConfigDescription("paint icon signs using the hotbar"));
+            RecentIcons.ConfigEntry = Config.Bind("config", "recent_icons", "", "your recently used icons");
 
             PrefabManager.OnVanillaPrefabsAvailable += CreateIconSign;
         }
 
-        private void CreateIconSign()
+        private static void CreateIconSign()
         {
+            PrefabManager.OnVanillaPrefabsAvailable -= CreateIconSign;
+
             Jotunn.Logger.LogInfo("creating icon sign");
             var iconSignPiece = new PieceConfig
             {
-                Name = IconSign.TranslationKeyName,
+                Name = Sign.IconSign.TranslationKeyName,
                 PieceTable = "Hammer",
                 Category = "Misc"
             };
@@ -44,79 +43,11 @@ namespace IconSign
             iconSignPiece.AddRequirement(new RequirementConfig("Blueberries", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Guck", 1));
 
-            Translations.Add();
+            Translations.AddToLocalizationManager();
 
-            var customPiece = new CustomPiece("iconsign", "sign", iconSignPiece);
+            var customPiece = new CustomPiece(BuildPieceName, "sign", iconSignPiece);
             PieceManager.Instance.AddPiece(customPiece);
-            customPiece.PiecePrefab.gameObject.AddComponent<IconSign>();
-
-            PrefabManager.OnVanillaPrefabsAvailable -= CreateIconSign;
-        }
-    }
-
-    class HoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
-    {
-        private Image _image;
-        public Color normalColor = Color.gray;
-        public Color hoverColor = Color.white;
-
-        public delegate void ClickAction();
-
-        public event ClickAction OnClicked;
-
-        void Awake()
-        {
-            _image = GetComponent<Image>();
-            _image.color = normalColor;
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            _image.color = hoverColor;
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            _image.color = normalColor;
-        }
-
-        public void OnPointerClick(Action eventData)
-        {
-            OnClicked?.Invoke();
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            OnClicked?.Invoke();
-        }
-    }
-
-
-    public static class ImageCreationExtensions
-    {
-        public static GameObject CreateImage(
-            this GUIManager guiManager,
-            string text,
-            Transform parent,
-            Vector2 anchorMin,
-            Vector2 anchorMax,
-            Vector2 position,
-            Vector2 size)
-        {
-            var obj = new GameObject("Image", typeof(RectTransform), typeof(Image));
-            var img = obj.GetComponent<Image>();
-            var rectTransform = obj.GetComponent<RectTransform>();
-
-            obj.transform.SetParent(parent, false);
-
-            img.sprite = guiManager.GetSprite(text);
-
-            rectTransform.anchorMin = anchorMin;
-            rectTransform.anchorMax = anchorMax;
-            rectTransform.anchoredPosition = position;
-            rectTransform.sizeDelta = size;
-
-            return obj;
+            customPiece.PiecePrefab.gameObject.AddComponent<Sign.IconSign>();
         }
     }
 }

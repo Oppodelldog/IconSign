@@ -1,16 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using IconSign.Selection.Interaction;
+using IconSign.Selection.Scrollpane;
+using IconSign.Selection.TabBar;
 using Jotunn.Managers;
 using UnityEngine;
-using UnityEngine.U2D;
 using UnityEngine.UI;
 using Logger = Jotunn.Logger;
 
-namespace IconSign
+namespace IconSign.Selection
 {
     public class IconSelectionPanel
     {
         private static IconSelectionPanel _instance;
         public static IconSelectionPanel Instance => _instance ?? (_instance = new IconSelectionPanel());
+
+        private static Dictionary<string, GameObject> _tabButtons = new Dictionary<string, GameObject>();
+        private static readonly Dictionary<string, GameObject> TabContainers = new Dictionary<string, GameObject>();
 
         private GameObject _iconSelectionPanel;
 
@@ -45,85 +51,73 @@ namespace IconSign
                 return;
             }
 
+            CreateWoodPanel();
+
+            CreateHeadline();
+
+            _tabButtons = CreateTabButtons.Create(_iconSelectionPanel.transform);
+            CreateTabButtons.OnCategoryButtonClicked += SwitchTab;
+
+            TabContainers.Add(Sign.IconSign.TabNameCategories, CreateCategoriesScrollPane.Create(_iconSelectionPanel.transform));
+            CreateCategoriesScrollPane.OnIconClicked += TriggerSelectionEvent;
+
+            TabContainers.Add(Sign.IconSign.TabNameInventory, CreateInventoryScrollPane.Create(_iconSelectionPanel.transform));
+            CreateInventoryScrollPane.OnIconClicked += TriggerSelectionEvent;
+            
+            TabContainers.Add(Sign.IconSign.TabNameRecent, CreateRecentScrollPane.Create(_iconSelectionPanel.transform));
+            CreateRecentScrollPane.OnIconClicked += TriggerSelectionEvent;
+
+            SwitchTab(Sign.IconSign.TabNameCategories);
+        }
+
+        private void CreateWoodPanel()
+        {
             _iconSelectionPanel = GUIManager.Instance.CreateWoodpanel(
                 parent: GUIManager.CustomGUIFront.transform,
                 anchorMin: new Vector2(0.5f, 0.5f),
                 anchorMax: new Vector2(0.5f, 0.5f),
                 position: new Vector2(0, 0),
-                width: 850,
-                height: 600,
+                width: 1200,
+                height: 800,
                 draggable: false);
             _iconSelectionPanel.SetActive(false);
             _iconSelectionPanel.AddComponent<EscClosePanelListener>();
+        }
 
+        private void CreateHeadline()
+        {
             GUIManager.Instance.CreateText(
-                text: LocalizationManager.Instance.TryTranslate("iconsign_name"),
+                text: LocalizationManager.Instance.TryTranslate(Sign.IconSign.TranslationKeyName),
                 parent: _iconSelectionPanel.transform,
                 anchorMin: new Vector2(0.5f, 1f),
                 anchorMax: new Vector2(0.5f, 1f),
-                position: new Vector2(0f, -30f),
+                position: new Vector2(0f, -45f),
                 font: GUIManager.Instance.AveriaSerifBold,
-                fontSize: 30,
+                fontSize: 38,
                 color: GUIManager.Instance.ValheimOrange,
                 outline: true,
                 outlineColor: Color.black,
-                width: 350f,
-                height: 40f,
+                width: 650f,
+                height: 48f,
                 addContentSizeFitter: false).GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-
-            var atlas = PrefabManager.Cache.GetPrefab<SpriteAtlas>("IconAtlas");
-            var sprites = new Sprite[atlas.spriteCount];
-            atlas.GetSprites(sprites);
-
-            var x = -400;
-            var y = -70;
-            foreach (var sprite in sprites)
-            {
-                if (x > 400)
-                {
-                    x = -400;
-                    y -= 20;
-                }
-
-                GUIManager.Instance.CreateImage(
-                        sprite.name,
-                        _iconSelectionPanel.transform,
-                        new Vector2(0.5f, 1f),
-                        new Vector2(0.5f, 1f),
-                        new Vector2(x, y),
-                        new Vector2(16, 16))
-                    .AddComponent<HoverEffect>()
-                    .OnClicked += () => TriggerSelectionEvent(sprite);
-                x += 20;
-            }
         }
 
-        private void TriggerSelectionEvent(Sprite sprite)
+        private void TriggerSelectionEvent(string spriteName)
         {
-            OnIconSelected?.Invoke(GetOriginalSpriteName(sprite));
+            OnIconSelected?.Invoke(spriteName);
             ClosePanel();
         }
 
-        private static string GetOriginalSpriteName(Sprite sprite)
+        private static void SwitchTab(string tabName)
         {
-            var spriteName = sprite.name;
-
-            if (spriteName.EndsWith("(Clone)"))
+            foreach (var tabContainer in TabContainers)
             {
-                spriteName = spriteName.Substring(0, spriteName.Length - "(Clone)".Length);
+                tabContainer.Value.SetActive(tabContainer.Key == tabName);
             }
 
-            return spriteName;
-        }
-    }
-
-    internal class EscClosePanelListener : MonoBehaviour
-    {
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            foreach (var tabButton in _tabButtons)
             {
-                IconSelectionPanel.Instance.ClosePanel();
+                tabButton.Value.GetComponent<TabButton>().IsSelected = tabButton.Key == tabName;
             }
         }
     }

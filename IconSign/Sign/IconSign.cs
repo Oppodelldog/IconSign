@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IconSign.Data;
+using IconSign.Extensions;
+using IconSign.Selection;
 using Jotunn;
 using Jotunn.Managers;
 using UnityEngine;
@@ -6,13 +8,27 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Logger = Jotunn.Logger;
 
-namespace IconSign
+namespace IconSign.Sign
 {
     internal class IconSign : MonoBehaviour, Hoverable, Interactable, TextReceiver
     {
-        internal const string TranslationKeyName = "$iconsign_name";
-        internal const string TranslationKeyUse = "$iconsign_use";
-        internal const string TranslationKeyPaintItem = "$iconsign_paint_item";
+        internal const string TranslationKeyName = "name";
+        internal const string TranslationKeyUse = "use";
+        internal const string TranslationKeyPaintItem = "paint_item";
+
+        internal const string TabNameCategories = "tab_categories";
+        internal const string TabNameRecent = "tab_recent";
+        internal const string TabNameInventory = "tab_inventory";
+
+        internal const string CategoryAbstract = "abstract";
+        internal const string CategoryArmor = "armor";
+        internal const string CategoryBuilding = "building";
+        internal const string CategoryConsumables = "consumables";
+        internal const string CategoryFarming = "farming";
+        internal const string CategoryFurniture = "furniture";
+        internal const string CategoryMiscellaneous = "misc";
+        internal const string CategoryPlunder = "plunder";
+        internal const string CategoryWeapons = "weapons";
 
         [FormerlySerializedAs("m_name")] public string mName;
 
@@ -20,17 +36,16 @@ namespace IconSign
         public string mDefaultText = "T_emote_thumbsup";
 
         private ZNetView _mNview;
-        private bool _mIsViewable = true;
         private string _mCurrentText = "T_emote_thumbsup";
 
         private const float BlitPreventionOffset = -0.007f;
 
         private void Awake()
         {
-            mName = Localization.instance.Localize(TranslationKeyName);
+            mName = LocalizationManager.Instance.TryTranslate(TranslationKeyName);
             var canvas = gameObject.GetComponentInChildren<Canvas>();
             var woodPole = gameObject.FindDeepChild("wood_pole (1)");
-            var sign = gameObject.GetComponent<Sign>();
+            var sign = gameObject.GetComponent<global::Sign>();
             var collider = gameObject.GetComponentInChildren<Collider>();
             LOGIfNull(canvas, "Canvas");
             LOGIfNull(woodPole, "WoodPole");
@@ -47,13 +62,14 @@ namespace IconSign
             woodPole.transform.localScale = new Vector3(0.5f, 0.5f, 0.1f);
             collider.transform.localScale = new Vector3(0.5f, 1f, 1f);
 
-            GUIManager.Instance.CreateImage(
-                text: GetText(),
+            var imgObj = GUIManager.Instance.CreateImage(
+                spriteName: GetText(),
                 parent: canvas.transform,
                 anchorMin: new Vector2(0.5f, 0.5f),
                 anchorMax: new Vector2(0.5f, 0.5f),
+                pivot: new Vector2(0.5f, 0.5f),
                 position: new Vector2(0, 0),
-                size: new Vector2(0.35f, 0.35f)).GetComponent<RectTransform>().position += new Vector3(0.01f, 0, 0);
+                size: new Vector2(0.35f, 0.35f));
 
             imgObj.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 0, BlitPreventionOffset);
             _mNview = GetComponent<ZNetView>();
@@ -65,12 +81,13 @@ namespace IconSign
 
         public string GetHoverText()
         {
-            var str = _mIsViewable ? "\"" + GetText().RemoveRichTextTags() + "\"" : "[TEXT HIDDEN DUE TO UGC SETTINGS]";
+            var str = "";
             if (!PrivateArea.CheckAccess(transform.position, flash: false)) return str;
-            str += "\n" + Localization.instance.Localize(mName + "\n[<color=yellow><b>$KEY_Use</b></color>] " + TranslationKeyUse);
+            str += "\n" + mName
+                        + Localization.instance.Localize("\n[<color=yellow><b>$KEY_Use</b></color>] ")
+                        + LocalizationManager.Instance.TryTranslate(TranslationKeyUse);
 
-            if (Conf.HotbarPaintEnabled())
-                str += "\n" + Localization.instance.Localize("\n[<color=yellow><b>1-8</b></color>] " + TranslationKeyPaintItem);
+            str += "\n[<color=yellow><b>1-8</b></color>] " + LocalizationManager.Instance.TryTranslate(TranslationKeyPaintItem);
 
             return str;
         }
@@ -92,6 +109,7 @@ namespace IconSign
             IconSelectionPanel.Instance.OnIconSelected -= OnIconSelected;
             if (icon == "") return;
 
+            RecentIcons.Add(icon);
             SetText(icon);
         }
 
@@ -109,18 +127,15 @@ namespace IconSign
                     case PrivilegeManager.Result.Allowed:
                         _mCurrentText = text;
                         UpdateSprite();
-                        _mIsViewable = true;
                         break;
                     case PrivilegeManager.Result.NotAllowed:
                         _mCurrentText = "";
                         UpdateSprite();
-                        _mIsViewable = false;
                         break;
                     case PrivilegeManager.Result.Failed:
                     default:
                         _mCurrentText = "";
                         UpdateSprite();
-                        _mIsViewable = false;
                         ZLog.LogError("Failed to check UGC privilege");
                         break;
                 }
@@ -136,12 +151,11 @@ namespace IconSign
 
         public bool UseItem(Humanoid user, ItemDrop.ItemData item)
         {
-            if (!Conf.HotbarPaintEnabled()) return false;
+            var iconName = item.GetIcon().name;
+            RecentIcons.Add(iconName);
+            SetText(iconName);
 
-            Logger.LogInfo("UseItem: " + item.m_shared.m_name);
-            SetText(item.GetIcon().name);
-
-            return false;
+            return true;
         }
 
         public void SetText(string text)
@@ -158,7 +172,7 @@ namespace IconSign
         {
             if (obj == null)
             {
-                Jotunn.Logger.LogError($"{descriptiveName} is null");
+                Logger.LogError($"{descriptiveName} is null");
             }
         }
     }
