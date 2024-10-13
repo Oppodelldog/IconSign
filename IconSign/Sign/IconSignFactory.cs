@@ -1,4 +1,5 @@
 ﻿using IconSign.Data;
+using Jotunn;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
@@ -19,10 +20,10 @@ namespace IconSign.Sign
         {
             PrefabManager.OnVanillaPrefabsAvailable -= CreateIconSign;
 
-            Jotunn.Logger.LogInfo("creating icon sign");
+            Logger.LogInfo("creating icon sign");
             var iconSignPiece = new PieceConfig
             {
-                Name = Sign.IconSign.TranslationKeyName,
+                Name = IconSign.TranslationKeyName,
                 PieceTable = "Hammer",
                 Category = "Misc"
             };
@@ -37,7 +38,7 @@ namespace IconSign.Sign
 
             var customPiece = new CustomPiece(BuildPieceName, "sign", iconSignPiece);
             PieceManager.Instance.AddPiece(customPiece);
-            customPiece.PiecePrefab.gameObject.AddComponent<Sign.IconSign>();
+            customPiece.PiecePrefab.gameObject.AddComponent<IconSign>();
         }
     }
 }
