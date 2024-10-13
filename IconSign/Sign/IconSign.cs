@@ -23,6 +23,8 @@ namespace IconSign
         private bool _mIsViewable = true;
         private string _mCurrentText = "T_emote_thumbsup";
 
+        private const float BlitPreventionOffset = -0.007f;
+
         private void Awake()
         {
             mName = Localization.instance.Localize(TranslationKeyName);
@@ -53,6 +55,7 @@ namespace IconSign
                 position: new Vector2(0, 0),
                 size: new Vector2(0.35f, 0.35f)).GetComponent<RectTransform>().position += new Vector3(0.01f, 0, 0);
 
+            imgObj.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, 0, BlitPreventionOffset);
             _mNview = GetComponent<ZNetView>();
             if (_mNview.GetZDO() == null)
                 return;
