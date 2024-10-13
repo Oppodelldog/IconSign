@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using IconSign.Data;
 using IconSign.Extensions;
 using IconSign.Selection.Helper;
@@ -8,7 +7,6 @@ using IconSign.Selection.Interaction;
 using IconSign.Selection.Scrollpane;
 using Jotunn.Managers;
 using UnityEngine;
-using UnityEngine.U2D;
 using UnityEngine.UI;
 using Logger = Jotunn.Logger;
 
@@ -36,16 +34,7 @@ namespace IconSign.Selection.IconScrollContent
             const float right = left + IconLineWidth;
             const float top = 0;
             const float stepSize = IconSize + Spacing;
-
-
-            var startTime = DateTime.Now;
-            Logger.LogInfo("Loading icons...");
-
-            var atlas = PrefabManager.Cache.GetPrefab<SpriteAtlas>("IconAtlas");
-            var sprites = new Sprite[atlas.spriteCount];
-            atlas.GetSprites(sprites);
-
-            Logger.LogInfo($"Loaded {sprites.Length} sprites in {(DateTime.Now - startTime).TotalMilliseconds}ms");
+            
 
             var categories = new[]
             {
@@ -60,13 +49,13 @@ namespace IconSign.Selection.IconScrollContent
                 Sign.IconSign.CategoryAbstract
             };
 
-            var catSpriteDict = PrepareData(categories, sprites);
+            var catSpriteDict = CategorizedIcons.PrepareData(categories);
 
             yield return null; // Wait for the next frame
 
             var createdCount = 0;
 
-            startTime = DateTime.Now;
+            var startTime = DateTime.Now;
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             scrollableContainer.SetSize(new Vector2(0, 0));
             var isNewLine = true;
@@ -150,63 +139,6 @@ namespace IconSign.Selection.IconScrollContent
         private static void TriggerClickEvent(Sprite sprite)
         {
             OnIconClicked?.Invoke(IconName.GetName(sprite));
-        }
-
-        private static Dictionary<string, List<Sprite>> PrepareData(string[] categories, Sprite[] sprites)
-        {
-            var startTime = DateTime.Now;
-            Logger.LogInfo("Loading icon categories...");
-
-            var categoryByIcon = BuildCategoryByIconIndex();
-            var result = InitResult(categories);
-            BuildSpritesByCategoryIndex(sprites, categoryByIcon, result);
-
-            Logger.LogInfo($"Loaded icon categories in {(DateTime.Now - startTime).TotalMilliseconds}ms");
-
-            return result;
-        }
-
-        private static void BuildSpritesByCategoryIndex(Sprite[] sprites, Dictionary<string, string> categoryByIcon, Dictionary<string, List<Sprite>> result)
-        {
-            foreach (var sprite in sprites)
-            {
-                var iconName = IconName.GetName(sprite);
-                if (categoryByIcon.TryGetValue(iconName, out var category))
-                {
-                    result[category].Add(sprite);
-                }
-                else
-                {
-                    Logger.LogWarning($"Icon {iconName} has no category");
-                }
-            }
-        }
-
-        private static Dictionary<string, List<Sprite>> InitResult(string[] categories)
-        {
-            var catSpriteDict = new Dictionary<string, List<Sprite>>();
-            foreach (var category in categories)
-            {
-                catSpriteDict[category] = new List<Sprite>();
-            }
-
-            return catSpriteDict;
-        }
-
-        private static Dictionary<string, string> BuildCategoryByIconIndex()
-        {
-            var categoryByIcon = new Dictionary<string, string>();
-            foreach (var kv in IconCategories.Data)
-            {
-                var category = kv.Key;
-                var icons = kv.Value;
-                foreach (var icon in icons)
-                {
-                    categoryByIcon[icon] = category;
-                }
-            }
-
-            return categoryByIcon;
         }
     }
 }
