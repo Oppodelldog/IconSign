@@ -31,6 +31,11 @@ namespace IconSign.Selection
 
         internal void ClosePanel()
         {
+            foreach(var tabButton in _tabButtons)
+            {
+                tabButton.Value.GetComponent<TabButton>().UpdateTextColor();
+            }
+            
             _iconSelectionPanel.SetActive(false);
             GUIManager.BlockInput(false);
         }

@@ -28,7 +28,7 @@ namespace IconSign.Selection.TabBar
             UpdateTextColor();
         }
 
-        private void UpdateTextColor()
+        public void UpdateTextColor()
         {
             textComponent.color = _isSelected ? _highlightedTextColor : _normalTextColor;
         }
