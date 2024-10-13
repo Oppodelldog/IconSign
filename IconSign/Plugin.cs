@@ -2,7 +2,6 @@
 using IconSign.Data;
 using IconSign.Sign;
 using Jotunn;
-using Jotunn.Managers;
 
 namespace IconSign
 {
@@ -19,6 +18,7 @@ namespace IconSign
         private void Awake()
         {
             RecentIcons.ConfigEntry = Config.Bind("config", "recent_icons", "", "your recently used icons");
+            DevConfig.SelectionPanel.DebugView = Config.Bind("dev", "selection_panel_debug_view", false, "show debug info in selection panel");
 
             IconSignFactory.Register();
         }

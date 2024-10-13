@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using IconSign.Data;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace IconSign.Selection.Scrollpane
 {
     public class ScrollableContainer : MonoBehaviour
     {
-        private const bool Debug = false;
         private GameObject _content;
 
         public Transform Content
@@ -62,9 +62,9 @@ namespace IconSign.Selection.Scrollpane
 
             // Add an Image component to make the panel visible (optional)
             var panelImage = panel.AddComponent<Image>();
-            
+
             // ReSharper disable once HeuristicUnreachableCode
-            panelImage.color = Debug ? new Color(0, 1, 0, 0.4f) : new Color(0, 0, 0, 0f); // Transparent background
+            panelImage.color = new Color(0, 0, 0, 0f); // Transparent background
 
             // Create a ScrollRect component for scrolling functionality
             var scrollRect = panel.AddComponent<ScrollRect>();
@@ -82,7 +82,7 @@ namespace IconSign.Selection.Scrollpane
             // Add an Image to the viewport
             var viewportImage = viewport.AddComponent<Image>();
             // ReSharper disable once HeuristicUnreachableCode
-            viewportImage.color = Debug ? new Color(0f, 1f, 1f, 0.4f) : new Color(0f, 0f, 0f, 0.1f); // if alpha is 0, the mask will not work
+            viewportImage.color = new Color(0f, 0f, 0f, 0.1f); // if alpha is 0, the mask will not work
             var mask = viewport.AddComponent<Mask>();
             mask.showMaskGraphic = false;
             // Assign the viewport to the ScrollRect
@@ -94,7 +94,7 @@ namespace IconSign.Selection.Scrollpane
             // add image to get a visual representation of the content
             var contentImage = _content.AddComponent<Image>();
             // ReSharper disable once HeuristicUnreachableCode
-            contentImage.color = Debug ? new Color(1f, 0f, 0.4f, 0.4f) : new Color(0f, 0f, 0f, 0f);
+            contentImage.color = new Color(0f, 0f, 0f, 0f);
 
             // Assign the content to the ScrollRect
             scrollRect.content = Content.GetComponent<RectTransform>();
@@ -116,6 +116,12 @@ namespace IconSign.Selection.Scrollpane
             // Attach the scrollbar to the ScrollRect
             scrollRect.verticalScrollbar = verticalScrollbar;
             scrollRect.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.Permanent;
+            
+            if (!DevConfig.SelectionPanel.DebugView.Value) return;
+            panelImage.color = new Color(0, 1, 0, 0.4f);
+            panelImage.color = new Color(0, 1, 0, 0.4f);
+            viewportImage.color = new Color(0f, 1f, 1f, 0.4f);
+            contentImage.color = new Color(1f, 0f, 0.4f, 0.4f);
         }
     }
 }
