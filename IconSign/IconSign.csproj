@@ -124,6 +124,8 @@
     <None Include="Package\manifest.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Docs\IconSign-used-to-visually-improve-storage.jpg" />
+    <Content Include="Docs\IconSign-categories-for-browsing.jpg" />
     <Content Include="Package\icon.png" />
   </ItemGroup>
   <PropertyGroup>
