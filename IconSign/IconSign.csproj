@@ -88,6 +88,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\CategorizedIcons.cs" />
+    <Compile Include="Data\DevConfig.cs" />
     <Compile Include="Data\IconCategories.cs" />
     <Compile Include="Data\RecentIcons.cs" />
     <Compile Include="Data\Translations.cs" />
