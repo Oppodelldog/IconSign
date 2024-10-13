@@ -4,7 +4,7 @@ New sign that shows icons instead of text.
 
 ## Features
 
-- 900+ existing in game icons
+- 1000+ existing in game icons
 - Categories for easy browsing
 - Recent tab for quick access to recently used icons
 - Inventory tag for quick access to inventory icons
