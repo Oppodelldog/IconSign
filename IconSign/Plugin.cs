@@ -19,6 +19,7 @@ namespace IconSign
         private void Awake()
         {
             RecentIcons.ConfigEntry = Config.Bind("config", "recent_icons", "", "your recently used icons");
+            ModConfig.SelectionPanel.SelectedTab = Config.Bind("config", "selection_panel_selected_tab", "", "selected tab in selection panel");
             DevConfig.SelectionPanel.DebugView = Config.Bind("dev", "selection_panel_debug_view", false, "show debug info in selection panel");
 
             IconSignFactory.Register();

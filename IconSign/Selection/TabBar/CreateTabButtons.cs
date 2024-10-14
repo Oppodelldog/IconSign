@@ -76,18 +76,11 @@ namespace IconSign.Selection.TabBar
 
         internal static Dictionary<string, GameObject> Create(Transform parent)
         {
-            var tabs = new[]
-            {
-                Constants.TabNameCategories,
-                Constants.TabNameRecent,
-                Constants.TabNameInventory
-            };
-
             const int buttonWidth = 140;
             const int buttonHeight = 38;
             var x = -buttonWidth;
             const int y = -92;
-            foreach (var tab in tabs)
+            foreach (var tab in ModConfig.SelectionPanel.Tabs)
             {
                 var tabName = LocalizationManager.Instance.TryTranslate(tab);
                 var tabButton = CreateTabButton(

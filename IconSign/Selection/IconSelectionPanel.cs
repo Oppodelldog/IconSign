@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IconSign.Config;
 using IconSign.Selection.Interaction;
 using IconSign.Selection.Scrollpane;
@@ -74,7 +75,7 @@ namespace IconSign.Selection
             TabContainers.Add(Constants.TabNameRecent, CreateRecentScrollPane.Create(_iconSelectionPanel.transform));
             CreateRecentScrollPane.OnIconClicked += TriggerSelectionEvent;
 
-            SwitchTab(Constants.TabNameCategories);
+            SwitchTab(ModConfig.SelectionPanel.SelectedTab.Value);
         }
 
         private void CreateWoodPanel()
@@ -117,6 +118,10 @@ namespace IconSign.Selection
 
         private static void SwitchTab(string tabName)
         {
+            if (!ModConfig.SelectionPanel.Tabs.Contains(tabName)) tabName = Constants.TabNameCategories;
+
+            ModConfig.SelectionPanel.SelectedTab.Value = tabName;
+            
             foreach (var tabContainer in TabContainers)
             {
                 tabContainer.Value.SetActive(tabContainer.Key == tabName);
