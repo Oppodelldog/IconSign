@@ -30,8 +30,8 @@ namespace IconSign.Sign
             var iconSignPiece = new PieceConfig
             {
                 Name = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
-                PieceTable = "Hammer",
-                Category = "Misc"
+                PieceTable = PieceTables.Hammer,
+                Category = PieceCategories.Furniture,
             };
 
             iconSignPiece.AddRequirement(new RequirementConfig("Wood", 1, 0, true));
