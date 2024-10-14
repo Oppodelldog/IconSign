@@ -25,9 +25,11 @@ namespace IconSign.Sign
 
             Logger.LogInfo("creating icon sign");
 
+            Translations.AddToLocalizationManager();
+
             var iconSignPiece = new PieceConfig
             {
-                Name = Constants.TranslationKeyName,
+                Name = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
                 PieceTable = "Hammer",
                 Category = "Misc"
             };
@@ -39,8 +41,6 @@ namespace IconSign.Sign
             iconSignPiece.AddRequirement(new RequirementConfig("Guck", 1));
 
             iconSignPiece.Icon = SpriteLoader.LoadBuildPieceIcon();
-
-            Translations.AddToLocalizationManager();
 
             var customPiece = new CustomPiece(BuildPieceName, "sign", iconSignPiece);
             PieceManager.Instance.AddPiece(customPiece);
