@@ -16,10 +16,10 @@ namespace IconSign.Sign
         [FormerlySerializedAs("m_name")] public string mName;
 
         [FormerlySerializedAs("m_defaultText")]
-        public string mDefaultText = "T_emote_thumbsup";
+        public string mDefaultText = "rested";
 
         private ZNetView _mNview;
-        private string _mCurrentText = "T_emote_thumbsup";
+        private string _mCurrentText = "rested";
 
         private void Awake()
         {
