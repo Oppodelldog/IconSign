@@ -63,6 +63,7 @@ namespace IconSign.Sign
         public string GetHoverText()
         {
             var str = "";
+            if (DevConfig.IconSign.ShowInternalName.Value) str += "\"" + GetText().RemoveRichTextTags() + "\"\n";
             if (!PrivateArea.CheckAccess(transform.position, flash: false)) return str;
             str += "\n" + mName
                         + Localization.instance.Localize("\n[<color=yellow><b>$KEY_Use</b></color>] ")
