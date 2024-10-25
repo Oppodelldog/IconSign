@@ -1,8 +1,11 @@
-﻿using IconSign.Data;
-using Jotunn;
+﻿using IconSign.Assets;
+using IconSign.Config;
+using IconSign.Data;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
+using UnityEngine;
+using Logger = Jotunn.Logger;
 
 namespace IconSign.Sign
 {
@@ -21,11 +24,14 @@ namespace IconSign.Sign
             PrefabManager.OnVanillaPrefabsAvailable -= CreateIconSign;
 
             Logger.LogInfo("creating icon sign");
+
+            Translations.AddToLocalizationManager();
+
             var iconSignPiece = new PieceConfig
             {
-                Name = IconSign.TranslationKeyName,
-                PieceTable = "Hammer",
-                Category = "Misc"
+                Name = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
+                PieceTable = PieceTables.Hammer,
+                Category = PieceCategories.Furniture,
             };
 
             iconSignPiece.AddRequirement(new RequirementConfig("Wood", 1, 0, true));
@@ -34,11 +40,13 @@ namespace IconSign.Sign
             iconSignPiece.AddRequirement(new RequirementConfig("Blueberries", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Guck", 1));
 
-            Translations.AddToLocalizationManager();
+            iconSignPiece.Icon = SpriteLoader.LoadBuildPieceIcon();
 
             var customPiece = new CustomPiece(BuildPieceName, "sign", iconSignPiece);
             PieceManager.Instance.AddPiece(customPiece);
             customPiece.PiecePrefab.gameObject.AddComponent<IconSign>();
+
+            Logger.LogInfo("icon sign created");
         }
     }
 }

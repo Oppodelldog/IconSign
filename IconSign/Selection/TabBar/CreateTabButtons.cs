@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IconSign.Config;
 using IconSign.Extensions;
 using Jotunn.Managers;
 using UnityEngine;
@@ -75,18 +76,11 @@ namespace IconSign.Selection.TabBar
 
         internal static Dictionary<string, GameObject> Create(Transform parent)
         {
-            var tabs = new[]
-            {
-                Sign.IconSign.TabNameCategories,
-                Sign.IconSign.TabNameRecent,
-                Sign.IconSign.TabNameInventory
-            };
-
             const int buttonWidth = 140;
             const int buttonHeight = 38;
             var x = -buttonWidth;
             const int y = -92;
-            foreach (var tab in tabs)
+            foreach (var tab in ModConfig.SelectionPanel.Tabs)
             {
                 var tabName = LocalizationManager.Instance.TryTranslate(tab);
                 var tabButton = CreateTabButton(
@@ -100,7 +94,7 @@ namespace IconSign.Selection.TabBar
                 x += buttonWidth;
             }
 
-            TabButtons[Sign.IconSign.TabNameCategories].GetComponent<TabButton>().IsSelected = true;
+            TabButtons[Constants.TabNameCategories].GetComponent<TabButton>().IsSelected = true;
 
             GUIManager.Instance.CreateImage(
                 "panel_separator",

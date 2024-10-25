@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using IconSign.Config;
 using IconSign.Selection.Interaction;
 using IconSign.Selection.Scrollpane;
 using IconSign.Selection.TabBar;
@@ -64,16 +66,16 @@ namespace IconSign.Selection
             _tabButtons = CreateTabButtons.Create(_iconSelectionPanel.transform);
             CreateTabButtons.OnCategoryButtonClicked += SwitchTab;
 
-            TabContainers.Add(Sign.IconSign.TabNameCategories, CreateCategoriesScrollPane.Create(_iconSelectionPanel.transform));
+            TabContainers.Add(Constants.TabNameCategories, CreateCategoriesScrollPane.Create(_iconSelectionPanel.transform));
             CreateCategoriesScrollPane.OnIconClicked += TriggerSelectionEvent;
 
-            TabContainers.Add(Sign.IconSign.TabNameInventory, CreateInventoryScrollPane.Create(_iconSelectionPanel.transform));
+            TabContainers.Add(Constants.TabNameInventory, CreateInventoryScrollPane.Create(_iconSelectionPanel.transform));
             CreateInventoryScrollPane.OnIconClicked += TriggerSelectionEvent;
 
-            TabContainers.Add(Sign.IconSign.TabNameRecent, CreateRecentScrollPane.Create(_iconSelectionPanel.transform));
+            TabContainers.Add(Constants.TabNameRecent, CreateRecentScrollPane.Create(_iconSelectionPanel.transform));
             CreateRecentScrollPane.OnIconClicked += TriggerSelectionEvent;
 
-            SwitchTab(Sign.IconSign.TabNameCategories);
+            SwitchTab(ModConfig.SelectionPanel.SelectedTab.Value);
         }
 
         private void CreateWoodPanel()
@@ -93,7 +95,7 @@ namespace IconSign.Selection
         private void CreateHeadline()
         {
             GUIManager.Instance.CreateText(
-                text: LocalizationManager.Instance.TryTranslate(Sign.IconSign.TranslationKeyName),
+                text: LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
                 parent: _iconSelectionPanel.transform,
                 anchorMin: new Vector2(0.5f, 1f),
                 anchorMax: new Vector2(0.5f, 1f),
@@ -116,6 +118,10 @@ namespace IconSign.Selection
 
         private static void SwitchTab(string tabName)
         {
+            if (!ModConfig.SelectionPanel.Tabs.Contains(tabName)) tabName = Constants.TabNameCategories;
+
+            ModConfig.SelectionPanel.SelectedTab.Value = tabName;
+            
             foreach (var tabContainer in TabContainers)
             {
                 tabContainer.Value.SetActive(tabContainer.Key == tabName);

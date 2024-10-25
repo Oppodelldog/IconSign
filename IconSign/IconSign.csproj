@@ -17,6 +17,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -88,8 +89,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\SpriteLoader.cs" />
+    <Compile Include="Config\Constants.cs" />
+    <Compile Include="Config\DevConfig.cs" />
+    <Compile Include="Config\ModConfig.cs" />
     <Compile Include="Data\CategorizedIcons.cs" />
-    <Compile Include="Data\DevConfig.cs" />
     <Compile Include="Data\IconCategories.cs" />
     <Compile Include="Data\RecentIcons.cs" />
     <Compile Include="Data\Translations.cs" />
@@ -124,6 +128,7 @@
     <None Include="Package\manifest.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\prefab-icon.png" />
     <Content Include="Docs\IconSign-used-to-visually-improve-storage.jpg" />
     <Content Include="Docs\IconSign-categories-for-browsing.jpg" />
     <Content Include="Package\icon.png" />

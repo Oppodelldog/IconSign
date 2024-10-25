@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using IconSign.Config;
 using IconSign.Data;
 using IconSign.Extensions;
 using IconSign.Selection.Helper;
@@ -38,15 +39,15 @@ namespace IconSign.Selection.IconScrollContent
 
             var categories = new[]
             {
-                Sign.IconSign.CategoryConsumables,
-                Sign.IconSign.CategoryFarming,
-                Sign.IconSign.CategoryArmor,
-                Sign.IconSign.CategoryWeapons,
-                Sign.IconSign.CategoryBuilding,
-                Sign.IconSign.CategoryFurniture,
-                Sign.IconSign.CategoryMiscellaneous,
-                Sign.IconSign.CategoryPlunder,
-                Sign.IconSign.CategoryAbstract
+                Constants.CategoryConsumables,
+                Constants.CategoryFarming,
+                Constants.CategoryArmor,
+                Constants.CategoryWeapons,
+                Constants.CategoryBuilding,
+                Constants.CategoryFurniture,
+                Constants.CategoryMiscellaneous,
+                Constants.CategoryPlunder,
+                Constants.CategoryAbstract
             };
 
             var catSpriteDict = CategorizedIcons.PrepareData(categories);

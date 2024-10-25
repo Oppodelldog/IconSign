@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IconSign.Config;
 using Jotunn.Managers;
 
 // ReSharper disable InconsistentNaming
@@ -21,199 +22,199 @@ namespace IconSign.Data
             LocalizationManager.Instance.GetLocalization().AddTranslation(en,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Icon Sign" },
-                    { Sign.IconSign.TranslationKeyUse, "Paint" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Paint item" },
+                    { Constants.TranslationKeyName, "Icon Sign" },
+                    { Constants.TranslationKeyUse, "Paint" },
+                    { Constants.TranslationKeyPaintItem, "Paint item" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventory" },
-                    { Sign.IconSign.TabNameRecent, "Recent" },
-                    { Sign.IconSign.TabNameCategories, "Categories" },
+                    { Constants.TabNameInventory, "Inventory" },
+                    { Constants.TabNameRecent, "Recent" },
+                    { Constants.TabNameCategories, "Categories" },
 
-                    { Sign.IconSign.CategoryArmor, "Armor" },
-                    { Sign.IconSign.CategoryBuilding, "Building" },
-                    { Sign.IconSign.CategoryConsumables, "Consumables" },
-                    { Sign.IconSign.CategoryFarming, "Farming" },
-                    { Sign.IconSign.CategoryFurniture, "Furniture" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Misc" },
-                    { Sign.IconSign.CategoryWeapons, "Weapons" },
-                    { Sign.IconSign.CategoryPlunder, "Plunder" },
-                    { Sign.IconSign.CategoryAbstract, "Abstract" }
+                    { Constants.CategoryArmor, "Armor" },
+                    { Constants.CategoryBuilding, "Building" },
+                    { Constants.CategoryConsumables, "Consumables" },
+                    { Constants.CategoryFarming, "Farming" },
+                    { Constants.CategoryFurniture, "Furniture" },
+                    { Constants.CategoryMiscellaneous, "Misc" },
+                    { Constants.CategoryWeapons, "Weapons" },
+                    { Constants.CategoryPlunder, "Plunder" },
+                    { Constants.CategoryAbstract, "Abstract" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(de,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Icon Schild" },
-                    { Sign.IconSign.TranslationKeyUse, "bemalen" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Objekt anmalen" },
+                    { Constants.TranslationKeyName, "Icon Schild" },
+                    { Constants.TranslationKeyUse, "bemalen" },
+                    { Constants.TranslationKeyPaintItem, "Objekt anmalen" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventar" },
-                    { Sign.IconSign.TabNameRecent, "Kürzliche" },
-                    { Sign.IconSign.TabNameCategories, "Kategorien" },
+                    { Constants.TabNameInventory, "Inventar" },
+                    { Constants.TabNameRecent, "Kürzliche" },
+                    { Constants.TabNameCategories, "Kategorien" },
 
-                    { Sign.IconSign.CategoryArmor, "Rüstung & Kleidung" },
-                    { Sign.IconSign.CategoryBuilding, "Baustruktur" },
-                    { Sign.IconSign.CategoryConsumables, "Verbrauchsgüter" },
-                    { Sign.IconSign.CategoryFarming, "Anbau & Herstellung" },
-                    { Sign.IconSign.CategoryFurniture, "Einrichtung" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Sonstiges" },
-                    { Sign.IconSign.CategoryWeapons, "Waffen & Werkzeuge" },
-                    { Sign.IconSign.CategoryPlunder, "Trophäen" },
-                    { Sign.IconSign.CategoryAbstract, "Abstrakt" }
+                    { Constants.CategoryArmor, "Rüstung & Kleidung" },
+                    { Constants.CategoryBuilding, "Baustruktur" },
+                    { Constants.CategoryConsumables, "Verbrauchsgüter" },
+                    { Constants.CategoryFarming, "Anbau & Herstellung" },
+                    { Constants.CategoryFurniture, "Einrichtung" },
+                    { Constants.CategoryMiscellaneous, "Sonstiges" },
+                    { Constants.CategoryWeapons, "Waffen & Werkzeuge" },
+                    { Constants.CategoryPlunder, "Trophäen" },
+                    { Constants.CategoryAbstract, "Abstrakt" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(fr,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Icône de panneau" },
-                    { Sign.IconSign.TranslationKeyUse, "Peindre" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Peindre l'objet" },
+                    { Constants.TranslationKeyName, "Icône de panneau" },
+                    { Constants.TranslationKeyUse, "Peindre" },
+                    { Constants.TranslationKeyPaintItem, "Peindre l'objet" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventaire" },
-                    { Sign.IconSign.TabNameRecent, "Récent" },
-                    { Sign.IconSign.TabNameCategories, "Catégories" },
+                    { Constants.TabNameInventory, "Inventaire" },
+                    { Constants.TabNameRecent, "Récent" },
+                    { Constants.TabNameCategories, "Catégories" },
 
-                    { Sign.IconSign.CategoryArmor, "Armure" },
-                    { Sign.IconSign.CategoryBuilding, "Bâtiment" },
-                    { Sign.IconSign.CategoryConsumables, "Consommables" },
-                    { Sign.IconSign.CategoryFarming, "Agriculture" },
-                    { Sign.IconSign.CategoryFurniture, "Meubles" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Divers" },
-                    { Sign.IconSign.CategoryWeapons, "Armes" },
-                    { Sign.IconSign.CategoryPlunder, "Butin" },
-                    { Sign.IconSign.CategoryAbstract, "Abstrait" }
+                    { Constants.CategoryArmor, "Armure" },
+                    { Constants.CategoryBuilding, "Bâtiment" },
+                    { Constants.CategoryConsumables, "Consommables" },
+                    { Constants.CategoryFarming, "Agriculture" },
+                    { Constants.CategoryFurniture, "Meubles" },
+                    { Constants.CategoryMiscellaneous, "Divers" },
+                    { Constants.CategoryWeapons, "Armes" },
+                    { Constants.CategoryPlunder, "Butin" },
+                    { Constants.CategoryAbstract, "Abstrait" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(es,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Icono de señal" },
-                    { Sign.IconSign.TranslationKeyUse, "Pintar" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Pintar objeto" },
+                    { Constants.TranslationKeyName, "Icono de señal" },
+                    { Constants.TranslationKeyUse, "Pintar" },
+                    { Constants.TranslationKeyPaintItem, "Pintar objeto" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventario" },
-                    { Sign.IconSign.TabNameRecent, "Reciente" },
-                    { Sign.IconSign.TabNameCategories, "Categorías" },
+                    { Constants.TabNameInventory, "Inventario" },
+                    { Constants.TabNameRecent, "Reciente" },
+                    { Constants.TabNameCategories, "Categorías" },
 
-                    { Sign.IconSign.CategoryArmor, "Armadura" },
-                    { Sign.IconSign.CategoryBuilding, "Edificio" },
-                    { Sign.IconSign.CategoryConsumables, "Consumibles" },
-                    { Sign.IconSign.CategoryFarming, "Agricultura" },
-                    { Sign.IconSign.CategoryFurniture, "Muebles" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Diverso" },
-                    { Sign.IconSign.CategoryWeapons, "Armas" },
-                    { Sign.IconSign.CategoryPlunder, "Botín" },
-                    { Sign.IconSign.CategoryAbstract, "Abstracto" }
+                    { Constants.CategoryArmor, "Armadura" },
+                    { Constants.CategoryBuilding, "Edificio" },
+                    { Constants.CategoryConsumables, "Consumibles" },
+                    { Constants.CategoryFarming, "Agricultura" },
+                    { Constants.CategoryFurniture, "Muebles" },
+                    { Constants.CategoryMiscellaneous, "Diverso" },
+                    { Constants.CategoryWeapons, "Armas" },
+                    { Constants.CategoryPlunder, "Botín" },
+                    { Constants.CategoryAbstract, "Abstracto" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(no,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Ikon skilt" },
-                    { Sign.IconSign.TranslationKeyUse, "Maling" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Maling objekt" },
+                    { Constants.TranslationKeyName, "Ikon skilt" },
+                    { Constants.TranslationKeyUse, "Maling" },
+                    { Constants.TranslationKeyPaintItem, "Maling objekt" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventar" },
-                    { Sign.IconSign.TabNameRecent, "Siste" },
-                    { Sign.IconSign.TabNameCategories, "Kategorier" },
+                    { Constants.TabNameInventory, "Inventar" },
+                    { Constants.TabNameRecent, "Siste" },
+                    { Constants.TabNameCategories, "Kategorier" },
 
-                    { Sign.IconSign.CategoryArmor, "Rustning" },
-                    { Sign.IconSign.CategoryBuilding, "Bygning" },
-                    { Sign.IconSign.CategoryConsumables, "Forbruksvarer" },
-                    { Sign.IconSign.CategoryFarming, "Jordbruk" },
-                    { Sign.IconSign.CategoryFurniture, "Møbler" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Diverse" },
-                    { Sign.IconSign.CategoryWeapons, "Våpen" },
-                    { Sign.IconSign.CategoryPlunder, "Plyndring" },
-                    { Sign.IconSign.CategoryAbstract, "Abstrakt" }
+                    { Constants.CategoryArmor, "Rustning" },
+                    { Constants.CategoryBuilding, "Bygning" },
+                    { Constants.CategoryConsumables, "Forbruksvarer" },
+                    { Constants.CategoryFarming, "Jordbruk" },
+                    { Constants.CategoryFurniture, "Møbler" },
+                    { Constants.CategoryMiscellaneous, "Diverse" },
+                    { Constants.CategoryWeapons, "Våpen" },
+                    { Constants.CategoryPlunder, "Plyndring" },
+                    { Constants.CategoryAbstract, "Abstrakt" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(sv,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Ikon skylt" },
-                    { Sign.IconSign.TranslationKeyUse, "Måla" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Måla objekt" },
+                    { Constants.TranslationKeyName, "Ikon skylt" },
+                    { Constants.TranslationKeyUse, "Måla" },
+                    { Constants.TranslationKeyPaintItem, "Måla objekt" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventering" },
-                    { Sign.IconSign.TabNameRecent, "Senaste" },
-                    { Sign.IconSign.TabNameCategories, "Kategorier" },
+                    { Constants.TabNameInventory, "Inventering" },
+                    { Constants.TabNameRecent, "Senaste" },
+                    { Constants.TabNameCategories, "Kategorier" },
 
-                    { Sign.IconSign.CategoryArmor, "Rustning" },
-                    { Sign.IconSign.CategoryBuilding, "Byggnad" },
-                    { Sign.IconSign.CategoryConsumables, "Förbrukningsvaror" },
-                    { Sign.IconSign.CategoryFarming, "Jordbruk" },
-                    { Sign.IconSign.CategoryFurniture, "Möbler" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Diverse" },
-                    { Sign.IconSign.CategoryWeapons, "Vapen" },
-                    { Sign.IconSign.CategoryPlunder, "Plundra" },
-                    { Sign.IconSign.CategoryAbstract, "Abstrakt" }
+                    { Constants.CategoryArmor, "Rustning" },
+                    { Constants.CategoryBuilding, "Byggnad" },
+                    { Constants.CategoryConsumables, "Förbrukningsvaror" },
+                    { Constants.CategoryFarming, "Jordbruk" },
+                    { Constants.CategoryFurniture, "Möbler" },
+                    { Constants.CategoryMiscellaneous, "Diverse" },
+                    { Constants.CategoryWeapons, "Vapen" },
+                    { Constants.CategoryPlunder, "Plundra" },
+                    { Constants.CategoryAbstract, "Abstrakt" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(da,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Ikon skilt" },
-                    { Sign.IconSign.TranslationKeyUse, "Maling" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Maling objekt" },
+                    { Constants.TranslationKeyName, "Ikon skilt" },
+                    { Constants.TranslationKeyUse, "Maling" },
+                    { Constants.TranslationKeyPaintItem, "Maling objekt" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventar" },
-                    { Sign.IconSign.TabNameRecent, "Seneste" },
-                    { Sign.IconSign.TabNameCategories, "Kategorier" },
+                    { Constants.TabNameInventory, "Inventar" },
+                    { Constants.TabNameRecent, "Seneste" },
+                    { Constants.TabNameCategories, "Kategorier" },
 
-                    { Sign.IconSign.CategoryArmor, "Rustning" },
-                    { Sign.IconSign.CategoryBuilding, "Bygning" },
-                    { Sign.IconSign.CategoryConsumables, "Forbrugsvarer" },
-                    { Sign.IconSign.CategoryFarming, "Landbrug" },
-                    { Sign.IconSign.CategoryFurniture, "Møbler" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Diverse" },
-                    { Sign.IconSign.CategoryWeapons, "Våben" },
-                    { Sign.IconSign.CategoryPlunder, "Plyndring" },
-                    { Sign.IconSign.CategoryAbstract, "Abstrakt" }
+                    { Constants.CategoryArmor, "Rustning" },
+                    { Constants.CategoryBuilding, "Bygning" },
+                    { Constants.CategoryConsumables, "Forbrugsvarer" },
+                    { Constants.CategoryFarming, "Landbrug" },
+                    { Constants.CategoryFurniture, "Møbler" },
+                    { Constants.CategoryMiscellaneous, "Diverse" },
+                    { Constants.CategoryWeapons, "Våben" },
+                    { Constants.CategoryPlunder, "Plyndring" },
+                    { Constants.CategoryAbstract, "Abstrakt" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(fi,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Kuvakekyltti" },
-                    { Sign.IconSign.TranslationKeyUse, "Maali" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Maalaa kohde" },
+                    { Constants.TranslationKeyName, "Kuvakekyltti" },
+                    { Constants.TranslationKeyUse, "Maali" },
+                    { Constants.TranslationKeyPaintItem, "Maalaa kohde" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventaario" },
-                    { Sign.IconSign.TabNameRecent, "Viimeisin" },
-                    { Sign.IconSign.TabNameCategories, "Kategoriat" },
+                    { Constants.TabNameInventory, "Inventaario" },
+                    { Constants.TabNameRecent, "Viimeisin" },
+                    { Constants.TabNameCategories, "Kategoriat" },
 
-                    { Sign.IconSign.CategoryArmor, "Panssari" },
-                    { Sign.IconSign.CategoryBuilding, "Rakennus" },
-                    { Sign.IconSign.CategoryConsumables, "Kulutustavarat" },
-                    { Sign.IconSign.CategoryFarming, "Maatalous" },
-                    { Sign.IconSign.CategoryFurniture, "Huonekalut" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Sekalaiset" },
-                    { Sign.IconSign.CategoryWeapons, "Aseet" },
-                    { Sign.IconSign.CategoryPlunder, "Ryöstö" },
-                    { Sign.IconSign.CategoryAbstract, "Abstrakti" }
+                    { Constants.CategoryArmor, "Panssari" },
+                    { Constants.CategoryBuilding, "Rakennus" },
+                    { Constants.CategoryConsumables, "Kulutustavarat" },
+                    { Constants.CategoryFarming, "Maatalous" },
+                    { Constants.CategoryFurniture, "Huonekalut" },
+                    { Constants.CategoryMiscellaneous, "Sekalaiset" },
+                    { Constants.CategoryWeapons, "Aseet" },
+                    { Constants.CategoryPlunder, "Ryöstö" },
+                    { Constants.CategoryAbstract, "Abstrakti" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(it,
                 new Dictionary<string, string>
                 {
-                    { Sign.IconSign.TranslationKeyName, "Segnale icona" },
-                    { Sign.IconSign.TranslationKeyUse, "Pittura" },
-                    { Sign.IconSign.TranslationKeyPaintItem, "Pittura oggetto" },
+                    { Constants.TranslationKeyName, "Segnale icona" },
+                    { Constants.TranslationKeyUse, "Pittura" },
+                    { Constants.TranslationKeyPaintItem, "Pittura oggetto" },
 
-                    { Sign.IconSign.TabNameInventory, "Inventario" },
-                    { Sign.IconSign.TabNameRecent, "Recente" },
-                    { Sign.IconSign.TabNameCategories, "Categorie" },
+                    { Constants.TabNameInventory, "Inventario" },
+                    { Constants.TabNameRecent, "Recente" },
+                    { Constants.TabNameCategories, "Categorie" },
 
-                    { Sign.IconSign.CategoryArmor, "Armatura" },
-                    { Sign.IconSign.CategoryBuilding, "Edificio" },
-                    { Sign.IconSign.CategoryConsumables, "Consumabili" },
-                    { Sign.IconSign.CategoryFarming, "Agricoltura" },
-                    { Sign.IconSign.CategoryFurniture, "Mobili" },
-                    { Sign.IconSign.CategoryMiscellaneous, "Varie" },
-                    { Sign.IconSign.CategoryWeapons, "Armi" },
-                    { Sign.IconSign.CategoryPlunder, "Bottino" },
-                    { Sign.IconSign.CategoryAbstract, "Astratto" }
+                    { Constants.CategoryArmor, "Armatura" },
+                    { Constants.CategoryBuilding, "Edificio" },
+                    { Constants.CategoryConsumables, "Consumabili" },
+                    { Constants.CategoryFarming, "Agricoltura" },
+                    { Constants.CategoryFurniture, "Mobili" },
+                    { Constants.CategoryMiscellaneous, "Varie" },
+                    { Constants.CategoryWeapons, "Armi" },
+                    { Constants.CategoryPlunder, "Bottino" },
+                    { Constants.CategoryAbstract, "Astratto" }
                 }
             );
         }
