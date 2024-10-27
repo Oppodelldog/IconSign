@@ -95,7 +95,9 @@
     <Compile Include="Config\ModConfig.cs" />
     <Compile Include="Data\CategorizedIcons.cs" />
     <Compile Include="Data\IconCategories.cs" />
+    <Compile Include="Data\IconTranslation.cs" />
     <Compile Include="Data\RecentIcons.cs" />
+    <Compile Include="Data\SearchIndex.cs" />
     <Compile Include="Data\Translations.cs" />
     <Compile Include="Extensions\ImageCreationExtensions.cs" />
     <Compile Include="Extensions\RectTransformExtension.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Selection\TabBar\TabButton.cs" />
     <Compile Include="Sign\IconSign.cs" />
     <Compile Include="Sign\IconSignFactory.cs" />
+    <Compile Include="TestCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Package\README.md" />

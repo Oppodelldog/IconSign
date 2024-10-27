@@ -4,7 +4,6 @@ using IconSign.Data;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
-using UnityEngine;
 using Logger = Jotunn.Logger;
 
 namespace IconSign.Sign

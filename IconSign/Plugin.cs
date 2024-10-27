@@ -3,6 +3,7 @@ using IconSign.Config;
 using IconSign.Data;
 using IconSign.Sign;
 using Jotunn;
+using Jotunn.Managers;
 
 namespace IconSign
 {
@@ -24,6 +25,9 @@ namespace IconSign
             DevConfig.IconSign.ShowInternalName = Config.Bind("dev", "icon_sign_show_internal_name", false, "show internal name of IconSign when hovering the sign");
 
             IconSignFactory.Register();
+            IconTranslation.Register();
+            
+            CommandManager.Instance.AddConsoleCommand(new TestCommand());
         }
     }
 }

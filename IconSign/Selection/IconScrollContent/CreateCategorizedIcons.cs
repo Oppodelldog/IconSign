@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using IconSign.Config;
 using IconSign.Data;
 using IconSign.Extensions;
@@ -19,6 +20,8 @@ namespace IconSign.Selection.IconScrollContent
 
         public static IconClickedAction OnIconClicked;
 
+        internal static Dictionary<string, GameObject> IconObjects = new Dictionary<string, GameObject>();
+
         private const float IconLineWidth = 1120;
         private const float IconSize = 44;
         private const float Spacing = 10;
@@ -29,13 +32,36 @@ namespace IconSign.Selection.IconScrollContent
             scrollableContainer.StartCoroutine(FillContentCoroutine(content, scrollableContainer));
         }
 
+        public static void ApplyFilter(string[] iconNames)
+        {
+            foreach (var iconObject in IconObjects)
+            {
+                iconObject.Value.SetActive(false);
+            }
+
+            foreach (var iconName in iconNames)
+            {
+                IconObjects[iconName].SetActive(true);
+            }
+
+            if (iconNames.Length == 0)
+            {
+                foreach (var iconObject in IconObjects)
+                {
+                    iconObject.Value.SetActive(true);
+                }
+            }
+        }
+
         private static IEnumerator FillContentCoroutine(Transform content, ScrollableContainer scrollableContainer)
         {
+            IconObjects.Clear();
+
             const float left = 0;
             const float right = left + IconLineWidth;
             const float top = 0;
             const float stepSize = IconSize + Spacing;
-            
+
 
             var categories = new[]
             {
@@ -102,15 +128,21 @@ namespace IconSign.Selection.IconScrollContent
                 foreach (var sprite in categorySprites)
                 {
                     // ReSharper disable block Unity.PerformanceCriticalCodeInvocation
-                    GUIManager.Instance.CreateImage(
-                            IconName.GetName(sprite),
-                            content,
-                            new Vector2(0, 1),
-                            new Vector2(0, 1),
-                            new Vector2(0, 1),
-                            new Vector2(x, y),
-                            new Vector2(IconSize, IconSize))
-                        .AddComponent<HoverEffect>().OnClicked += () => TriggerClickEvent(sprite);
+                    var iconName = IconName.GetName(sprite);
+                    var image = GUIManager.Instance.CreateImage(
+                        iconName,
+                        content,
+                        new Vector2(0, 1),
+                        new Vector2(0, 1),
+                        new Vector2(0, 1),
+                        new Vector2(x, y),
+                        new Vector2(IconSize, IconSize));
+                    image.AddComponent<HoverEffect>().OnClicked += () => TriggerClickEvent(sprite);
+
+                    if (!IconObjects.ContainsKey(iconName))
+                    {
+                        IconObjects.Add(iconName, image);
+                    }
 
                     x += stepSize;
                     isNewLine = false;
