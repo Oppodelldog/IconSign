@@ -90,7 +90,6 @@
     <EmbeddedResource Include="Assets\prefab-icon.png" />
     <Content Include="Docs\IconSign-used-to-visually-improve-storage.jpg" />
     <Content Include="Docs\IconSign-categories-for-browsing.jpg" />
-    <Content Include="Package\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="assembly_guiutils">
