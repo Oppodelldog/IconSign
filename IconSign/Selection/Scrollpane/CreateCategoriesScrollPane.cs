@@ -1,13 +1,11 @@
 ﻿using IconSign.Extensions;
-using IconSign.Selection.IconScrollContent;
+using IconSign.Selection.IconScrollContent.CategorizedIcons;
 using UnityEngine;
 
 namespace IconSign.Selection.Scrollpane
 {
     public static class CreateCategoriesScrollPane
     {
-        internal delegate void IconClickedDelegate(string iconName);
-
         internal static event IconClickedDelegate OnIconClicked;
 
         internal static GameObject Create(Transform parent)
@@ -15,7 +13,7 @@ namespace IconSign.Selection.Scrollpane
             var scroll = new GameObject("scroll-container-categories");
             var rectTransform = scroll.AddComponent<RectTransform>();
             scroll.AddComponent<ScrollableContainer>();
-            scroll.AddComponent<CategoryIconLoadingInitializer>();
+            scroll.AddComponent<IconLoadingInitializer>();
 
             scroll.transform.SetParent(parent);
             rectTransform.Expand();
@@ -28,9 +26,11 @@ namespace IconSign.Selection.Scrollpane
         {
             OnIconClicked?.Invoke(iconName);
         }
+
+        internal delegate void IconClickedDelegate(string iconName);
     }
 
-    internal class CategoryIconLoadingInitializer : MonoBehaviour
+    internal class IconLoadingInitializer : MonoBehaviour
     {
         private void Start()
         {
