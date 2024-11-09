@@ -37,7 +37,7 @@ namespace IconSign.Sign
             iconSignPiece.AddRequirement(new RequirementConfig("Coal", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Raspberry", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Blueberries", 1));
-            iconSignPiece.AddRequirement(new RequirementConfig("Guck", 1));
+            iconSignPiece.AddRequirement(new RequirementConfig("Dandelion", 1));
 
             iconSignPiece.Icon = SpriteLoader.LoadBuildPieceIcon();
 
