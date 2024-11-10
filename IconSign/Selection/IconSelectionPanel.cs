@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IconSign.Config;
+using IconSign.Extensions;
 using IconSign.Selection.Helper;
 using IconSign.Selection.IconScrollContent.CategorizedIcons;
 using IconSign.Selection.Interaction;
@@ -88,16 +89,23 @@ namespace IconSign.Selection
                 parent: _iconSelectionPanel.transform,
                 anchorMin: Vector2.zero,
                 anchorMax: Vector2.zero,
-                position: new Vector2(60, -92),
+                position: new Vector2(40, -92),
                 contentType: InputField.ContentType.Standard,
                 placeholderText: "[Filter]",
-                fontSize: 24,
+                fontSize: 22,
                 width: 160f,
-                height: 40f);
+                height: 36f);
 
             input.GetComponent<InputField>().onValueChanged.AddListener(CreateCategorizedIcons.SearchInputChanged);
-            
             Anchors.SetTopLeft(input);
+
+            var searchIcon = GUIManager.Instance.CreateImage("trash_icon", _iconSelectionPanel.transform);
+            Anchors.SetTopLeft(searchIcon);
+            Anchors.SetPosition(searchIcon, new Vector2(210, -88));
+            Anchors.SetSize(searchIcon, new Vector2(44, 44));
+
+            searchIcon.AddComponent<HoverEffect>().OnClicked += () => input.GetComponent<InputField>().text = string.Empty;
+            searchIcon.name = "ResetSearchFilterIcon";
         }
 
         private void CreateWoodPanel()

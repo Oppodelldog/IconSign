@@ -9,6 +9,22 @@ namespace IconSign.Extensions
         public static GameObject CreateImage(
             this GUIManager guiManager,
             string spriteName,
+            Transform parent)
+        {
+            return guiManager.CreateImage(
+                spriteName,
+                parent,
+                Vector2.zero,
+                Vector2.zero,
+                Vector2.zero,
+                Vector2.zero,
+                Vector2.one
+            );
+        }
+
+        public static GameObject CreateImage(
+            this GUIManager guiManager,
+            string spriteName,
             Transform parent,
             Vector2 anchorMin,
             Vector2 anchorMax,

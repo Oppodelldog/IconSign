@@ -69,11 +69,30 @@ namespace IconSign.Selection.Helper
             uitransform.pivot = new Vector2(1, 0);
         }
         
+        public static void SetPosition(RectTransform uitransform, Vector2 vector2)
+        {
+            uitransform.anchoredPosition = vector2;
+        }
+        
+        
+        public static void SetSize(RectTransform uitransform, Vector2 vector2)
+        {
+            uitransform.sizeDelta = vector2;
+        }
         
         public static void SetTopLeft(GameObject uitransform)
         {
             SetTopLeft(uitransform.GetComponent<RectTransform>());
         }
 
+        public static void SetPosition(GameObject searchIcon, Vector2 vector2)
+        {
+            SetPosition(searchIcon.GetComponent<RectTransform>(), vector2);
+        }
+
+        public static void SetSize(GameObject searchIcon, Vector2 vector2)
+        {
+            SetSize(searchIcon.GetComponent<RectTransform>(), vector2);
+        }
     }
 }
