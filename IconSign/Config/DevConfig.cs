@@ -13,5 +13,10 @@ namespace IconSign.Config
         {
             internal static ConfigEntry<bool> ShowInternalName;
         }
+
+        internal static class SeachIndex
+        {
+            internal static ConfigEntry<bool> DumpIndexToFile;
+        }
     }
 }
