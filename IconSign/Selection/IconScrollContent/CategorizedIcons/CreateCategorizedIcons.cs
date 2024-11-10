@@ -54,16 +54,9 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
 
             foreach (var cat in IconCategories) cat.ShowIcons(iconNames);
 
-            foreach (var cat in IconCategories)
-                if (cat.IsHidden())
-                    cat.Label.SetActive(false);
-                else
-                    cat.Label.SetActive(true);
+            foreach (var cat in IconCategories) cat.Label.SetActive(!cat.IsHidden());
 
-            if (iconNames.Length == 0)
-                NoResultsLabel.SetActive(true);
-            else
-                NoResultsLabel.SetActive(false);
+            NoResultsLabel.SetActive(iconNames.Length == 0);
 
             Layout.Apply(IconCategories, _scrollableContainer);
         }
@@ -108,7 +101,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             foreach (var category in categories)
             {
                 var categorySprites = catSpriteDict[category];
-                var iconCategory = new Category(category);
+                var iconCategory = new Category();
                 IconCategories.Add(iconCategory);
 
                 // Add category label

@@ -6,15 +6,8 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
 {
     public class Category
     {
-        public Category(string category)
-        {
-            Name = category;
-            Icons = new Dictionary<string, GameObject>();
-        }
-
-        public string Name { get; set; }
         public GameObject Label { get; set; }
-        public Dictionary<string, GameObject> Icons { get; set; }
+        public Dictionary<string, GameObject> Icons { get; } = new Dictionary<string, GameObject>();
 
         public List<GameObject> GetActiveIcons()
         {

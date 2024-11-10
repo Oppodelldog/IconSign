@@ -557,7 +557,7 @@ namespace IconSign.Data
                     "wolf_meat_cooked",
                     "wolf_skewer",
                     "wolfjerky",
-                    "wolfmeat",
+                    "wolfmeat"
                 }
             },
             {
@@ -852,7 +852,7 @@ namespace IconSign.Data
                     "workbench_ext4",
                     "xmastree",
                     "yulecrown",
-                    "yulegarland",
+                    "yulegarland"
                 }
             },
             {
@@ -944,7 +944,7 @@ namespace IconSign.Data
                     "staminaupgrade",
                     "thunderstone",
                     "witheredbone",
-                    "yagluthdrop",
+                    "yagluthdrop"
                 }
             },
             {
@@ -1018,7 +1018,7 @@ namespace IconSign.Data
                     "ruby",
                     "silvernecklace",
                     "treasure_pile",
-                    "treasure_stack",
+                    "treasure_stack"
                 }
             },
             {
