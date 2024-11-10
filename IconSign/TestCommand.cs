@@ -1,6 +1,4 @@
-﻿using IconSign.Data;
-using IconSign.Selection.IconScrollContent.CategorizedIcons;
-using Jotunn;
+﻿using IconSign.Selection.IconScrollContent.CategorizedIcons;
 using Jotunn.Entities;
 
 namespace IconSign
@@ -12,12 +10,7 @@ namespace IconSign
 
         public override void Run(string[] args)
         {
-            Logger.LogInfo($"Search.... {args[0]}");
-            var result = SearchIndex.Search(args[0]);
-            foreach (var icons in result) Logger.LogInfo(icons);
-
-            CreateCategorizedIcons.ApplyFilter(result);
-            Logger.LogInfo("Search finished");
+            CreateCategorizedIcons.SearchInputChanged(args[0]);
         }
     }
 }

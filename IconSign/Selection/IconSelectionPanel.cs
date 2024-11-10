@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using IconSign.Config;
+using IconSign.Selection.Helper;
+using IconSign.Selection.IconScrollContent.CategorizedIcons;
 using IconSign.Selection.Interaction;
 using IconSign.Selection.Scrollpane;
 using IconSign.Selection.TabBar;
@@ -63,6 +65,8 @@ namespace IconSign.Selection
 
             CreateHeadline();
 
+            CreateSearchInput();
+
             _tabButtons = CreateTabButtons.Create(_iconSelectionPanel.transform);
             CreateTabButtons.OnCategoryButtonClicked += SwitchTab;
 
@@ -76,6 +80,22 @@ namespace IconSign.Selection
             CreateRecentScrollPane.OnIconClicked += TriggerSelectionEvent;
 
             SwitchTab(ModConfig.SelectionPanel.SelectedTab.Value);
+        }
+
+        private void CreateSearchInput()
+        {
+            var input = GUIManager.Instance.CreateInputField(
+                parent: _iconSelectionPanel.transform,
+                anchorMin: Anchors.TopLeft,
+                anchorMax: Anchors.TopLeft,
+                position: new Vector2(0, 0),
+                contentType: InputField.ContentType.Standard,
+                placeholderText: "input...",
+                fontSize: 16,
+                width: 160f,
+                height: 30f);
+
+            input.GetComponent<InputField>().onValueChanged.AddListener(CreateCategorizedIcons.SearchInputChanged);
         }
 
         private void CreateWoodPanel()
@@ -121,7 +141,7 @@ namespace IconSign.Selection
             if (!ModConfig.SelectionPanel.Tabs.Contains(tabName)) tabName = Constants.TabNameCategories;
 
             ModConfig.SelectionPanel.SelectedTab.Value = tabName;
-            
+
             foreach (var tabContainer in TabContainers)
             {
                 tabContainer.Value.SetActive(tabContainer.Key == tabName);

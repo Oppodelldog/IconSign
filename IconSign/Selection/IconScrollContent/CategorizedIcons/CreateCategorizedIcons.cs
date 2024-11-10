@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using IconSign.Config;
+using IconSign.Data;
 using IconSign.Extensions;
 using IconSign.Selection.Helper;
 using IconSign.Selection.Interaction;
@@ -30,7 +31,30 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             _scrollableContainer.StartCoroutine(FillContentCoroutine(content, _scrollableContainer));
         }
 
-        public static void ApplyFilter(string[] iconNames)
+        public static void SearchInputChanged(string searchInput)
+        {
+            Logger.LogInfo($"Search.... {searchInput}");
+            if (searchInput.Length == 0)
+            {
+                ShowAll();
+            }
+            else
+            {
+                var iconNames = SearchIndex.Search(searchInput);
+                foreach (var icons in iconNames) Logger.LogInfo(icons);
+                ApplyFilter(iconNames);
+            }
+
+            Logger.LogInfo("Search finished");
+        }
+
+        private static void ShowAll()
+        {
+            foreach (var cat in IconCategories) cat.ShowAll();
+            Layout.Apply(IconCategories, _scrollableContainer);
+        }
+
+        private static void ApplyFilter(string[] iconNames)
         {
             foreach (var cat in IconCategories) cat.HideAll();
 
