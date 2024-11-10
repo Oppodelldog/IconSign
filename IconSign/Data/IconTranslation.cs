@@ -3,11 +3,14 @@ using System.Linq;
 using Jotunn.Entities;
 using Jotunn.Managers;
 using UnityEngine;
+using Logger = Jotunn.Logger;
 
 namespace IconSign.Data
 {
     public abstract class IconTranslation
     {
+        private static readonly Dictionary<string, string> Translations = new Dictionary<string, string>();
+
         public static void Register()
         {
             PieceManager.OnPiecesRegistered += Init;
@@ -15,13 +18,13 @@ namespace IconSign.Data
 
         private static void Init()
         {
-            Jotunn.Logger.LogInfo($"init translations");
-            
+            Logger.LogInfo("init translations");
+
             InitFromPrefabs();
             InitFromPieces();
 
-            Jotunn.Logger.LogInfo($"{Translations.Count} translation load");
-            
+            Logger.LogInfo($"{Translations.Count} translation load");
+
             SearchIndex.Init();
         }
 
@@ -60,23 +63,19 @@ namespace IconSign.Data
         private static void InitFromPieces()
         {
             foreach (var table in PieceManager.Instance.GetPieceTables())
+            foreach (var piece in table.m_pieces)
             {
-                foreach (var piece in table.m_pieces)
-                {
-                    var p = piece.GetComponent<Piece>();
-                    if (Translations.ContainsKey(p.m_icon.name)) continue;
-                    if (!p.m_name.StartsWith("$")) continue;
+                var p = piece.GetComponent<Piece>();
+                if (Translations.ContainsKey(p.m_icon.name)) continue;
+                if (!p.m_name.StartsWith("$")) continue;
 
-                    Translations.Add(p.m_icon.name, LocalizationManager.Instance.TryTranslate(p.m_name));
-                }
+                Translations.Add(p.m_icon.name, LocalizationManager.Instance.TryTranslate(p.m_name));
             }
         }
 
-        public static Dictionary<string,string> GetTranslations()
+        public static Dictionary<string, string> GetTranslations()
         {
             return Translations;
         }
-        
-        private static readonly Dictionary<string, string> Translations = new Dictionary<string, string>();
     }
 }

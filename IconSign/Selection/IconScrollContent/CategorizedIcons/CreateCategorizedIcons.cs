@@ -35,13 +35,9 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
         {
             Logger.LogInfo($"Search.... {searchInput}");
             if (searchInput.Length == 0)
-            {
                 ShowAll();
-            }
             else
-            {
                 ApplyFilter(SearchIndex.Search(searchInput));
-            }
 
             Logger.LogInfo("Search finished");
         }

@@ -8,7 +8,7 @@ namespace IconSign.Config
         {
             internal static ConfigEntry<bool> DebugView;
         }
-        
+
         internal static class IconSign
         {
             internal static ConfigEntry<bool> ShowInternalName;

@@ -27,7 +27,7 @@ namespace IconSign
 
             IconSignFactory.Register();
             IconTranslation.Register();
-            
+
             CommandManager.Instance.AddConsoleCommand(new TestCommand());
         }
     }

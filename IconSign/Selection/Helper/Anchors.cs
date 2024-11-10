@@ -4,7 +4,6 @@ namespace IconSign.Selection.Helper
 {
     public abstract class Anchors
     {
-
         public static void SetTopLeft(RectTransform uitransform)
         {
             uitransform.anchorMin = new Vector2(0, 1);
@@ -68,18 +67,18 @@ namespace IconSign.Selection.Helper
             uitransform.anchorMax = new Vector2(1, 0);
             uitransform.pivot = new Vector2(1, 0);
         }
-        
+
         public static void SetPosition(RectTransform uitransform, Vector2 vector2)
         {
             uitransform.anchoredPosition = vector2;
         }
-        
-        
+
+
         public static void SetSize(RectTransform uitransform, Vector2 vector2)
         {
             uitransform.sizeDelta = vector2;
         }
-        
+
         public static void SetTopLeft(GameObject uitransform)
         {
             SetTopLeft(uitransform.GetComponent<RectTransform>());
