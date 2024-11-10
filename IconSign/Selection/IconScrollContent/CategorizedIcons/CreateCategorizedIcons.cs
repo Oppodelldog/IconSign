@@ -99,7 +99,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             scrollableContainer.SetSize(new Vector2(0, 0));
 
-            NoResultsLabel = CreateLabel(content, LocalizationManager.Instance.TryTranslate(Constants.SearchNoResults));
+            NoResultsLabel = CreateLabel(content, Constants.SearchNoResults);
             NoResultsLabel.SetActive(false);
             var noResultsRect = NoResultsLabel.GetComponent<RectTransform>();
             noResultsRect.sizeDelta = new Vector2(200, 30);
