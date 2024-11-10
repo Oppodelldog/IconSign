@@ -4,7 +4,6 @@ using IconSign.Data;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
-using UnityEngine;
 using Logger = Jotunn.Logger;
 
 namespace IconSign.Sign
@@ -31,7 +30,7 @@ namespace IconSign.Sign
             {
                 Name = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
                 PieceTable = PieceTables.Hammer,
-                Category = PieceCategories.Furniture,
+                Category = PieceCategories.Furniture
             };
 
             iconSignPiece.AddRequirement(new RequirementConfig("Wood", 1, 0, true));

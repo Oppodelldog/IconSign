@@ -38,7 +38,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Misc" },
                     { Constants.CategoryWeapons, "Weapons" },
                     { Constants.CategoryPlunder, "Plunder" },
-                    { Constants.CategoryAbstract, "Abstract" }
+                    { Constants.CategoryAbstract, "Abstract" },
+
+                    { Constants.SearchNoResults, "No results found" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(de,
@@ -60,7 +62,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Sonstiges" },
                     { Constants.CategoryWeapons, "Waffen & Werkzeuge" },
                     { Constants.CategoryPlunder, "Trophäen" },
-                    { Constants.CategoryAbstract, "Abstrakt" }
+                    { Constants.CategoryAbstract, "Abstrakt" },
+
+                    { Constants.SearchNoResults, "Keine Ergebnisse gefunden" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(fr,
@@ -82,7 +86,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Divers" },
                     { Constants.CategoryWeapons, "Armes" },
                     { Constants.CategoryPlunder, "Butin" },
-                    { Constants.CategoryAbstract, "Abstrait" }
+                    { Constants.CategoryAbstract, "Abstrait" },
+
+                    { Constants.SearchNoResults, "Aucun résultat trouvé" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(es,
@@ -104,7 +110,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Diverso" },
                     { Constants.CategoryWeapons, "Armas" },
                     { Constants.CategoryPlunder, "Botín" },
-                    { Constants.CategoryAbstract, "Abstracto" }
+                    { Constants.CategoryAbstract, "Abstracto" },
+
+                    { Constants.SearchNoResults, "No se encontraron resultados" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(no,
@@ -126,7 +134,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Diverse" },
                     { Constants.CategoryWeapons, "Våpen" },
                     { Constants.CategoryPlunder, "Plyndring" },
-                    { Constants.CategoryAbstract, "Abstrakt" }
+                    { Constants.CategoryAbstract, "Abstrakt" },
+
+                    { Constants.SearchNoResults, "Ingen resultater funnet" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(sv,
@@ -148,7 +158,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Diverse" },
                     { Constants.CategoryWeapons, "Vapen" },
                     { Constants.CategoryPlunder, "Plundra" },
-                    { Constants.CategoryAbstract, "Abstrakt" }
+                    { Constants.CategoryAbstract, "Abstrakt" },
+
+                    { Constants.SearchNoResults, "Inga resultat hittades" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(da,
@@ -170,7 +182,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Diverse" },
                     { Constants.CategoryWeapons, "Våben" },
                     { Constants.CategoryPlunder, "Plyndring" },
-                    { Constants.CategoryAbstract, "Abstrakt" }
+                    { Constants.CategoryAbstract, "Abstrakt" },
+
+                    { Constants.SearchNoResults, "Ingen resultater fundet" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(fi,
@@ -192,7 +206,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Sekalaiset" },
                     { Constants.CategoryWeapons, "Aseet" },
                     { Constants.CategoryPlunder, "Ryöstö" },
-                    { Constants.CategoryAbstract, "Abstrakti" }
+                    { Constants.CategoryAbstract, "Abstrakti" },
+
+                    { Constants.SearchNoResults, "Ei tuloksia" }
                 }
             );
             LocalizationManager.Instance.GetLocalization().AddTranslation(it,
@@ -214,7 +230,9 @@ namespace IconSign.Data
                     { Constants.CategoryMiscellaneous, "Varie" },
                     { Constants.CategoryWeapons, "Armi" },
                     { Constants.CategoryPlunder, "Bottino" },
-                    { Constants.CategoryAbstract, "Astratto" }
+                    { Constants.CategoryAbstract, "Astratto" },
+
+                    { Constants.SearchNoResults, "Nessun risultato trovato" }
                 }
             );
         }
