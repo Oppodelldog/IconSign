@@ -4,7 +4,6 @@ using IconSign.Data;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
-using UnityEngine;
 using Logger = Jotunn.Logger;
 
 namespace IconSign.Sign
@@ -31,14 +30,14 @@ namespace IconSign.Sign
             {
                 Name = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
                 PieceTable = PieceTables.Hammer,
-                Category = PieceCategories.Furniture,
+                Category = PieceCategories.Furniture
             };
 
             iconSignPiece.AddRequirement(new RequirementConfig("Wood", 1, 0, true));
             iconSignPiece.AddRequirement(new RequirementConfig("Coal", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Raspberry", 1));
             iconSignPiece.AddRequirement(new RequirementConfig("Blueberries", 1));
-            iconSignPiece.AddRequirement(new RequirementConfig("Guck", 1));
+            iconSignPiece.AddRequirement(new RequirementConfig("Dandelion", 1));
 
             iconSignPiece.Icon = SpriteLoader.LoadBuildPieceIcon();
 

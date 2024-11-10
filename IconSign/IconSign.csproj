@@ -63,15 +63,21 @@
     <Compile Include="Config\ModConfig.cs" />
     <Compile Include="Data\CategorizedIcons.cs" />
     <Compile Include="Data\IconCategories.cs" />
+    <Compile Include="Data\IconTranslation.cs" />
     <Compile Include="Data\RecentIcons.cs" />
+    <Compile Include="Data\SearchIndex.cs" />
     <Compile Include="Data\Translations.cs" />
     <Compile Include="Extensions\ImageCreationExtensions.cs" />
     <Compile Include="Extensions\RectTransformExtension.cs" />
+    <Compile Include="Helper\Anchors.cs" />
+    <Compile Include="Helper\IconName.cs" />
+    <Compile Include="Helper\StatsLogger.cs" />
     <Compile Include="Properties\IgnoreAccessModifiers.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selection\Helper\IconName.cs" />
-    <Compile Include="Selection\IconScrollContent\CreateCategorizedIcons.cs" />
+    <Compile Include="Selection\IconScrollContent\CategorizedIcons\CreateCategorizedIcons.cs"/>
+    <Compile Include="Selection\IconScrollContent\CategorizedIcons\Layout.cs"/>
+    <Compile Include="Selection\IconScrollContent\CategorizedIcons\Category.cs"/>
     <Compile Include="Selection\IconScrollContent\CreateInventoryIcons.cs" />
     <Compile Include="Selection\IconScrollContent\CreateRecentIcons.cs" />
     <Compile Include="Selection\IconSelectionPanel.cs" />
@@ -85,6 +91,7 @@
     <Compile Include="Selection\TabBar\TabButton.cs" />
     <Compile Include="Sign\IconSign.cs" />
     <Compile Include="Sign\IconSignFactory.cs" />
+    <Compile Include="TestCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\prefab-icon.png" />

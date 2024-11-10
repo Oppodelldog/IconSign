@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using IconSign.Config;
+using IconSign.Extensions;
+using IconSign.Helper;
+using IconSign.Selection.IconScrollContent.CategorizedIcons;
 using IconSign.Selection.Interaction;
 using IconSign.Selection.Scrollpane;
 using IconSign.Selection.TabBar;
@@ -15,12 +18,12 @@ namespace IconSign.Selection
     public class IconSelectionPanel
     {
         private static IconSelectionPanel _instance;
-        public static IconSelectionPanel Instance => _instance ?? (_instance = new IconSelectionPanel());
 
         private static Dictionary<string, GameObject> _tabButtons = new Dictionary<string, GameObject>();
         private static readonly Dictionary<string, GameObject> TabContainers = new Dictionary<string, GameObject>();
 
         private GameObject _iconSelectionPanel;
+        public static IconSelectionPanel Instance => _instance ?? (_instance = new IconSelectionPanel());
 
         public event Action<string> OnIconSelected;
 
@@ -34,10 +37,8 @@ namespace IconSign.Selection
         internal void ClosePanel()
         {
             foreach (var tabButton in _tabButtons)
-            {
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
                 tabButton.Value.GetComponent<TabButton>().UpdateTextColor();
-            }
 
             _iconSelectionPanel.SetActive(false);
             GUIManager.BlockInput(false);
@@ -63,6 +64,8 @@ namespace IconSign.Selection
 
             CreateHeadline();
 
+            CreateSearchInput();
+
             _tabButtons = CreateTabButtons.Create(_iconSelectionPanel.transform);
             CreateTabButtons.OnCategoryButtonClicked += SwitchTab;
 
@@ -78,16 +81,41 @@ namespace IconSign.Selection
             SwitchTab(ModConfig.SelectionPanel.SelectedTab.Value);
         }
 
+        private void CreateSearchInput()
+        {
+            var input = GUIManager.Instance.CreateInputField(
+                _iconSelectionPanel.transform,
+                Vector2.zero,
+                Vector2.zero,
+                new Vector2(40, -92),
+                InputField.ContentType.Standard,
+                "[Filter]",
+                22,
+                160f,
+                36f);
+
+            input.GetComponent<InputField>().onValueChanged.AddListener(CreateCategorizedIcons.SearchInputChanged);
+            Anchors.SetTopLeft(input);
+
+            var searchIcon = GUIManager.Instance.CreateImage("trash_icon", _iconSelectionPanel.transform);
+            Anchors.SetTopLeft(searchIcon);
+            Anchors.SetPosition(searchIcon, new Vector2(210, -88));
+            Anchors.SetSize(searchIcon, new Vector2(44, 44));
+
+            searchIcon.AddComponent<HoverEffect>().OnClicked += () => input.GetComponent<InputField>().text = string.Empty;
+            searchIcon.name = "ResetSearchFilterIcon";
+        }
+
         private void CreateWoodPanel()
         {
             _iconSelectionPanel = GUIManager.Instance.CreateWoodpanel(
-                parent: GUIManager.CustomGUIFront.transform,
-                anchorMin: new Vector2(0.5f, 0.5f),
-                anchorMax: new Vector2(0.5f, 0.5f),
-                position: new Vector2(0, 0),
-                width: 1200,
-                height: 800,
-                draggable: false);
+                GUIManager.CustomGUIFront.transform,
+                new Vector2(0.5f, 0.5f),
+                new Vector2(0.5f, 0.5f),
+                new Vector2(0, 0),
+                1200,
+                800,
+                false);
             _iconSelectionPanel.SetActive(false);
             _iconSelectionPanel.AddComponent<EscClosePanelListener>();
         }
@@ -95,19 +123,19 @@ namespace IconSign.Selection
         private void CreateHeadline()
         {
             GUIManager.Instance.CreateText(
-                text: LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
-                parent: _iconSelectionPanel.transform,
-                anchorMin: new Vector2(0.5f, 1f),
-                anchorMax: new Vector2(0.5f, 1f),
-                position: new Vector2(0f, -45f),
-                font: GUIManager.Instance.AveriaSerifBold,
-                fontSize: 38,
-                color: GUIManager.Instance.ValheimOrange,
-                outline: true,
-                outlineColor: Color.black,
-                width: 650f,
-                height: 48f,
-                addContentSizeFitter: false).GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+                LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
+                _iconSelectionPanel.transform,
+                new Vector2(0.5f, 1f),
+                new Vector2(0.5f, 1f),
+                new Vector2(0f, -45f),
+                GUIManager.Instance.AveriaSerifBold,
+                38,
+                GUIManager.Instance.ValheimOrange,
+                true,
+                Color.black,
+                650f,
+                48f,
+                false).GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
         }
 
         private void TriggerSelectionEvent(string spriteName)
@@ -121,16 +149,10 @@ namespace IconSign.Selection
             if (!ModConfig.SelectionPanel.Tabs.Contains(tabName)) tabName = Constants.TabNameCategories;
 
             ModConfig.SelectionPanel.SelectedTab.Value = tabName;
-            
-            foreach (var tabContainer in TabContainers)
-            {
-                tabContainer.Value.SetActive(tabContainer.Key == tabName);
-            }
 
-            foreach (var tabButton in _tabButtons)
-            {
-                tabButton.Value.GetComponent<TabButton>().IsSelected = tabButton.Key == tabName;
-            }
+            foreach (var tabContainer in TabContainers) tabContainer.Value.SetActive(tabContainer.Key == tabName);
+
+            foreach (var tabButton in _tabButtons) tabButton.Value.GetComponent<TabButton>().IsSelected = tabButton.Key == tabName;
         }
     }
 }
