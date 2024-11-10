@@ -40,9 +40,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             }
             else
             {
-                var iconNames = SearchIndex.Search(searchInput);
-                foreach (var icons in iconNames) Logger.LogInfo(icons);
-                ApplyFilter(iconNames);
+                ApplyFilter(SearchIndex.Search(searchInput));
             }
 
             Logger.LogInfo("Search finished");

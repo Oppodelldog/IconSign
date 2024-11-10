@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace IconSign.Data
     {
         public static void Init()
         {
+            var start = DateTime.Now;
             Jotunn.Logger.LogInfo("init search index");
             foreach (var kv in IconTranslation.GetTranslations())
             {
@@ -16,16 +18,16 @@ namespace IconSign.Data
                 foreach (var word in words)
                 {
                     var w = word.ToLower();
-                    
+
                     Index.TryGetValue(w, out var values);
                     if (values == null) values = new List<string>();
                     values.Add(kv.Key);
-                    
+
                     Index[w] = values;
                 }
             }
 
-            Jotunn.Logger.LogInfo("search index initialized");
+            Jotunn.Logger.LogInfo("search index initialized in " + (DateTime.Now - start).TotalMilliseconds + "ms");
 
             if (Config.DevConfig.SeachIndex.DumpIndexToFile.Value)
             {
@@ -43,8 +45,23 @@ namespace IconSign.Data
 
         public static string[] Search(string query)
         {
-            Index.TryGetValue(query, out var iconName);
-            return iconName == null ? new string[] { } : iconName.ToArray();
+            var start = DateTime.Now;
+            Jotunn.Logger.LogInfo($"searching for '{query}'");
+            var iconNames = new List<string>();
+            query = query.ToLower();
+            foreach (var kv in Index)
+            {
+                if (kv.Key.Contains(query))
+                {
+                    iconNames.AddRange(kv.Value);
+                }
+            }
+
+            var result = iconNames.Distinct().ToList();
+
+            Jotunn.Logger.LogInfo($"search for '{query}' found {result.Count} results in " + (DateTime.Now - start).TotalMilliseconds + "ms");
+
+            return result.ToArray();
         }
 
         private static readonly Dictionary<string, List<string>> Index = new Dictionary<string, List<string>>();
