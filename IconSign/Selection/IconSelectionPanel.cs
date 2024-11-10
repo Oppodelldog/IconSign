@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IconSign.Config;
 using IconSign.Extensions;
-using IconSign.Selection.Helper;
+using IconSign.Helper;
 using IconSign.Selection.IconScrollContent.CategorizedIcons;
 using IconSign.Selection.Interaction;
 using IconSign.Selection.Scrollpane;

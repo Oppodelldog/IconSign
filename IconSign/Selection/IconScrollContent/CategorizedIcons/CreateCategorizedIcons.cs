@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using IconSign.Config;
 using IconSign.Data;
 using IconSign.Extensions;
-using IconSign.Selection.Helper;
+using IconSign.Helper;
 using IconSign.Selection.Interaction;
 using IconSign.Selection.Scrollpane;
 using Jotunn.Managers;
@@ -33,13 +33,10 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
 
         public static void SearchInputChanged(string searchInput)
         {
-            Logger.LogInfo($"Search.... {searchInput}");
             if (searchInput.Length == 0)
                 ShowAll();
             else
                 ApplyFilter(SearchIndex.Search(searchInput));
-
-            Logger.LogInfo("Search finished");
         }
 
         private static void ShowAll()

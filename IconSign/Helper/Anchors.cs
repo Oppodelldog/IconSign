@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace IconSign.Selection.Helper
+namespace IconSign.Helper
 {
     public abstract class Anchors
     {

@@ -20,5 +20,10 @@ namespace IconSign.Config
 
             internal static ConfigEntry<int> LogSearchStatsEvery;
         }
+
+        public class Layout
+        {
+            public static ConfigEntry<int> LogLayoutStatsEvery;
+        }
     }
 }

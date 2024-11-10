@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using IconSign.Selection.Helper;
+using IconSign.Helper;
 using IconSign.Selection.Scrollpane;
 using UnityEngine;
 using Logger = Jotunn.Logger;
@@ -12,11 +12,14 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
         private const float IconLineWidth = 1120;
         private const float IconSize = 44;
         private const float Spacing = 10;
+        
+        private static StatsLogger _layoutStats;
 
         public static void Apply(List<Category> iconCategories, ScrollableContainer scrollableContainer)
         {
-            var startTime = DateTime.Now;
-
+            if(_layoutStats == null)  _layoutStats = new StatsLogger("Layout", Config.DevConfig.Layout.LogLayoutStatsEvery.Value);
+            _layoutStats.Start();
+            
             const float left = 0;
             const float right = left + IconLineWidth;
             const float top = 0;
@@ -61,8 +64,8 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
 
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             scrollableContainer.SetSize(size);
-
-            Logger.LogInfo($"Applied layout in {(DateTime.Now - startTime).TotalMilliseconds}ms");
+            
+            _layoutStats.Done();
         }
 
         private static bool IsAtEndOfLine(float x, float right)
