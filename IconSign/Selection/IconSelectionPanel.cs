@@ -86,16 +86,18 @@ namespace IconSign.Selection
         {
             var input = GUIManager.Instance.CreateInputField(
                 parent: _iconSelectionPanel.transform,
-                anchorMin: Anchors.TopLeft,
-                anchorMax: Anchors.TopLeft,
-                position: new Vector2(0, 0),
+                anchorMin: Vector2.zero,
+                anchorMax: Vector2.zero,
+                position: new Vector2(60, -92),
                 contentType: InputField.ContentType.Standard,
-                placeholderText: "input...",
-                fontSize: 16,
+                placeholderText: "[Filter]",
+                fontSize: 24,
                 width: 160f,
-                height: 30f);
+                height: 40f);
 
             input.GetComponent<InputField>().onValueChanged.AddListener(CreateCategorizedIcons.SearchInputChanged);
+            
+            Anchors.SetTopLeft(input);
         }
 
         private void CreateWoodPanel()

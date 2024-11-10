@@ -33,10 +33,8 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
 
                 var categoryLabelRect = category.Label.GetComponent<RectTransform>();
                 categoryLabelRect.sizeDelta = new Vector2(IconLineWidth, 30);
-                categoryLabelRect.anchorMin = Anchors.TopLeft;
-                categoryLabelRect.anchorMax = Anchors.TopLeft;
-                categoryLabelRect.pivot = Anchors.TopLeft;
                 categoryLabelRect.anchoredPosition = new Vector2(x, y);
+                Anchors.SetTopLeft(category.Label);
 
                 // New Line
                 x = left;
@@ -52,10 +50,8 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
 
                     var iconRect = icon.GetComponent<RectTransform>();
                     iconRect.sizeDelta = new Vector2(IconSize, IconSize);
-                    iconRect.anchorMin = Anchors.TopLeft;
-                    iconRect.anchorMax = Anchors.TopLeft;
-                    iconRect.pivot = Anchors.TopLeft;
                     iconRect.anchoredPosition = new Vector2(x, y);
+                    Anchors.SetTopLeft(icon);
 
                     x += stepSize;
                 }
