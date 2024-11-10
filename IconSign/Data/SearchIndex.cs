@@ -9,8 +9,38 @@ using Logger = Jotunn.Logger;
 
 namespace IconSign.Data
 {
+    
     public abstract class SearchIndex
     {
+        private class SearchStats
+        {
+            private int TotalSearches { get; set; } = 0;
+            private int TotalResults { get; set; } = 0;
+            private float AvgSearchTime { get; set; } = 0;
+            private float MinSearchTime { get; set; } = float.MaxValue;
+            private float MaxSearchTime { get; set; } = 0;
+
+            public void Update(float searchTime, int results)
+            {
+                TotalSearches++;
+                TotalResults += results;
+                AvgSearchTime = (AvgSearchTime * (TotalSearches - 1) + searchTime) / TotalSearches;
+                MinSearchTime = Mathf.Min(MinSearchTime, searchTime);
+                MaxSearchTime = Mathf.Max(MaxSearchTime, searchTime);
+            }
+            
+            public override string ToString()
+            {
+                return $"Total searches: {TotalSearches}, Total results: {TotalResults}, Avg search time: {AvgSearchTime}ms, Min search time: {MinSearchTime}ms, Max search time: {MaxSearchTime}ms";
+            }
+
+            public bool IsTimeToLog(int modulo)
+            {
+                return TotalSearches % modulo == 0;
+            }
+        } 
+        
+        private SearchStats _searchStats = new SearchStats();
         private static readonly Dictionary<string, List<string>> Index = new Dictionary<string, List<string>>();
 
         public static void Init()
@@ -45,7 +75,7 @@ namespace IconSign.Data
             File.WriteAllLines(path, Index.Select(kv => $"{kv.Key}: {string.Join(", ", kv.Value)}"));
         }
 
-        public static string[] Search(string query)
+        public string[] Search(string query)
         {
             var start = DateTime.Now;
             Logger.LogInfo($"searching for '{query}'");
@@ -57,7 +87,9 @@ namespace IconSign.Data
 
             var result = iconNames.Distinct().ToList();
 
-            Logger.LogInfo($"search for '{query}' found {result.Count} results in " + (DateTime.Now - start).TotalMilliseconds + "ms");
+            _searchStats.Update((float)(DateTime.Now - start).TotalMilliseconds, result.Count);
+            if (_searchStats.IsTimeToLog(DevConfig.SeachIndex.LogSearchStatsEvery.Value))
+                Logger.LogInfo(_searchStats.ToString());
 
             return result.ToArray();
         }

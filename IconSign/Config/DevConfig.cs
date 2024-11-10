@@ -17,6 +17,8 @@ namespace IconSign.Config
         internal static class SeachIndex
         {
             internal static ConfigEntry<bool> DumpIndexToFile;
+
+            internal static ConfigEntry<int> LogSearchStatsEvery;
         }
     }
 }
