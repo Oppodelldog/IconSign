@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Logger = Jotunn.Logger;
+using Splatform;
 
 namespace IconSign.Sign
 {
@@ -56,6 +57,7 @@ namespace IconSign.Sign
             _mNview = GetComponent<ZNetView>();
             if (_mNview.GetZDO() == null)
                 return;
+            
             UpdateText();
             InvokeRepeating(nameof(UpdateText), 2f, 2f);
         }
@@ -98,30 +100,14 @@ namespace IconSign.Sign
         private void UpdateText()
         {
             var text = _mNview.GetZDO().GetString(ZDOVars.s_text, mDefaultText);
-            var str = _mNview.GetZDO().GetString(ZDOVars.s_author);
-            text = CensorShittyWords.FilterUGC(text, UGCType.Text, str);
             if (_mCurrentText == text)
                 return;
-            PrivilegeManager.CanViewUserGeneratedContent(str, access =>
-            {
-                switch (access)
-                {
-                    case PrivilegeManager.Result.Allowed:
-                        _mCurrentText = text;
-                        UpdateSprite();
-                        break;
-                    case PrivilegeManager.Result.NotAllowed:
-                        _mCurrentText = "";
-                        UpdateSprite();
-                        break;
-                    case PrivilegeManager.Result.Failed:
-                    default:
-                        _mCurrentText = "";
-                        UpdateSprite();
-                        ZLog.LogError("Failed to check UGC privilege");
-                        break;
-                }
-            });
+            
+            _mCurrentText = text;
+            Logger.LogInfo("renamed icon sign to " + _mCurrentText);
+
+            
+            UpdateSprite();
         }
 
         private void UpdateSprite()
@@ -139,14 +125,16 @@ namespace IconSign.Sign
 
             return true;
         }
-
+        
         public void SetText(string text)
         {
             if (!PrivateArea.CheckAccess(transform.position))
                 return;
+            
             _mNview.ClaimOwnership();
             _mNview.GetZDO().Set(ZDOVars.s_text, text);
-            _mNview.GetZDO().Set(ZDOVars.s_author, PrivilegeManager.GetNetworkUserId());
+            var platformUserId = PlatformManager.DistributionPlatform.LocalUser.PlatformUserID;
+            _mNview.GetZDO().Set(ZDOVars.s_author, platformUserId.ToString());
             UpdateText();
         }
 
