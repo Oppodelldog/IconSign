@@ -114,6 +114,9 @@
     <Reference Include="Jotunn">
       <HintPath>$(VALHEIM_INSTALL)\BepInEx\plugins\Jotunn.dll</HintPath>
     </Reference>
+    <Reference Include="Splatform">
+      <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\Splatform.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
