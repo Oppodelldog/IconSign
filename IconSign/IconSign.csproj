@@ -114,8 +114,17 @@
     <Reference Include="Jotunn">
       <HintPath>$(VALHEIM_INSTALL)\BepInEx\plugins\Jotunn.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\netstandard.dll</HintPath>
+    </Reference>
     <Reference Include="Splatform">
       <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\Splatform.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\System.Core.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\UnityEngine.dll</HintPath>
