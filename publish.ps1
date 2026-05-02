@@ -40,11 +40,15 @@ if (Test-Path -Path "$pdb") {
 # Main Script
 $DeployPathDebug = "$ValheimPath\BepInEx\scripts\$name"
 $DeployPathRelease = "$ValheimPath\BepInEx\plugins\$name"
+$ReleasePackageRoot = "$TargetPath\$name"
+$ReleasePackage = "$TargetPath\$name.zip"
 
-Remove-Item -Path "$DeployPathDebug\$name.dll" -Recurse -Force
-Remove-Item -Path "$DeployPathDebug\$name.pdb" -Recurse -Force
-Remove-Item -Path "$DeployPathDebug\$name.dll.mdb" -Recurse -Force
-Remove-Item -Path "$DeployPathRelease" -Recurse -Force
+Remove-Item -Path "$DeployPathDebug\$name.dll" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$DeployPathDebug\$name.pdb" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$DeployPathDebug\$name.dll.mdb" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$DeployPathRelease" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$ReleasePackageRoot" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$ReleasePackage" -Recurse -Force -ErrorAction SilentlyContinue
 
 if ($Target.Equals("Debug")) {
     Write-Host "Publishing for $Target from $TargetPath to $DeployPathDebug"
@@ -62,6 +66,11 @@ if($Target.Equals("Release")) {
     $plug = New-Item -Type Directory -Path "$DeployPathRelease" -Force
     Write-Host "Copy $TargetAssembly to $plug"
     Copy-Item -Path "$TargetPath\$name.dll" -Destination "$plug" -Force
+
+    $packageRoot = New-Item -Type Directory -Path "$ReleasePackageRoot" -Force
+    Copy-Item -Path "$TargetPath\$name.dll" -Destination "$packageRoot" -Force
+    Compress-Archive -Path "$ReleasePackageRoot" -DestinationPath "$ReleasePackage" -Force
+    Write-Host "Created release package $ReleasePackage"
 }
 
 # Pop Location
