@@ -65,12 +65,25 @@ namespace IconSign.Data
             foreach (var table in PieceManager.Instance.GetPieceTables())
             foreach (var piece in table.m_pieces)
             {
-                var p = piece.GetComponent<Piece>();
+                var p = GetValidPiece(piece);
+                if (p == null) continue;
                 if (Translations.ContainsKey(p.m_icon.name)) continue;
                 if (!p.m_name.StartsWith("$")) continue;
 
                 Translations.Add(p.m_icon.name, LocalizationManager.Instance.TryTranslate(p.m_name));
             }
+        }
+
+        private static Piece GetValidPiece(GameObject piece)
+        {
+            if (piece == null) return null;
+
+            var p = piece.GetComponent<Piece>();
+            if (p == null) return null;
+            if (p.m_icon == null) return null;
+            if (string.IsNullOrEmpty(p.m_name)) return null;
+
+            return p;
         }
 
         public static Dictionary<string, string> GetTranslations()
