@@ -7,6 +7,7 @@ namespace IconSign.Config
         internal static class SelectionPanel
         {
             internal static ConfigEntry<string> SelectedTab;
+            internal static ConfigEntry<float> ScrollSensitivity;
 
             internal static readonly string[] Tabs =
             {

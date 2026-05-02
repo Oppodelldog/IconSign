@@ -21,6 +21,7 @@ namespace IconSign
         {
             RecentIcons.ConfigEntry = Config.Bind("config", "recent_icons", "", "your recently used icons");
             ModConfig.SelectionPanel.SelectedTab = Config.Bind("config", "selection_panel_selected_tab", "", "selected tab in selection panel");
+            ModConfig.SelectionPanel.ScrollSensitivity = Config.Bind("config", "selection_panel_scroll_sensitivity", 1000f, "mouse wheel scroll strength in selection panel");
             DevConfig.SelectionPanel.DebugView = Config.Bind("dev", "selection_panel_debug_view", false, "show debug info in selection panel");
             DevConfig.IconSign.ShowInternalName = Config.Bind("dev", "icon_sign_show_internal_name", false, "show internal name of IconSign when hovering the sign");
             DevConfig.SeachIndex.DumpIndexToFile = Config.Bind("dev", "search_index_dump_index_to_file", false, "dump search index to file");

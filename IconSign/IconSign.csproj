@@ -86,6 +86,7 @@
     <Compile Include="Selection\Scrollpane\CreateCategoriesScrollPane.cs" />
     <Compile Include="Selection\Scrollpane\CreateInventoryScrollPane.cs" />
     <Compile Include="Selection\Scrollpane\CreateRecentScrollPane.cs" />
+    <Compile Include="Selection\Scrollpane\SmoothScrollRect.cs" />
     <Compile Include="Selection\Scrollpane\ScrollableContainer.cs" />
     <Compile Include="Selection\TabBar\CreateTabButtons.cs" />
     <Compile Include="Selection\TabBar\TabButton.cs" />
