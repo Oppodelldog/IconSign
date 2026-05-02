@@ -1,4 +1,5 @@
 ﻿using IconSign.Config;
+using Jotunn.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,22 @@ namespace IconSign.Selection.Scrollpane
 {
     public class ScrollableContainer : MonoBehaviour
     {
+        private const float TopOffset = -60;
+        private const float PanelWidth = 1200;
+        private const float PanelHeight = 660;
+        private const float ViewportWidth = 1120;
+        private const float ViewportHeight = 660;
+        private const float ScrollBarWidth = 20;
+        private const float ScrollBarRightInset = 24;
+        private const float SmoothScrollSpeed = 8f;
+
+        private GameObject _panel;
+        private Image _panelImage;
+        private RectTransform _viewportRect;
+        private Image _viewportImage;
+        private SmoothScrollRect _scrollRect;
+        private Image _contentImage;
+        private Scrollbar _verticalScrollbar;
         private GameObject _content;
 
         public Transform Content
@@ -39,89 +56,143 @@ namespace IconSign.Selection.Scrollpane
 
         private void Start()
         {
-            const float topOffset = -60;
-            const float panelWidth = 1200;
-            const float panelHeight = 660;
-            const float viewportWidth = 1120;
-            const float viewportHeight = 660;
+            CreatePanel();
+            CreateViewport();
+            CreateScrollRect();
+            AttachContent();
+            CreateVerticalScrollbar();
+            AttachScrollbar();
+            
+            ApplyDebugView();
+        }
 
-            const float scrollBarWidth = 20;
-            const float scrollSensitivity = 10;
+        private void CreatePanel()
+        {
+            _panel = new GameObject("ScrollablePanel");
+            _panel.transform.SetParent(transform, false);
 
-            // Create a new GameObject for the panel
-            var panel = new GameObject("ScrollablePanel");
-            panel.transform.SetParent(transform, false); // Attach to the Canvas or parent
-
-            // Add RectTransform and set its size
-            var panelRect = panel.AddComponent<RectTransform>();
-            panelRect.sizeDelta = new Vector2(panelWidth, panelHeight); // Size of the panel
-            panelRect.anchorMin = new Vector2(0.5f, 0.5f); // Center anchor
-            panelRect.anchorMax = new Vector2(0.5f, 0.5f); // Center anchor
+            var panelRect = _panel.AddComponent<RectTransform>();
+            panelRect.sizeDelta = new Vector2(PanelWidth, PanelHeight);
+            panelRect.anchorMin = new Vector2(0.5f, 0.5f);
+            panelRect.anchorMax = new Vector2(0.5f, 0.5f);
             panelRect.pivot = new Vector2(0.5f, 0.5f);
-            panelRect.anchoredPosition = new Vector2(0, topOffset);
+            panelRect.anchoredPosition = new Vector2(0, TopOffset);
 
-            // Add an Image component to make the panel visible (optional)
-            var panelImage = panel.AddComponent<Image>();
+            _panelImage = _panel.AddComponent<Image>();
+            _panelImage.color = new Color(0, 0, 0, 0f);
+        }
 
-            // ReSharper disable once HeuristicUnreachableCode
-            panelImage.color = new Color(0, 0, 0, 0f); // Transparent background
-
-            // Create a ScrollRect component for scrolling functionality
-            var scrollRect = panel.AddComponent<ScrollRect>();
-
-            // Create a viewport for the ScrollRect
+        private void CreateViewport()
+        {
             var viewport = new GameObject("Viewport");
-            viewport.transform.SetParent(panel.transform, false);
-            var viewportRect = viewport.AddComponent<RectTransform>();
-            viewportRect.sizeDelta = new Vector2(viewportWidth, viewportHeight); // Slightly smaller than the panel
-            viewportRect.anchorMin = new Vector2(0.5f, 0.5f);
-            viewportRect.anchorMax = new Vector2(0.5f, 0.5f);
-            viewportRect.pivot = new Vector2(0.5f, 0.5f);
-            viewportRect.anchoredPosition = new Vector2(0, 0);
+            viewport.transform.SetParent(_panel.transform, false);
 
-            // Add an Image to the viewport
-            var viewportImage = viewport.AddComponent<Image>();
-            // ReSharper disable once HeuristicUnreachableCode
-            viewportImage.color = new Color(0f, 0f, 0f, 0.1f); // if alpha is 0, the mask will not work
+            _viewportRect = viewport.AddComponent<RectTransform>();
+            _viewportRect.sizeDelta = new Vector2(ViewportWidth, ViewportHeight);
+            _viewportRect.anchorMin = new Vector2(0.5f, 0.5f);
+            _viewportRect.anchorMax = new Vector2(0.5f, 0.5f);
+            _viewportRect.pivot = new Vector2(0.5f, 0.5f);
+            _viewportRect.anchoredPosition = Vector2.zero;
+
+            _viewportImage = viewport.AddComponent<Image>();
+            _viewportImage.color = new Color(0f, 0f, 0f, 0.1f);
+
             var mask = viewport.AddComponent<Mask>();
             mask.showMaskGraphic = false;
-            // Assign the viewport to the ScrollRect
-            scrollRect.viewport = viewportRect;
+        }
 
-            // Create the content holder inside the viewport
-            Content.SetParent(viewport.transform, false);
+        private void CreateScrollRect()
+        {
+            _scrollRect = _panel.AddComponent<SmoothScrollRect>();
+            _scrollRect.viewport = _viewportRect;
+            _scrollRect.horizontal = false;
+            _scrollRect.vertical = true;
+            _scrollRect.scrollSensitivity = Mathf.Max(1f, ModConfig.SelectionPanel.ScrollSensitivity.Value);
+            _scrollRect.SmoothScrollSpeed = SmoothScrollSpeed;
+        }
 
-            // add image to get a visual representation of the content
-            var contentImage = _content.AddComponent<Image>();
-            // ReSharper disable once HeuristicUnreachableCode
-            contentImage.color = new Color(0f, 0f, 0f, 0f);
+        private void AttachContent()
+        {
+            Content.SetParent(_viewportRect.transform, false);
 
-            // Assign the content to the ScrollRect
-            scrollRect.content = Content.GetComponent<RectTransform>();
-            scrollRect.horizontal = false;
-            scrollRect.vertical = true;
-            scrollRect.scrollSensitivity = scrollSensitivity;
+            _contentImage = _content.AddComponent<Image>();
+            _contentImage.color = new Color(0f, 0f, 0f, 0f);
 
-            // Optionally, add a vertical scrollbar
+            _scrollRect.content = Content.GetComponent<RectTransform>();
+        }
+
+        private void CreateVerticalScrollbar()
+        {
             var scrollbar = new GameObject("Scrollbar");
-            scrollbar.transform.SetParent(panel.transform, false);
-            var verticalScrollbar = scrollbar.AddComponent<Scrollbar>();
-            var scrollbarRect = scrollbar.GetComponent<RectTransform>();
-            scrollbarRect.sizeDelta = new Vector2(scrollBarWidth, panelHeight); // Width of the scrollbar
-            scrollbarRect.anchorMin = new Vector2(1, 0); // Right anchor
-            scrollbarRect.anchorMax = new Vector2(1, 1); // Right anchor
-            verticalScrollbar.direction = Scrollbar.Direction.TopToBottom;
-            verticalScrollbar.value = 1; // Start scrolled to the top
+            scrollbar.transform.SetParent(_panel.transform, false);
 
-            // Attach the scrollbar to the ScrollRect
-            scrollRect.verticalScrollbar = verticalScrollbar;
-            scrollRect.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.Permanent;
-            
-            if (!DevConfig.SelectionPanel.DebugView.Value) return;
-            panelImage.color = new Color(0, 1, 0, 0.4f);
-            panelImage.color = new Color(0, 1, 0, 0.4f);
-            viewportImage.color = new Color(0f, 1f, 1f, 0.4f);
-            contentImage.color = new Color(1f, 0f, 0.4f, 0.4f);
+            _verticalScrollbar = scrollbar.AddComponent<Scrollbar>();
+            var scrollbarImage = scrollbar.AddComponent<Image>();
+            scrollbarImage.color = new Color(0f, 0f, 0f, 0.35f);
+
+            var scrollbarRect = scrollbar.GetComponent<RectTransform>();
+            scrollbarRect.anchorMin = new Vector2(1, 0);
+            scrollbarRect.anchorMax = new Vector2(1, 1);
+            scrollbarRect.pivot = new Vector2(1f, 0.5f);
+            scrollbarRect.offsetMin = new Vector2(-ScrollBarRightInset - ScrollBarWidth, 0f);
+            scrollbarRect.offsetMax = new Vector2(-ScrollBarRightInset, 0f);
+
+            var handleRect = CreateScrollbarHandle(CreateSlidingArea(scrollbar.transform));
+            var handleImage = handleRect.GetComponent<Image>();
+
+            _verticalScrollbar.targetGraphic = handleImage;
+            _verticalScrollbar.handleRect = handleRect;
+            _verticalScrollbar.direction = Scrollbar.Direction.BottomToTop;
+            _verticalScrollbar.value = 1;
+        }
+
+        private static RectTransform CreateSlidingArea(Transform parent)
+        {
+            var slidingArea = new GameObject("Sliding Area");
+            slidingArea.transform.SetParent(parent, false);
+
+            var slidingAreaRect = slidingArea.AddComponent<RectTransform>();
+            slidingAreaRect.anchorMin = Vector2.zero;
+            slidingAreaRect.anchorMax = Vector2.one;
+            slidingAreaRect.offsetMin = new Vector2(3f, 3f);
+            slidingAreaRect.offsetMax = new Vector2(-3f, -3f);
+
+            return slidingAreaRect;
+        }
+
+        private static RectTransform CreateScrollbarHandle(RectTransform slidingArea)
+        {
+            var handle = new GameObject("Handle");
+            handle.transform.SetParent(slidingArea.transform, false);
+
+            var handleRect = handle.AddComponent<RectTransform>();
+            handleRect.anchorMin = Vector2.zero;
+            handleRect.anchorMax = Vector2.one;
+            handleRect.offsetMin = Vector2.zero;
+            handleRect.offsetMax = Vector2.zero;
+
+            var handleImage = handle.AddComponent<Image>();
+            handleImage.color = GUIManager.Instance.ValheimOrange;
+
+            return handleRect;
+        }
+
+        private void AttachScrollbar()
+        {
+            _scrollRect.verticalScrollbar = _verticalScrollbar;
+            _scrollRect.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.Permanent;
+        }
+
+        private void ApplyDebugView()
+        {
+            if (!DevConfig.SelectionPanel.DebugView.Value)
+            {
+                return;
+            }
+
+            _panelImage.color = new Color(0, 1, 0, 0.4f);
+            _viewportImage.color = new Color(0f, 1f, 1f, 0.4f);
+            _contentImage.color = new Color(1f, 0f, 0.4f, 0.4f);
         }
     }
 }
