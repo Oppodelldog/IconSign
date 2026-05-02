@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IconSign.Config;
 using IconSign.Helper;
 using Jotunn.Managers;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace IconSign.Data
             var result = InitResult(categories);
             BuildDataIndices(IconCategories.Data, out var categoryByIcon, out var nameOrderByIcon);
             BuildSpritesByCategoryIndex(sprites, categoryByIcon, result);
-            SortSprites(result, nameOrderByIcon);
+            SortSprites(result, nameOrderByIcon, categoryByIcon);
 
             Logger.LogInfo($"Built categorized icons in {(DateTime.Now - startTime).TotalMilliseconds}ms");
 
@@ -50,7 +51,7 @@ namespace IconSign.Data
             return sprites;
         }
 
-        private static void SortSprites(Dictionary<string, List<Sprite>> result, Dictionary<string, int> nameOrderByIcon)
+        private static void SortSprites(Dictionary<string, List<Sprite>> result, Dictionary<string, int> nameOrderByIcon, Dictionary<string, string> categoryByIcon)
         {
             // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
             foreach (var kv in result)
@@ -60,7 +61,12 @@ namespace IconSign.Data
                 {
                     var nameA = IconName.GetName(a);
                     var nameB = IconName.GetName(b);
-                    return nameOrderByIcon[nameA].CompareTo(nameOrderByIcon[nameB]);
+                    var iconAIsKnown = categoryByIcon.ContainsKey(nameA);
+                    var iconBIsKnown = categoryByIcon.ContainsKey(nameB);
+                    if (iconAIsKnown && iconBIsKnown) return nameOrderByIcon[nameA].CompareTo(nameOrderByIcon[nameB]);
+                    if (iconAIsKnown) return -1;
+                    if (iconBIsKnown) return 1;
+                    return string.Compare(nameA, nameB, StringComparison.Ordinal);
                 });
             }
         }
@@ -77,6 +83,8 @@ namespace IconSign.Data
                 else
                 {
                     Logger.LogWarning($"Icon {iconName} has no category");
+                    result[Constants.CategoryMiscellaneous].Add(sprite);
+                    SearchIndex.AddIconName(iconName);
                 }
             }
         }

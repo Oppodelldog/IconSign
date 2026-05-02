@@ -17,27 +17,51 @@ namespace IconSign.Data
 
         public static void Init()
         {
+            Index.Clear();
             _searchStats = new StatsLogger("Search", DevConfig.SeachIndex.LogSearchStatsEvery.Value);
             var start = DateTime.Now;
             Logger.LogInfo("init search index");
             foreach (var kv in IconTranslation.GetTranslations())
             {
-                var words = kv.Value.Split(' ');
-                foreach (var word in words)
-                {
-                    var w = word.ToLower();
+                AddIconName(kv.Key);
+                AddTranslation(kv.Key, kv.Value);
+            }
 
-                    Index.TryGetValue(w, out var values);
-                    if (values == null) values = new List<string>();
-                    values.Add(kv.Key);
-
-                    Index[w] = values;
-                }
+            foreach (var iconName in IconCategories.Data.Values.SelectMany(x => x).Distinct())
+            {
+                AddIconName(iconName);
             }
 
             Logger.LogInfo("search index initialized in " + (DateTime.Now - start).TotalMilliseconds + "ms");
 
             if (DevConfig.SeachIndex.DumpIndexToFile.Value) DumpIndexToFile();
+        }
+
+        internal static void AddIconName(string iconName)
+        {
+            AddToIndex(iconName, iconName);
+        }
+
+        private static void AddTranslation(string iconName, string translation)
+        {
+            if (string.IsNullOrEmpty(translation)) return;
+
+            foreach (var word in translation.Split(' '))
+            {
+                AddToIndex(word, iconName);
+            }
+        }
+
+        private static void AddToIndex(string searchTerm, string iconName)
+        {
+            if (string.IsNullOrEmpty(searchTerm)) return;
+
+            var key = searchTerm.ToLower();
+            Index.TryGetValue(key, out var values);
+            if (values == null) values = new List<string>();
+            values.Add(iconName);
+
+            Index[key] = values;
         }
 
         private static void DumpIndexToFile()
