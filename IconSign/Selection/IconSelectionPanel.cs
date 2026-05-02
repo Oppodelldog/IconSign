@@ -23,13 +23,13 @@ namespace IconSign.Selection
         private static readonly Dictionary<string, GameObject> TabContainers = new Dictionary<string, GameObject>();
 
         private GameObject _iconSelectionPanel;
+        private Action<string> _onIconSelected;
         public static IconSelectionPanel Instance => _instance ?? (_instance = new IconSelectionPanel());
 
-        public event Action<string> OnIconSelected;
-
-        internal void RequestSelection()
+        internal void RequestSelection(Action<string> onIconSelected)
         {
             EnsurePanel();
+            _onIconSelected = onIconSelected;
             _iconSelectionPanel.SetActive(true);
             GUIManager.BlockInput(true);
         }
@@ -42,6 +42,7 @@ namespace IconSign.Selection
 
             _iconSelectionPanel.SetActive(false);
             GUIManager.BlockInput(false);
+            _onIconSelected = null;
         }
 
         private void EnsurePanel()
@@ -140,7 +141,7 @@ namespace IconSign.Selection
 
         private void TriggerSelectionEvent(string spriteName)
         {
-            OnIconSelected?.Invoke(spriteName);
+            _onIconSelected?.Invoke(spriteName);
             ClosePanel();
         }
 

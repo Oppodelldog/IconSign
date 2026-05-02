@@ -83,14 +83,12 @@ namespace IconSign.Sign
             if (hold || !PrivateArea.CheckAccess(transform.position))
                 return false;
 
-            IconSelectionPanel.Instance.RequestSelection();
-            IconSelectionPanel.Instance.OnIconSelected += OnIconSelected;
+            IconSelectionPanel.Instance.RequestSelection(OnIconSelected);
             return true;
         }
 
         private void OnIconSelected(string icon)
         {
-            IconSelectionPanel.Instance.OnIconSelected -= OnIconSelected;
             if (icon == "") return;
 
             RecentIcons.Add(icon);
