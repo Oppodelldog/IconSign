@@ -2,7 +2,7 @@
 {
     internal abstract class Constants
     {
-        internal const string TranslationKeyName = "name";
+        internal const string TranslationKeyName = "iconsign_name";
         internal const string TranslationKeyUse = "use";
         internal const string TranslationKeyPaintItem = "paint_item";
         internal const string TabNameCategories = "tab_categories";

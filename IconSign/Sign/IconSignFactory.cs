@@ -28,7 +28,7 @@ namespace IconSign.Sign
 
             var iconSignPiece = new PieceConfig
             {
-                Name = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
+                Name =   "$" + Constants.TranslationKeyName,
                 PieceTable = PieceTables.Hammer,
                 Category = PieceCategories.Furniture
             };
