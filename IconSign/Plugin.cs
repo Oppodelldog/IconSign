@@ -14,7 +14,7 @@ namespace IconSign
         // ReSharper disable block MemberCanBePrivate.Global
         public const string PluginGuid = "oppodelldog.mod.iconsign";
         public const string PluginName = "IconSign";
-        public const string PluginVersion = "0.5.0";
+        public const string PluginVersion = "0.6.0";
 
 
         private void Awake()
