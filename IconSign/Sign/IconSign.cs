@@ -77,6 +77,10 @@ namespace IconSign.Sign
         }
 
         public string GetHoverName() => mName;
+        public float GetHoverOffset()
+        {
+            return 0f;
+        }
 
         public bool Interact(Humanoid character, bool hold, bool alt)
         {
