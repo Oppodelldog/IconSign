@@ -1,5 +1,5 @@
 {
-  "iconsign_name": "Icon Sign",
+  "name": "Icon Sign",
   "use": "Paint",
   "paint_item": "Paint item",
   "tab_inventory": "Inventory",
@@ -15,5 +15,5 @@
   "plunder": "Plunder",
   "abstract": "Abstract",
   "search_no_results": "No results found",
-  "iconsign_loading_icons": "Loading icons…"
+  "loading_icons": "Loading icons…"
 }

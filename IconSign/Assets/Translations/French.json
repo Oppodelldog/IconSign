@@ -1,5 +1,5 @@
 {
-  "iconsign_name": "Icône de panneau",
+  "name": "Icône de panneau",
   "use": "Peindre",
   "paint_item": "Peindre l'objet",
   "tab_inventory": "Inventaire",
@@ -15,5 +15,5 @@
   "plunder": "Butin",
   "abstract": "Abstrait",
   "search_no_results": "Aucun résultat trouvé",
-  "iconsign_loading_icons": "Chargement des icônes…"
+  "loading_icons": "Chargement des icônes…"
 }

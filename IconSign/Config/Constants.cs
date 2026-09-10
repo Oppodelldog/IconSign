@@ -2,7 +2,7 @@
 {
     internal abstract class Constants
     {
-        internal const string TranslationKeyName = "iconsign_name";
+        internal const string TranslationKeyName = "name";
         internal const string TranslationKeyUse = "use";
         internal const string TranslationKeyPaintItem = "paint_item";
         internal const string TabNameCategories = "tab_categories";
@@ -17,7 +17,7 @@
         internal const string CategoryMiscellaneous = "misc";
         internal const string CategoryPlunder = "plunder";
         internal const string CategoryWeapons = "weapons";
-        internal const string LoadingIcons = "iconsign_loading_icons";
+        internal const string LoadingIcons = "loading_icons";
         internal const string SearchNoResults = "search_no_results";
 
         internal const float BlitPreventionOffset = -0.007f;

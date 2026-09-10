@@ -1,5 +1,5 @@
 {
-  "iconsign_name": "Icon Schild",
+  "name": "Icon Schild",
   "use": "bemalen",
   "paint_item": "Objekt anmalen",
   "tab_inventory": "Inventar",
@@ -15,5 +15,5 @@
   "plunder": "Trophäen",
   "abstract": "Abstrakt",
   "search_no_results": "Keine Ergebnisse gefunden",
-  "iconsign_loading_icons": "Icons werden geladen …"
+  "loading_icons": "Icons werden geladen …"
 }

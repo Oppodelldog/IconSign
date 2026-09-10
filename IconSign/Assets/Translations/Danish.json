@@ -1,5 +1,5 @@
 {
-  "iconsign_name": "Ikon skilt",
+  "name": "Ikon skilt",
   "use": "Maling",
   "paint_item": "Maling objekt",
   "tab_inventory": "Inventar",
@@ -15,5 +15,5 @@
   "plunder": "Plyndring",
   "abstract": "Abstrakt",
   "search_no_results": "Ingen resultater fundet",
-  "iconsign_loading_icons": "Indlæser ikoner …"
+  "loading_icons": "Indlæser ikoner …"
 }

@@ -1,5 +1,5 @@
 {
-  "iconsign_name": "Icono de señal",
+  "name": "Icono de señal",
   "use": "Pintar",
   "paint_item": "Pintar objeto",
   "tab_inventory": "Inventario",
@@ -15,5 +15,5 @@
   "plunder": "Botín",
   "abstract": "Abstracto",
   "search_no_results": "No se encontraron resultados",
-  "iconsign_loading_icons": "Cargando iconos…"
+  "loading_icons": "Cargando iconos…"
 }

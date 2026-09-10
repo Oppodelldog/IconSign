@@ -1,5 +1,6 @@
 ﻿using IconSign.Assets;
 using IconSign.Config;
+using IconSign.Data;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
@@ -25,7 +26,7 @@ namespace IconSign.Sign
 
             var iconSignPiece = new PieceConfig
             {
-                Name =   "$" + Constants.TranslationKeyName,
+                Name = Translations.GetToken(Constants.TranslationKeyName),
                 PieceTable = PieceTables.Hammer,
                 Category = PieceCategories.Furniture
             };

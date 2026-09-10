@@ -1,5 +1,5 @@
 {
-  "iconsign_name": "Segnale icona",
+  "name": "Segnale icona",
   "use": "Pittura",
   "paint_item": "Pittura oggetto",
   "tab_inventory": "Inventario",
@@ -15,5 +15,5 @@
   "plunder": "Bottino",
   "abstract": "Astratto",
   "search_no_results": "Nessun risultato trovato",
-  "iconsign_loading_icons": "Caricamento delle icone…"
+  "loading_icons": "Caricamento delle icone…"
 }

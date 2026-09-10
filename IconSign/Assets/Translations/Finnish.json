@@ -1,5 +1,5 @@
 {
-  "iconsign_name": "Kuvakekyltti",
+  "name": "Kuvakekyltti",
   "use": "Maali",
   "paint_item": "Maalaa kohde",
   "tab_inventory": "Inventaario",
@@ -15,5 +15,5 @@
   "plunder": "Ryöstö",
   "abstract": "Abstrakti",
   "search_no_results": "Ei tuloksia",
-  "iconsign_loading_icons": "Ladataan kuvakkeita…"
+  "loading_icons": "Ladataan kuvakkeita…"
 }

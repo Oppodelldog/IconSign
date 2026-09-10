@@ -1,5 +1,5 @@
 {
-  "iconsign_name": "Ikon skylt",
+  "name": "Ikon skylt",
   "use": "Måla",
   "paint_item": "Måla objekt",
   "tab_inventory": "Inventering",
@@ -15,5 +15,5 @@
   "plunder": "Plundra",
   "abstract": "Abstrakt",
   "search_no_results": "Inga resultat hittades",
-  "iconsign_loading_icons": "Läser in ikoner …"
+  "loading_icons": "Läser in ikoner …"
 }
