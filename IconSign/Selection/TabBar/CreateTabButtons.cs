@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using IconSign.Config;
+using IconSign.Data;
 using IconSign.Extensions;
 using Jotunn.Managers;
 using UnityEngine;
@@ -82,7 +83,7 @@ namespace IconSign.Selection.TabBar
             const int y = -92;
             foreach (var tab in ModConfig.SelectionPanel.Tabs)
             {
-                var tabName = LocalizationManager.Instance.TryTranslate(tab);
+                var tabName = Translations.Translate(tab);
                 var tabButton = CreateTabButton(
                     parent,
                     tab,

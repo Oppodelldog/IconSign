@@ -1,0 +1,18 @@
+{
+  "iconsign_name": "Segnale icona",
+  "use": "Pittura",
+  "paint_item": "Pittura oggetto",
+  "tab_inventory": "Inventario",
+  "tab_recent": "Recente",
+  "tab_categories": "Categorie",
+  "armor": "Armatura",
+  "building": "Edificio",
+  "consumables": "Consumabili",
+  "farming": "Agricoltura",
+  "furniture": "Mobili",
+  "misc": "Varie",
+  "weapons": "Armi",
+  "plunder": "Bottino",
+  "abstract": "Astratto",
+  "search_no_results": "Nessun risultato trovato"
+}

@@ -1,0 +1,18 @@
+{
+  "iconsign_name": "Ikon skilt",
+  "use": "Maling",
+  "paint_item": "Maling objekt",
+  "tab_inventory": "Inventar",
+  "tab_recent": "Siste",
+  "tab_categories": "Kategorier",
+  "armor": "Rustning",
+  "building": "Bygning",
+  "consumables": "Forbruksvarer",
+  "farming": "Jordbruk",
+  "furniture": "Møbler",
+  "misc": "Diverse",
+  "weapons": "Våpen",
+  "plunder": "Plyndring",
+  "abstract": "Abstrakt",
+  "search_no_results": "Ingen resultater funnet"
+}

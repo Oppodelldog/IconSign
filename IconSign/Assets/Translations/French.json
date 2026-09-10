@@ -1,0 +1,18 @@
+{
+  "iconsign_name": "Icône de panneau",
+  "use": "Peindre",
+  "paint_item": "Peindre l'objet",
+  "tab_inventory": "Inventaire",
+  "tab_recent": "Récent",
+  "tab_categories": "Catégories",
+  "armor": "Armure",
+  "building": "Bâtiment",
+  "consumables": "Consommables",
+  "farming": "Agriculture",
+  "furniture": "Meubles",
+  "misc": "Divers",
+  "weapons": "Armes",
+  "plunder": "Butin",
+  "abstract": "Abstrait",
+  "search_no_results": "Aucun résultat trouvé"
+}

@@ -1,0 +1,18 @@
+{
+  "iconsign_name": "Kuvakekyltti",
+  "use": "Maali",
+  "paint_item": "Maalaa kohde",
+  "tab_inventory": "Inventaario",
+  "tab_recent": "Viimeisin",
+  "tab_categories": "Kategoriat",
+  "armor": "Panssari",
+  "building": "Rakennus",
+  "consumables": "Kulutustavarat",
+  "farming": "Maatalous",
+  "furniture": "Huonekalut",
+  "misc": "Sekalaiset",
+  "weapons": "Aseet",
+  "plunder": "Ryöstö",
+  "abstract": "Abstrakti",
+  "search_no_results": "Ei tuloksia"
+}

@@ -28,6 +28,7 @@ namespace IconSign
             DevConfig.SeachIndex.LogSearchStatsEvery = Config.Bind("dev", "search_index_log_search_stats", 10, "log search stats every nth search");
             DevConfig.Layout.LogLayoutStatsEvery = Config.Bind("dev", "layout_log_layout_stats", 10, "log layout stats every nth layout");
 
+            Translations.Load();
             IconSignFactory.Register();
             IconTranslation.Register();
 

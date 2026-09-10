@@ -140,7 +140,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             categoryLabelObject.transform.SetParent(content, false);
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             var categoryLabel = categoryLabelObject.AddComponent<Text>();
-            categoryLabel.text = LocalizationManager.Instance.TryTranslate(category);
+            categoryLabel.text = Translations.Translate(category);
             categoryLabel.font = GUIManager.Instance.AveriaSerifBold;
             categoryLabel.fontSize = 20;
             categoryLabel.color = GUIManager.Instance.ValheimBeige;

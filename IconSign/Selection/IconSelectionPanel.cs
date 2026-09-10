@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IconSign.Config;
+using IconSign.Data;
 using IconSign.Extensions;
 using IconSign.Helper;
 using IconSign.Selection.IconScrollContent.CategorizedIcons;
@@ -124,7 +125,7 @@ namespace IconSign.Selection
         private void CreateHeadline()
         {
             GUIManager.Instance.CreateText(
-                LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
+                Translations.Translate(Constants.TranslationKeyName),
                 _iconSelectionPanel.transform,
                 new Vector2(0.5f, 1f),
                 new Vector2(0.5f, 1f),

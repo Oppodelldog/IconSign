@@ -1,6 +1,5 @@
 ﻿using IconSign.Assets;
 using IconSign.Config;
-using IconSign.Data;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
@@ -23,8 +22,6 @@ namespace IconSign.Sign
             PrefabManager.OnVanillaPrefabsAvailable -= CreateIconSign;
 
             Logger.LogInfo("creating icon sign");
-
-            Translations.AddToLocalizationManager();
 
             var iconSignPiece = new PieceConfig
             {

@@ -96,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\prefab-icon.png" />
+    <EmbeddedResource Include="Assets\Translations\*.json">
+      <LogicalName>IconSign.Assets.Translations.%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
     <Content Include="Docs\IconSign-used-to-visually-improve-storage.jpg" />
     <Content Include="Docs\IconSign-categories-for-browsing.jpg" />
   </ItemGroup>

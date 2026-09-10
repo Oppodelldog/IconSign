@@ -1,0 +1,18 @@
+{
+  "iconsign_name": "Icon Schild",
+  "use": "bemalen",
+  "paint_item": "Objekt anmalen",
+  "tab_inventory": "Inventar",
+  "tab_recent": "Kürzliche",
+  "tab_categories": "Kategorien",
+  "armor": "Rüstung & Kleidung",
+  "building": "Baustruktur",
+  "consumables": "Verbrauchsgüter",
+  "farming": "Anbau & Herstellung",
+  "furniture": "Einrichtung",
+  "misc": "Sonstiges",
+  "weapons": "Waffen & Werkzeuge",
+  "plunder": "Trophäen",
+  "abstract": "Abstrakt",
+  "search_no_results": "Keine Ergebnisse gefunden"
+}
