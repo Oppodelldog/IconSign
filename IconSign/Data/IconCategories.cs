@@ -887,6 +887,7 @@ namespace IconSign.Data
 
                     "ArmorHeavyChestUncooked",
                     "ArmorHeavyHelmetUncooked",
+                    "ArmorHeavyHelmetUncooked 1",
                     "ArmorHeavyLegsUncooked",
                     "ArmorMageChestUncooked",
                     "ArmorMageHelmetUncooked",
