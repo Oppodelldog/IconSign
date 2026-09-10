@@ -56,7 +56,7 @@ namespace IconSign.Data
                 if (Translations.ContainsKey(iconName)) continue;
                 if (!drop.m_itemData.m_shared.m_name.StartsWith("$")) continue;
 
-                Translations.Add(iconName, LocalizationManager.Instance.TryTranslate(drop.m_itemData.m_shared.m_name));
+                Translations.Add(iconName, Localization.instance.Localize(drop.m_itemData.m_shared.m_name));
             }
         }
 
@@ -70,7 +70,7 @@ namespace IconSign.Data
                 if (Translations.ContainsKey(p.m_icon.name)) continue;
                 if (!p.m_name.StartsWith("$")) continue;
 
-                Translations.Add(p.m_icon.name, LocalizationManager.Instance.TryTranslate(p.m_name));
+                Translations.Add(p.m_icon.name, Localization.instance.Localize(p.m_name));
             }
         }
 

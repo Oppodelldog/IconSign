@@ -24,11 +24,9 @@ namespace IconSign.Sign
 
             Logger.LogInfo("creating icon sign");
 
-            Translations.AddToLocalizationManager();
-
             var iconSignPiece = new PieceConfig
             {
-                Name = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
+                Name = Translations.GetToken(Constants.TranslationKeyName),
                 PieceTable = PieceTables.Hammer,
                 Category = PieceCategories.Furniture
             };

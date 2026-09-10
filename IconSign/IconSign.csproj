@@ -96,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\prefab-icon.png" />
+    <EmbeddedResource Include="Assets\Translations\*.json">
+      <LogicalName>IconSign.Assets.Translations.%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
     <Content Include="Docs\IconSign-used-to-visually-improve-storage.jpg" />
     <Content Include="Docs\IconSign-categories-for-browsing.jpg" />
   </ItemGroup>
@@ -116,16 +119,20 @@
       <HintPath>$(VALHEIM_INSTALL)\BepInEx\plugins\Jotunn.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
-      <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\mscorlib.dll</HintPath>
+      <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
-      <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\netstandard.dll</HintPath>
+      <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\netstandard.dll</HintPath>
     </Reference>
     <Reference Include="Splatform">
-      <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\Splatform.dll</HintPath>
+      <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\Splatform.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\System.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Core">
-      <HintPath>G:\Steam\steamapps\common\Valheim\valheim_Data\Managed\System.Core.dll</HintPath>
+      <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\System.Core.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\UnityEngine.dll</HintPath>

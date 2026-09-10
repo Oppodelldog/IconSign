@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IconSign.Config;
+using IconSign.Data;
 using IconSign.Extensions;
 using IconSign.Helper;
 using IconSign.Selection.IconScrollContent.CategorizedIcons;
@@ -61,6 +62,11 @@ namespace IconSign.Selection
                 return;
             }
 
+            _tabButtons.Clear();
+            TabContainers.Clear();
+            CreateCategorizedIcons.Reset();
+            _onIconSelected = null;
+
             CreateWoodPanel();
 
             CreateHeadline();
@@ -68,15 +74,19 @@ namespace IconSign.Selection
             CreateSearchInput();
 
             _tabButtons = CreateTabButtons.Create(_iconSelectionPanel.transform);
+            CreateTabButtons.OnCategoryButtonClicked -= SwitchTab;
             CreateTabButtons.OnCategoryButtonClicked += SwitchTab;
 
             TabContainers.Add(Constants.TabNameCategories, CreateCategoriesScrollPane.Create(_iconSelectionPanel.transform));
+            CreateCategoriesScrollPane.OnIconClicked -= TriggerSelectionEvent;
             CreateCategoriesScrollPane.OnIconClicked += TriggerSelectionEvent;
 
             TabContainers.Add(Constants.TabNameInventory, CreateInventoryScrollPane.Create(_iconSelectionPanel.transform));
+            CreateInventoryScrollPane.OnIconClicked -= TriggerSelectionEvent;
             CreateInventoryScrollPane.OnIconClicked += TriggerSelectionEvent;
 
             TabContainers.Add(Constants.TabNameRecent, CreateRecentScrollPane.Create(_iconSelectionPanel.transform));
+            CreateRecentScrollPane.OnIconClicked -= TriggerSelectionEvent;
             CreateRecentScrollPane.OnIconClicked += TriggerSelectionEvent;
 
             SwitchTab(ModConfig.SelectionPanel.SelectedTab.Value);
@@ -124,7 +134,7 @@ namespace IconSign.Selection
         private void CreateHeadline()
         {
             GUIManager.Instance.CreateText(
-                LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName),
+                Translations.Translate(Constants.TranslationKeyName),
                 _iconSelectionPanel.transform,
                 new Vector2(0.5f, 1f),
                 new Vector2(0.5f, 1f),

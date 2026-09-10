@@ -27,8 +27,10 @@ namespace IconSign.Selection.IconScrollContent
 
             foreach (var item in Player.m_localPlayer.GetInventory().GetAllItems())
             {
+                var sprite = item.GetIcon();
+                var iconName = IconName.GetName(sprite);
                 GUIManager.Instance.CreateImage(
-                        IconName.GetName(item.GetIcon()),
+                        sprite,
                         content,
                         new Vector2(0, 1),
                         new Vector2(0, 1),
@@ -36,7 +38,7 @@ namespace IconSign.Selection.IconScrollContent
                         new Vector2(x, y),
                         new Vector2(IconSize, IconSize)
                     )
-                    .AddComponent<HoverEffect>().OnClicked += () => TriggerClickEvent(IconName.GetName(item.GetIcon()));
+                    .AddComponent<HoverEffect>().OnClicked += () => TriggerClickEvent(iconName);
 
                 x += stepSize;
                 if (x <= right) continue;

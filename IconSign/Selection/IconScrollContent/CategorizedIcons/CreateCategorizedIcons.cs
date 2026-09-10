@@ -24,43 +24,68 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
         private static readonly List<Category> IconCategories = new List<Category>();
         private static ScrollableContainer _scrollableContainer;
         private static GameObject NoResultsLabel { get; set; }
+        private static bool _isReady;
+        private static string _searchInput = string.Empty;
 
-        public static void StartFillingContent(Transform content, ScrollableContainer container)
+        internal static void Reset()
+        {
+            _isReady = false;
+            _searchInput = string.Empty;
+            IconCategories.Clear();
+            NoResultsLabel = null;
+            _scrollableContainer = null;
+        }
+
+        public static IEnumerator FillContent(Transform content, ScrollableContainer container)
         {
             _scrollableContainer = container;
-            _scrollableContainer.StartCoroutine(FillContentCoroutine(content, _scrollableContainer));
+            _isReady = false;
+            return FillContentInBatches(content, container);
         }
 
         public static void SearchInputChanged(string searchInput)
         {
-            if (searchInput.Length == 0)
-                ShowAll();
-            else
-                ApplyFilter(SearchIndex.Search(searchInput));
+            _searchInput = searchInput;
+            if (!_isReady) return;
+
+            var matchingIcons = string.IsNullOrWhiteSpace(searchInput)
+                ? null
+                : new HashSet<string>(SearchIndex.Search(searchInput), StringComparer.Ordinal);
+            ApplyFilter(matchingIcons);
         }
 
-        private static void ShowAll()
+        private static void ApplyFilter(ISet<string> matchingIcons)
         {
-            foreach (var cat in IconCategories) cat.ShowAll();
+            var visibleCount = 0;
+            foreach (var category in IconCategories)
+                visibleCount += category.ApplyFilter(matchingIcons);
+
+            var showNoResults = visibleCount == 0;
+            if (NoResultsLabel.activeSelf != showNoResults)
+                NoResultsLabel.SetActive(showNoResults);
+
             Layout.Apply(IconCategories, _scrollableContainer);
         }
 
-        private static void ApplyFilter(string[] iconNames)
-        {
-            foreach (var cat in IconCategories) cat.HideAll();
-
-            foreach (var cat in IconCategories) cat.ShowIcons(iconNames);
-
-            foreach (var cat in IconCategories) cat.Label.SetActive(!cat.IsHidden());
-
-            NoResultsLabel.SetActive(iconNames.Length == 0);
-
-            Layout.Apply(IconCategories, _scrollableContainer);
-        }
-
-        private static IEnumerator FillContentCoroutine(Transform content, ScrollableContainer scrollableContainer)
+        private static IEnumerator FillContentInBatches(Transform content, ScrollableContainer scrollableContainer)
         {
             IconCategories.Clear();
+            
+            var loadingLabel = CreateLabel(scrollableContainer.Viewport, Constants.LoadingIcons);
+            loadingLabel.name = "LoadingIconsLabel";
+            var loadingRect = loadingLabel.GetComponent<RectTransform>();
+            loadingRect.anchorMin = Vector2.zero;
+            loadingRect.anchorMax = Vector2.one;
+            loadingRect.pivot = new Vector2(0.5f, 0.5f);
+            loadingRect.offsetMin = new Vector2(20, 20);
+            loadingRect.offsetMax = new Vector2(-20, -20);
+            var loadingText = loadingLabel.GetComponent<Text>();
+            loadingText.alignment = TextAnchor.MiddleCenter;
+            loadingText.raycastTarget = false;
+            scrollableContainer.SetSize(new Vector2(1, 108));
+
+            // Render the hint before loading the atlas and building the icon groups.
+            yield return null;
 
             var categories = new[]
             {
@@ -82,17 +107,17 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             var createdCount = 0;
 
             var startTime = DateTime.Now;
-            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-            scrollableContainer.SetSize(new Vector2(0, 0));
-
-            NoResultsLabel = CreateLabel(content, Constants.SearchNoResults);
+            NoResultsLabel = CreateLabel(scrollableContainer.Viewport, Constants.SearchNoResults);
             NoResultsLabel.SetActive(false);
             var noResultsRect = NoResultsLabel.GetComponent<RectTransform>();
-            noResultsRect.sizeDelta = new Vector2(200, 30);
-            noResultsRect.anchorMin = new Vector2(0.5f, 0.5f);
-            noResultsRect.anchorMax = new Vector2(0.5f, 0.5f);
+            noResultsRect.anchorMin = Vector2.zero;
+            noResultsRect.anchorMax = Vector2.one;
             noResultsRect.pivot = new Vector2(0.5f, 0.5f);
-            noResultsRect.anchoredPosition = new Vector2(0, 0);
+            noResultsRect.offsetMin = new Vector2(20, 20);
+            noResultsRect.offsetMax = new Vector2(-20, -20);
+            var noResultsText = NoResultsLabel.GetComponent<Text>();
+            noResultsText.alignment = TextAnchor.MiddleCenter;
+            noResultsText.raycastTarget = false;
 
 
             foreach (var category in categories)
@@ -104,6 +129,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
                 // Add category label
                 var categoryLabelObject = CreateLabel(content, category);
 
+                categoryLabelObject.SetActive(false);
                 iconCategory.Label = categoryLabelObject;
 
                 yield return null; // Wait for the next frame
@@ -113,7 +139,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
                     // ReSharper disable block Unity.PerformanceCriticalCodeInvocation
                     var iconName = IconName.GetName(sprite);
                     var image = GUIManager.Instance.CreateImage(
-                        iconName,
+                        sprite,
                         content,
                         new Vector2(0, 1),
                         new Vector2(0, 1),
@@ -122,6 +148,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
                         new Vector2(1, 1));
                     image.AddComponent<HoverEffect>().OnClicked += () => TriggerClickEvent(sprite);
 
+                    image.SetActive(false);
                     iconCategory.Icons.Add(iconName, image);
 
                     createdCount++;
@@ -131,7 +158,9 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
 
             Logger.LogInfo($"Created {createdCount} icons in {(DateTime.Now - startTime).TotalMilliseconds}ms");
 
-            Layout.Apply(IconCategories, scrollableContainer);
+            _isReady = true;
+            SearchInputChanged(_searchInput);
+            UnityEngine.Object.Destroy(loadingLabel);
         }
 
         private static GameObject CreateLabel(Transform content, string category)
@@ -140,7 +169,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             categoryLabelObject.transform.SetParent(content, false);
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             var categoryLabel = categoryLabelObject.AddComponent<Text>();
-            categoryLabel.text = LocalizationManager.Instance.TryTranslate(category);
+            categoryLabel.text = Translations.Translate(category);
             categoryLabel.font = GUIManager.Instance.AveriaSerifBold;
             categoryLabel.fontSize = 20;
             categoryLabel.color = GUIManager.Instance.ValheimBeige;

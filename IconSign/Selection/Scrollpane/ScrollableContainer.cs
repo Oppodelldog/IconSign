@@ -25,6 +25,8 @@ namespace IconSign.Selection.Scrollpane
         private Scrollbar _verticalScrollbar;
         private GameObject _content;
 
+        internal RectTransform Viewport => _viewportRect;
+
         public Transform Content
         {
             get

@@ -1,0 +1,19 @@
+{
+  "name": "Icon Sign",
+  "use": "Paint",
+  "paint_item": "Paint item",
+  "tab_inventory": "Inventory",
+  "tab_recent": "Recent",
+  "tab_categories": "Categories",
+  "armor": "Armor",
+  "building": "Building",
+  "consumables": "Consumables",
+  "farming": "Farming",
+  "furniture": "Furniture",
+  "misc": "Misc",
+  "weapons": "Weapons",
+  "plunder": "Plunder",
+  "abstract": "Abstract",
+  "search_no_results": "No results found",
+  "loading_icons": "Loading icons…"
+}

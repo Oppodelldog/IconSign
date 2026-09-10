@@ -17,6 +17,7 @@
         internal const string CategoryMiscellaneous = "misc";
         internal const string CategoryPlunder = "plunder";
         internal const string CategoryWeapons = "weapons";
+        internal const string LoadingIcons = "loading_icons";
         internal const string SearchNoResults = "search_no_results";
 
         internal const float BlitPreventionOffset = -0.007f;

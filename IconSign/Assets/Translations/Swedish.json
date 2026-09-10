@@ -1,0 +1,19 @@
+{
+  "name": "Ikon skylt",
+  "use": "Måla",
+  "paint_item": "Måla objekt",
+  "tab_inventory": "Inventering",
+  "tab_recent": "Senaste",
+  "tab_categories": "Kategorier",
+  "armor": "Rustning",
+  "building": "Byggnad",
+  "consumables": "Förbrukningsvaror",
+  "farming": "Jordbruk",
+  "furniture": "Möbler",
+  "misc": "Diverse",
+  "weapons": "Vapen",
+  "plunder": "Plundra",
+  "abstract": "Abstrakt",
+  "search_no_results": "Inga resultat hittades",
+  "loading_icons": "Läser in ikoner …"
+}

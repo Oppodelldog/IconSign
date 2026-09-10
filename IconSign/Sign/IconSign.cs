@@ -24,7 +24,7 @@ namespace IconSign.Sign
 
         private void Awake()
         {
-            mName = LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyName);
+            mName = Translations.Translate(Constants.TranslationKeyName);
             var canvas = gameObject.GetComponentInChildren<Canvas>();
             var woodPole = gameObject.FindDeepChild("wood_pole (1)");
             var sign = gameObject.GetComponent<global::Sign>();
@@ -69,14 +69,18 @@ namespace IconSign.Sign
             if (!PrivateArea.CheckAccess(transform.position, flash: false)) return str;
             str += "\n" + mName
                         + Localization.instance.Localize("\n[<color=yellow><b>$KEY_Use</b></color>] ")
-                        + LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyUse);
+                        + Translations.Translate(Constants.TranslationKeyUse);
 
-            str += "\n[<color=yellow><b>1-8</b></color>] " + LocalizationManager.Instance.TryTranslate(Constants.TranslationKeyPaintItem);
+            str += "\n[<color=yellow><b>1-8</b></color>] " + Translations.Translate(Constants.TranslationKeyPaintItem);
 
             return str;
         }
 
         public string GetHoverName() => mName;
+        public float GetHoverOffset()
+        {
+            return 0f;
+        }
 
         public bool Interact(Humanoid character, bool hold, bool alt)
         {
