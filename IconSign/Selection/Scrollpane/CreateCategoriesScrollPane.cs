@@ -1,4 +1,5 @@
-﻿using IconSign.Extensions;
+﻿using System.Collections;
+using IconSign.Extensions;
 using IconSign.Selection.IconScrollContent.CategorizedIcons;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace IconSign.Selection.Scrollpane
 
             scroll.transform.SetParent(parent);
             rectTransform.Expand();
+            CreateCategorizedIcons.OnIconClicked -= TriggerClickEvent;
             CreateCategorizedIcons.OnIconClicked += TriggerClickEvent;
 
             return scroll;
@@ -32,10 +34,31 @@ namespace IconSign.Selection.Scrollpane
 
     internal class IconLoadingInitializer : MonoBehaviour
     {
+        private IEnumerator _loading;
+
         private void Start()
         {
             var scrollContainer = GetComponent<ScrollableContainer>();
-            CreateCategorizedIcons.StartFillingContent(scrollContainer.Content, scrollContainer);
+            _loading = CreateCategorizedIcons.FillContent(scrollContainer.Content, scrollContainer);
+        }
+
+        private void Update()
+        {
+            // Advance one batch per frame. Unlike a coroutine, the iterator survives
+            // hiding the tab or closing the dialog and resumes when visible again.
+            if (_loading != null && !_loading.MoveNext())
+                DisposeLoading();
+        }
+
+        private void OnDestroy()
+        {
+            DisposeLoading();
+        }
+
+        private void DisposeLoading()
+        {
+            (_loading as System.IDisposable)?.Dispose();
+            _loading = null;
         }
     }
 }

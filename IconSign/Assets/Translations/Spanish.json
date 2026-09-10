@@ -14,5 +14,6 @@
   "weapons": "Armas",
   "plunder": "Botín",
   "abstract": "Abstracto",
-  "search_no_results": "No se encontraron resultados"
+  "search_no_results": "No se encontraron resultados",
+  "iconsign_loading_icons": "Cargando iconos…"
 }

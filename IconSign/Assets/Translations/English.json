@@ -14,5 +14,6 @@
   "weapons": "Weapons",
   "plunder": "Plunder",
   "abstract": "Abstract",
-  "search_no_results": "No results found"
+  "search_no_results": "No results found",
+  "iconsign_loading_icons": "Loading icons…"
 }

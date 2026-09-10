@@ -19,6 +19,7 @@ namespace IconSign.Selection.Scrollpane
 
             scroll.transform.SetParent(transform);
             rectTransform.Expand();
+            CreateRecentIcons.OnIconClicked -= TriggerClickEvent;
             CreateRecentIcons.OnIconClicked += TriggerClickEvent;
 
             return scroll;

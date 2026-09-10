@@ -14,5 +14,6 @@
   "weapons": "Våben",
   "plunder": "Plyndring",
   "abstract": "Abstrakt",
-  "search_no_results": "Ingen resultater fundet"
+  "search_no_results": "Ingen resultater fundet",
+  "iconsign_loading_icons": "Indlæser ikoner …"
 }

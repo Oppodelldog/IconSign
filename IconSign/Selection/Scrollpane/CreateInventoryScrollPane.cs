@@ -19,6 +19,7 @@ namespace IconSign.Selection.Scrollpane
 
             scroll.transform.SetParent(transform);
             rectTransform.Expand();
+            CreateInventoryIcons.OnIconClicked -= TriggerClickEvent;
             CreateInventoryIcons.OnIconClicked += TriggerClickEvent;
 
             return scroll;

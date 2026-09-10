@@ -77,6 +77,7 @@ namespace IconSign.Selection.TabBar
 
         internal static Dictionary<string, GameObject> Create(Transform parent)
         {
+            TabButtons.Clear();
             const int buttonWidth = 140;
             const int buttonHeight = 38;
             var x = -buttonWidth;
