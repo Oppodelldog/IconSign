@@ -13,7 +13,7 @@ namespace IconSign.Data
     public abstract class SearchIndex
     {
         private static StatsLogger _searchStats;
-        private static readonly Dictionary<string, List<string>> Index = new Dictionary<string, List<string>>();
+        private static readonly Dictionary<string, HashSet<string>> Index = new Dictionary<string, HashSet<string>>();
 
         public static void Init()
         {
@@ -46,7 +46,7 @@ namespace IconSign.Data
         {
             if (string.IsNullOrEmpty(translation)) return;
 
-            foreach (var word in translation.Split(' '))
+            foreach (var word in translation.Split((char[])null, StringSplitOptions.RemoveEmptyEntries))
             {
                 AddToIndex(word, iconName);
             }
@@ -56,9 +56,9 @@ namespace IconSign.Data
         {
             if (string.IsNullOrEmpty(searchTerm)) return;
 
-            var key = searchTerm.ToLower();
+            var key = searchTerm.ToLowerInvariant();
             Index.TryGetValue(key, out var values);
-            if (values == null) values = new List<string>();
+            if (values == null) values = new HashSet<string>(StringComparer.Ordinal);
             values.Add(iconName);
 
             Index[key] = values;
@@ -74,18 +74,37 @@ namespace IconSign.Data
 
         public static string[] Search(string query)
         {
-            _searchStats.Start();
-            var iconNames = new List<string>();
-            query = query.ToLower();
-            foreach (var kv in Index)
-                if (kv.Key.Contains(query))
-                    iconNames.AddRange(kv.Value);
+            _searchStats?.Start();
+            try
+            {
+                var terms = (query ?? string.Empty).ToLowerInvariant()
+                    .Split((char[])null, StringSplitOptions.RemoveEmptyEntries)
+                    .Distinct();
+                HashSet<string> matches = null;
 
-            var result = iconNames.Distinct().ToList();
+                foreach (var term in terms)
+                {
+                    var termMatches = new HashSet<string>(StringComparer.Ordinal);
+                    foreach (var entry in Index)
+                        if (entry.Key.Contains(term))
+                            termMatches.UnionWith(entry.Value);
 
-            _searchStats.Done();
+                    if (matches == null)
+                        matches = termMatches;
+                    else
+                        matches.IntersectWith(termMatches);
 
-            return result.ToArray();
+                    if (matches.Count == 0) break;
+                }
+
+                return matches == null
+                    ? Index.Values.SelectMany(names => names).Distinct().ToArray()
+                    : matches.ToArray();
+            }
+            finally
+            {
+                _searchStats?.Done();
+            }
         }
     }
 }

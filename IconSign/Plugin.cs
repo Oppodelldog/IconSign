@@ -25,8 +25,8 @@ namespace IconSign
             DevConfig.SelectionPanel.DebugView = Config.Bind("dev", "selection_panel_debug_view", false, "show debug info in selection panel");
             DevConfig.IconSign.ShowInternalName = Config.Bind("dev", "icon_sign_show_internal_name", false, "show internal name of IconSign when hovering the sign");
             DevConfig.SeachIndex.DumpIndexToFile = Config.Bind("dev", "search_index_dump_index_to_file", false, "dump search index to file");
-            DevConfig.SeachIndex.LogSearchStatsEvery = Config.Bind("dev", "search_index_log_search_stats", 10, "log search stats every nth search");
-            DevConfig.Layout.LogLayoutStatsEvery = Config.Bind("dev", "layout_log_layout_stats", 10, "log layout stats every nth layout");
+            DevConfig.SeachIndex.LogSearchStatsEvery = Config.Bind("dev", "search_index_log_search_stats", 10, "log search stats every nth search; 0 or less disables statistics");
+            DevConfig.Layout.LogLayoutStatsEvery = Config.Bind("dev", "layout_log_layout_stats", 10, "log layout stats every nth layout; 0 or less disables statistics");
 
             Translations.Load();
             IconSignFactory.Register();

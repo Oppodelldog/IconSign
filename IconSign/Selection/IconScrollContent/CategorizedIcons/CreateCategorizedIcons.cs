@@ -48,28 +48,21 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             _searchInput = searchInput;
             if (!_isReady) return;
 
-            if (searchInput.Length == 0)
-                ShowAll();
-            else
-                ApplyFilter(SearchIndex.Search(searchInput));
+            var matchingIcons = string.IsNullOrWhiteSpace(searchInput)
+                ? null
+                : new HashSet<string>(SearchIndex.Search(searchInput), StringComparer.Ordinal);
+            ApplyFilter(matchingIcons);
         }
 
-        private static void ShowAll()
+        private static void ApplyFilter(ISet<string> matchingIcons)
         {
-            NoResultsLabel.SetActive(false);
-            foreach (var cat in IconCategories) cat.ShowAll();
-            Layout.Apply(IconCategories, _scrollableContainer);
-        }
+            var visibleCount = 0;
+            foreach (var category in IconCategories)
+                visibleCount += category.ApplyFilter(matchingIcons);
 
-        private static void ApplyFilter(string[] iconNames)
-        {
-            foreach (var cat in IconCategories) cat.HideAll();
-
-            foreach (var cat in IconCategories) cat.ShowIcons(iconNames);
-
-            foreach (var cat in IconCategories) cat.Label.SetActive(!cat.IsHidden());
-
-            NoResultsLabel.SetActive(iconNames.Length == 0);
+            var showNoResults = visibleCount == 0;
+            if (NoResultsLabel.activeSelf != showNoResults)
+                NoResultsLabel.SetActive(showNoResults);
 
             Layout.Apply(IconCategories, _scrollableContainer);
         }
@@ -114,14 +107,17 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
             var createdCount = 0;
 
             var startTime = DateTime.Now;
-            NoResultsLabel = CreateLabel(content, Constants.SearchNoResults);
+            NoResultsLabel = CreateLabel(scrollableContainer.Viewport, Constants.SearchNoResults);
             NoResultsLabel.SetActive(false);
             var noResultsRect = NoResultsLabel.GetComponent<RectTransform>();
-            noResultsRect.sizeDelta = new Vector2(200, 30);
-            noResultsRect.anchorMin = new Vector2(0.5f, 0.5f);
-            noResultsRect.anchorMax = new Vector2(0.5f, 0.5f);
+            noResultsRect.anchorMin = Vector2.zero;
+            noResultsRect.anchorMax = Vector2.one;
             noResultsRect.pivot = new Vector2(0.5f, 0.5f);
-            noResultsRect.anchoredPosition = new Vector2(0, 0);
+            noResultsRect.offsetMin = new Vector2(20, 20);
+            noResultsRect.offsetMax = new Vector2(-20, -20);
+            var noResultsText = NoResultsLabel.GetComponent<Text>();
+            noResultsText.alignment = TextAnchor.MiddleCenter;
+            noResultsText.raycastTarget = false;
 
 
             foreach (var category in categories)
@@ -143,7 +139,7 @@ namespace IconSign.Selection.IconScrollContent.CategorizedIcons
                     // ReSharper disable block Unity.PerformanceCriticalCodeInvocation
                     var iconName = IconName.GetName(sprite);
                     var image = GUIManager.Instance.CreateImage(
-                        iconName,
+                        sprite,
                         content,
                         new Vector2(0, 1),
                         new Vector2(0, 1),

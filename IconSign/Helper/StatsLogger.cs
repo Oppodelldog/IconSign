@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics;
 using UnityEngine;
 
 namespace IconSign.Helper
@@ -13,7 +13,7 @@ namespace IconSign.Helper
         private float MinDuration { get; set; } = float.MaxValue;
         private float MaxDuration { get; set; } = 0;
         
-        private DateTime _start;
+        private readonly Stopwatch _stopwatch = new Stopwatch();
 
         public StatsLogger(string name, int logEvery)
         {
@@ -23,12 +23,16 @@ namespace IconSign.Helper
 
         public void Start()
         {
-            _start = DateTime.Now;
+            if (LogEvery <= 0) return;
+            _stopwatch.Restart();
         }
 
         public void Done()
         {
-            var duration = (float)(DateTime.Now - _start).TotalMilliseconds;
+            if (LogEvery <= 0 || !_stopwatch.IsRunning) return;
+
+            _stopwatch.Stop();
+            var duration = (float)_stopwatch.Elapsed.TotalMilliseconds;
 
             Total++;
             AvgDuration = (AvgDuration * (Total - 1) + duration) / Total;
